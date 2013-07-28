@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[
+rgba ${1:int} ${2:int} ${3:int} ${4:float} 
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>rgba</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.elm</scope>
+	<description>Int -> Int -> Int -> Float -> Color</description>
+</snippet>

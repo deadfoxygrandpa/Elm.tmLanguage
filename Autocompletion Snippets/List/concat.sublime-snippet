@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[
+concat ${1:[${2:appendable}, ${3:appendable}]} 
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>concat</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.elm</scope>
+	<description>[appendable] -> appendable</description>
+</snippet>

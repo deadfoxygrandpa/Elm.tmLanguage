@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[
+segment ${1:(${2:number}, ${3:number})} ${4:(${5:number}, ${6:number})} 
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>segment</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.elm</scope>
+	<description>(number,number) -> (number,number) -> Path</description>
+</snippet>

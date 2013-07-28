@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[
+lift3 ${1:function} ${2:signal} ${3:signal} ${4:signal} 
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>lift3</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.elm</scope>
+	<description>(a -> b -> c -> d) -> Signal a -> Signal b -> Signal c -> Signal d</description>
+</snippet>

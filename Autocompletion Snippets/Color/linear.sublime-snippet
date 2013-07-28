@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[
+linear (${1:number}, ${2:number}) (${3:number}, ${4:number}) ${5:[(${6:float}, ${7:color})]} 
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>linear</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.elm</scope>
+	<description>(number, number) -> (number, number) -> [(Float,Color)] -> Gradient</description>
+</snippet>

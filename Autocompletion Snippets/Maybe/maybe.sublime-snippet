@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[
+maybe ${1:b} ${2:function} ${3:(${4:Just ${5:a}})} 
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>maybe</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.elm</scope>
+	<description>b -> (a -> b) -> Maybe a -> b</description>
+</snippet>

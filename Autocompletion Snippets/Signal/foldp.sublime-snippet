@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[
+foldp ${1:function} ${2:b} ${3:signal} 
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>foldp</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.elm</scope>
+	<description>(a -> b -> b) -> b -> Signal a -> Signal b</description>
+</snippet>
