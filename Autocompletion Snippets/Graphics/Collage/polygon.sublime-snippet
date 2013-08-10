@@ -1,10 +1,10 @@
 <snippet>
 	<content><![CDATA[
-polygon ${1:[${2:(${3:number}, ${4:number}), (${5:number}, ${6:number})}]}
+polygon ${1:[${2:(${3:float}, ${4:float}), (${5:float}, ${6:float})}]}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>polygon</tabTrigger>
 	<!-- Optional: Set a scope to limit where the snippet will trigger -->
 	<scope>source.elm</scope>
-	<description>[(number,number)] -> Shape</description>
+	<description>[(Float, Float)] -> Shape</description>
 </snippet>
