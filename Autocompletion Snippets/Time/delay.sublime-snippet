@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-delay ${1:time} ${2:signal} 
+delay ${1:time} ${2:signal}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>delay</tabTrigger>

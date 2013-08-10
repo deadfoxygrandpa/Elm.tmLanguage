@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-ceiling ${1:float} 
+ceiling ${1:float}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>ceiling</tabTrigger>

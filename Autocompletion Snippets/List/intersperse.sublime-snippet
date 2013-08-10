@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-intersperse ${1:a} ${2:list} 
+intersperse ${1:a} ${2:list}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>intersperse</tabTrigger>

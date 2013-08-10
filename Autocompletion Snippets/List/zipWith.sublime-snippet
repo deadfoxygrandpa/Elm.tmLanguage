@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-zipWith ${1:function} ${2:list} ${3:list} 
+zipWith ${1:function} ${2:list} ${3:list}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>zipWith</tabTrigger>

@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-${1:appendable} ++ ${2:appendable} 
+${1:appendable} ++ ${2:appendable}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>APPEND</tabTrigger>

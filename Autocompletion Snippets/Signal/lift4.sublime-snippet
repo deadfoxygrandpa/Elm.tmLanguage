@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-lift4 ${1:function} ${2:signal} ${3:signal} ${4:signal} ${5:signal} 
+lift4 ${1:function} ${2:signal} ${3:signal} ${4:signal} ${5:signal}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>lift4</tabTrigger>

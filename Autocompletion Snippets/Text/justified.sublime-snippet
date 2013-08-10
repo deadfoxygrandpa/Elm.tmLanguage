@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-justified ${1:text} 
+justified ${1:text}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>justified</tabTrigger>

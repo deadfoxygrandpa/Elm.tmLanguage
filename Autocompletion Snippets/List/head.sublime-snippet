@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-head ${1:list} 
+head ${1:list}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>head</tabTrigger>

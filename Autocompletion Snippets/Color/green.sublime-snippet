@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-green 
+green
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>green</tabTrigger>

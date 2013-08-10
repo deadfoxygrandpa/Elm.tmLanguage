@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-filled ${1:color} ${2:shape} 
+filled ${1:color} ${2:shape}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>filled</tabTrigger>

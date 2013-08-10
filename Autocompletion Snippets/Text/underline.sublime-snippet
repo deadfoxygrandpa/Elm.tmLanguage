@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-underline ${1:text} 
+underline ${1:text}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>underline</tabTrigger>

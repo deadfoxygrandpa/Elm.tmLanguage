@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-cons ${1:(${2:Just ${3:a}})} ${4:list} 
+cons ${1:(${2:Just ${3:a}})} ${4:list}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>cons</tabTrigger>

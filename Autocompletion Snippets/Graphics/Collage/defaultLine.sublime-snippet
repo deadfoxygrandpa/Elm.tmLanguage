@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-defaultLine 
+defaultLine
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>defaultLine</tabTrigger>

@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-dropRepeats ${1:signal} 
+dropRepeats ${1:signal}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>dropRepeats</tabTrigger>

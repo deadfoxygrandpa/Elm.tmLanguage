@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-last ${1:list} 
+last ${1:list}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>last</tabTrigger>

@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-tag ${1:string} ${2:element} 
+tag ${1:string} ${2:element}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>tag</tabTrigger>

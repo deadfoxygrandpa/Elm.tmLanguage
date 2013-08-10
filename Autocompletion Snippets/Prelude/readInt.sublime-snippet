@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-readInt ${1:string} 
+readInt ${1:string}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>readInt</tabTrigger>

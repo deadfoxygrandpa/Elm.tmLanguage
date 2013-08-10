@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-fst ${1:pair} 
+fst ${1:pair}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>fst</tabTrigger>

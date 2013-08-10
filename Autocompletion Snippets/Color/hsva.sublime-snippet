@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-hsva ${1:float} ${2:float} ${3:float} ${4:float} 
+hsva ${1:float} ${2:float} ${3:float} ${4:float}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>hsva</tabTrigger>

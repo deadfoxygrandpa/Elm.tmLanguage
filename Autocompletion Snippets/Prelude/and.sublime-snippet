@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-${1:bool} && ${2:bool} 
+${1:bool} && ${2:bool}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>AND</tabTrigger>

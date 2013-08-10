@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-flip ${1:function} 
+flip ${1:function}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>flip</tabTrigger>

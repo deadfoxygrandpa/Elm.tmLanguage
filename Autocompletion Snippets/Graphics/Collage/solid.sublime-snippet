@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-solid ${1:color} 
+solid ${1:color}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>solid</tabTrigger>

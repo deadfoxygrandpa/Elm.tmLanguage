@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-floor ${1:float} 
+floor ${1:float}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>floor</tabTrigger>

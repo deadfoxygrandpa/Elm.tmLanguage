@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-maximum ${1:list} 
+maximum ${1:list}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>maximum</tabTrigger>

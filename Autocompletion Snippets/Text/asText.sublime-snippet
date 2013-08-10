@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-asText ${1:a} 
+asText ${1:a}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>asText</tabTrigger>

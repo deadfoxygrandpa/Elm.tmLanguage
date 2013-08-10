@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-countIf ${1:function} ${2:signal} 
+countIf ${1:function} ${2:signal}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>countIf</tabTrigger>

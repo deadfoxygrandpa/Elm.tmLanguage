@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-curry ${1:function} 
+curry ${1:function}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>curry</tabTrigger>

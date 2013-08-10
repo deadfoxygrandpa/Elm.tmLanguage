@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-foldl ${1:function} ${2:b} ${3:list} 
+foldl ${1:function} ${2:b} ${3:list}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>foldl</tabTrigger>

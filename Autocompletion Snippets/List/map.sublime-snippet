@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-map ${1:function} ${2:list} 
+map ${1:function} ${2:list}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>map</tabTrigger>

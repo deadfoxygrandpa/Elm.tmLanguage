@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-fpsWhen ${1:number} ${2:signal} 
+fpsWhen ${1:number} ${2:signal}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>fpsWhen</tabTrigger>

@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-outlined ${1:linestyle} ${2:shape} 
+outlined ${1:linestyle} ${2:shape}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>outlined</tabTrigger>

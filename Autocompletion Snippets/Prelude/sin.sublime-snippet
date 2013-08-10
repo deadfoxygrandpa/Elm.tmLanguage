@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-sin ${1:float} 
+sin ${1:float}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>sin</tabTrigger>

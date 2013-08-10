@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-inMinutes ${1:time} 
+inMinutes ${1:time}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>inMinutes</tabTrigger>

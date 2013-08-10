@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-height ${1:int} ${2:element} 
+height ${1:int} ${2:element}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>height</tabTrigger>

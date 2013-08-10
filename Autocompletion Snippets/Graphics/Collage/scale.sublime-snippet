@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-scale ${1:float} ${2:form} 
+scale ${1:float} ${2:form}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>scale</tabTrigger>

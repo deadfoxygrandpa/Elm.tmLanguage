@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-midTop 
+midTop
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>midTop</tabTrigger>

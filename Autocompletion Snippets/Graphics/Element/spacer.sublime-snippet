@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-spacer ${1:int} ${2:int} 
+spacer ${1:int} ${2:int}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>spacer</tabTrigger>

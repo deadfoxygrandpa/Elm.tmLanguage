@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-timestamp ${1:signal} 
+timestamp ${1:signal}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>timestamp</tabTrigger>

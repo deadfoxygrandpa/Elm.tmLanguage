@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[
+gradient ${1:gradient} ${2:shape}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>gradient</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.elm</scope>
+	<description>Gradient -> Shape -> Form</description>
+</snippet>

@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-unzip ${1:list} 
+unzip ${1:list}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>unzip</tabTrigger>

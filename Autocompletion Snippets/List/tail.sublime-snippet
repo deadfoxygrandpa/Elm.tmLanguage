@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-tail ${1:list} 
+tail ${1:list}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>tail</tabTrigger>

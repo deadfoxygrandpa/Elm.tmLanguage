@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-color ${1:color} ${2:text} 
+color ${1:color} ${2:text}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>color</tabTrigger>

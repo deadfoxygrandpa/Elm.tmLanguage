@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-bold ${1:text} 
+bold ${1:text}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>bold</tabTrigger>

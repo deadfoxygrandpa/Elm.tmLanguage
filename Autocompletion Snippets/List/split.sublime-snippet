@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-split ${1:list} ${2:list} 
+split ${1:list} ${2:list}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>split</tabTrigger>

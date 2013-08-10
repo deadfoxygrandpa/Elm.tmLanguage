@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-combine ${1:[${2:signal}, ${3:signal}]} 
+combine ${1:[${2:signal}, ${3:signal}]}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>combine</tabTrigger>

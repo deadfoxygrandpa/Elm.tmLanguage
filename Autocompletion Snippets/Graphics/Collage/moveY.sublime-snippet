@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-moveY ${1:float} ${2:form} 
+moveY ${1:float} ${2:form}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>moveY</tabTrigger>

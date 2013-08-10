@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-atan2 ${1:float} ${2:float} 
+atan2 ${1:float} ${2:float}
 ]]></content> 
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>atan2</tabTrigger>

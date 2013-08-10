@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-rgb ${1:int} ${2:int} ${3:int} 
+rgb ${1:int} ${2:int} ${3:int}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>rgb</tabTrigger>

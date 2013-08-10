@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-foldr ${1:function} ${2:b} ${3:list} 
+foldr ${1:function} ${2:b} ${3:list}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>foldr</tabTrigger>

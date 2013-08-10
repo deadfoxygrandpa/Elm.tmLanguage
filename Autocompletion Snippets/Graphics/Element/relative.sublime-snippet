@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-relative ${1:float} 
+relative ${1:float}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>relative</tabTrigger>

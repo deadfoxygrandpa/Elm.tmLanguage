@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-dropWhen ${1:signal} ${2:a} ${3:signal} 
+dropWhen ${1:signal} ${2:a} ${3:signal}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>dropWhen</tabTrigger>

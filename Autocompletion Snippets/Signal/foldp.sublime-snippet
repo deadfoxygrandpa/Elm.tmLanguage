@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-foldp ${1:function} ${2:b} ${3:signal} 
+foldp ${1:function} ${2:b} ${3:signal}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>foldp</tabTrigger>

@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-merge ${1:signal} ${2:signal} 
+merge ${1:signal} ${2:signal}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>merge</tabTrigger>

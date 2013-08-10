@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-segment ${1:(${2:number}, ${3:number})} ${4:(${5:number}, ${6:number})} 
+segment ${1:(${2:number}, ${3:number})} ${4:(${5:number}, ${6:number})}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>segment</tabTrigger>

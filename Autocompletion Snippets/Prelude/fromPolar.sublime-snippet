@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-fromPolar (${1:float}, ${2:float}) 
+fromPolar (${1:float}, ${2:float})
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>fromPolar</tabTrigger>

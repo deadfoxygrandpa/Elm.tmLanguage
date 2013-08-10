@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-typeface ${1:string} ${2:text} 
+typeface ${1:string} ${2:text}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>typeface</tabTrigger>

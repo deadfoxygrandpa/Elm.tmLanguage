@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-fps ${1:number} 
+fps ${1:number}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>fps</tabTrigger>

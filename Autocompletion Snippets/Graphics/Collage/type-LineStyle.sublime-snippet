@@ -9,7 +9,7 @@ type LineStyle = {
  	dashOffset : Int
  }
 
- 
+
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>type LineStyle</tabTrigger>

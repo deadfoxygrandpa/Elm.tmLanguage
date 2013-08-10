@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-sum ${1:list} 
+sum ${1:list}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>sum</tabTrigger>

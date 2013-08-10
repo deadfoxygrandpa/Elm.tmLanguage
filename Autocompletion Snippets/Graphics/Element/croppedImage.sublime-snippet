@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-croppedImage ${1:(${2:int}, ${3:int})} ${4:int} ${5:int} ${6:string} 
+croppedImage ${1:(${2:int}, ${3:int})} ${4:int} ${5:int} ${6:string}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>croppedImage</tabTrigger>

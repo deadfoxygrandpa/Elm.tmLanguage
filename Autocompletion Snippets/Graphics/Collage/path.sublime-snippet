@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-path ${1:[${2:(${3:number}, ${4:number}), (${5:number}, ${6:number})}]} 
+path ${1:[${2:(${3:number}, ${4:number}), (${5:number}, ${6:number})}]}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>path</tabTrigger>

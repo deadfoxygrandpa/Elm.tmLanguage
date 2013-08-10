@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-product ${1:list} 
+product ${1:list}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>product</tabTrigger>

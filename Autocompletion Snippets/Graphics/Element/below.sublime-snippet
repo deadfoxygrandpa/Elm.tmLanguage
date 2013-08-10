@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-${1:element} `below` ${2:element} 
+${1:element} `below` ${2:element}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>below</tabTrigger>

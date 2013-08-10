@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-toForm ${1:element} 
+toForm ${1:element}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>toForm</tabTrigger>

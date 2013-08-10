@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-scanl1 ${1:function} ${2:list} 
+scanl1 ${1:function} ${2:list}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>scanl1</tabTrigger>

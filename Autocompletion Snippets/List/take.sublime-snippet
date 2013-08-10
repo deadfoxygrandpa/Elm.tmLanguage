@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-take ${1:int} ${2:list} 
+take ${1:int} ${2:list}
 ]]></content> 
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>take</tabTrigger>

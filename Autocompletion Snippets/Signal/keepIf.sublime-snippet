@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-keepIf ${1:function} ${2:a} ${3:signal} 
+keepIf ${1:function} ${2:a} ${3:signal}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>keepIf</tabTrigger>

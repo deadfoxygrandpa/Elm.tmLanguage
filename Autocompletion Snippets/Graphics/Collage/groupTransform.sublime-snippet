@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-groupTransform ${1:matrix2d} ${2:[${3:form}]} 
+groupTransform ${1:matrix2d} ${2:[${3:form}]}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>groupTransform</tabTrigger>

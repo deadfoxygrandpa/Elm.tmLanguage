@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-midRightAt ${1:pos} ${2:pos} 
+midRightAt ${1:pos} ${2:pos}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>midRightAt</tabTrigger>

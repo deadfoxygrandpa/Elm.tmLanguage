@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-${1:int} `mod` ${2:int} 
+${1:int} `mod` ${2:int}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>mod</tabTrigger>

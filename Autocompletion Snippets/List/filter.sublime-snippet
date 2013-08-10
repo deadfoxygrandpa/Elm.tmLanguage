@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-filter ${1:function} ${2:list} 
+filter ${1:function} ${2:list}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>filter</tabTrigger>

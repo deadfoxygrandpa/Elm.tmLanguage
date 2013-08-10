@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-centered ${1:text} 
+centered ${1:text}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>centered</tabTrigger>

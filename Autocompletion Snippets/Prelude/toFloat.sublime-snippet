@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-toFloat ${1:int} 
+toFloat ${1:int}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>toFloat</tabTrigger>

@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-e 
+e
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>e</tabTrigger>

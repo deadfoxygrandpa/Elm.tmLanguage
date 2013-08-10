@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-constant ${1:a} 
+constant ${1:a}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>constant</tabTrigger>

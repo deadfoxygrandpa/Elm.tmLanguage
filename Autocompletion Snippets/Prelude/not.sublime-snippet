@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-not ${1:bool} 
+not ${1:bool}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>not</tabTrigger>

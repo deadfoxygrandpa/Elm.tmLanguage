@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-clamp ${1:low} ${2:high} ${3:number} 
+clamp ${1:low} ${2:high} ${3:number}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>clamp</tabTrigger>

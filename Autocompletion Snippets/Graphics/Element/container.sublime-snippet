@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-container ${1:int} ${2:int} ${3:position} ${4:element} 
+container ${1:int} ${2:int} ${3:position} ${4:element}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>container</tabTrigger>

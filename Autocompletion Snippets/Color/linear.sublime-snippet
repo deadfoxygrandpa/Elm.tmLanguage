@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-linear (${1:number}, ${2:number}) (${3:number}, ${4:number}) ${5:[(${6:float}, ${7:color})]} 
+linear (${1:number}, ${2:number}) (${3:number}, ${4:number}) ${5:[(${6:float}, ${7:color})]}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>linear</tabTrigger>

@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-down 
+down
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>down</tabTrigger>

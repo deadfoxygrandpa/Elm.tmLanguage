@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-all ${1:function} ${2:list} 
+all ${1:function} ${2:list}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>all</tabTrigger>
