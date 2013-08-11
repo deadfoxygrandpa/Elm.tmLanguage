@@ -171,11 +171,13 @@
 					<string>keyword.other.elm</string>
 				</dict>
 			</dict>
+			<key>name</key>
+			<string>entity.markdown.elm</string>
 			<key>patterns</key>
 			<array>
 				<dict>
 					<key>include</key>
-					<string>text.html.markdown</string>
+					<string>text.html.basic</string>
 				</dict>
 			</array>
 		</dict>
