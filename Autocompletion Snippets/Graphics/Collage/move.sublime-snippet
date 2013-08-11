@@ -1,10 +1,10 @@
 <snippet>
 	<content><![CDATA[
-move ${1:(${2:float}, ${3:float})} ${4:form}
+move ${1:(${2:number}, ${3:number})} ${4:form}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>move</tabTrigger>
 	<!-- Optional: Set a scope to limit where the snippet will trigger -->
 	<scope>source.elm</scope>
-	<description>(Float,Float) -> Form -> Form</description>
+	<description>(number,number) -> Form -> Form</description>
 </snippet>

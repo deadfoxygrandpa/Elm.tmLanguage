@@ -1,10 +1,10 @@
 <snippet>
 	<content><![CDATA[
-path ${1:[${2:(${3:float}, ${4:float}), (${5:float}, ${6:float})}]}
+path ${1:[${2:(${3:number}, ${4:number}), (${5:number}, ${6:number})}]}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>path</tabTrigger>
 	<!-- Optional: Set a scope to limit where the snippet will trigger -->
 	<scope>source.elm</scope>
-	<description>[(Float, Float)] -> Path</description>
+	<description>[(number, number)] -> Path</description>
 </snippet>
