@@ -43,7 +43,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>(module)</string>
+			<string>\b(module)\b</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -53,7 +53,7 @@
 				</dict>
 			</dict>
 			<key>end</key>
-			<string>(where)</string>
+			<string>\b(where)\b</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>1</key>
