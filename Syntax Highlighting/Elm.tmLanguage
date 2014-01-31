@@ -541,67 +541,7 @@
 				<array>
 					<dict>
 						<key>include</key>
-						<string>#char</string>
-					</dict>
-					<dict>
-						<key>include</key>
-						<string>#date</string>
-					</dict>
-					<dict>
-						<key>include</key>
-						<string>#list</string>
-					</dict>
-					<dict>
-						<key>include</key>
-						<string>#dict</string>
-					</dict>
-					<dict>
-						<key>include</key>
-						<string>#set</string>
-					</dict>
-					<dict>
-						<key>include</key>
-						<string>#maybe</string>
-					</dict>
-					<dict>
-						<key>include</key>
-						<string>#either</string>
-					</dict>
-					<dict>
-						<key>include</key>
-						<string>#signal</string>
-					</dict>
-					<dict>
-						<key>include</key>
-						<string>#automaton</string>
-					</dict>
-					<dict>
-						<key>include</key>
-						<string>#mouse</string>
-					</dict>
-					<dict>
-						<key>include</key>
-						<string>#keyboard</string>
-					</dict>
-					<dict>
-						<key>include</key>
-						<string>#touch</string>
-					</dict>
-					<dict>
-						<key>include</key>
 						<string>#window</string>
-					</dict>
-					<dict>
-						<key>include</key>
-						<string>#time</string>
-					</dict>
-					<dict>
-						<key>include</key>
-						<string>#random</string>
-					</dict>
-					<dict>
-						<key>include</key>
-						<string>#http</string>
 					</dict>
 					<dict>
 						<key>include</key>
@@ -609,19 +549,15 @@
 					</dict>
 					<dict>
 						<key>include</key>
-						<string>#element</string>
+						<string>#transform2d</string>
 					</dict>
 					<dict>
 						<key>include</key>
-						<string>#collage</string>
+						<string>#touch</string>
 					</dict>
 					<dict>
 						<key>include</key>
-						<string>#input</string>
-					</dict>
-					<dict>
-						<key>include</key>
-						<string>#color</string>
+						<string>#time</string>
 					</dict>
 					<dict>
 						<key>include</key>
@@ -629,19 +565,23 @@
 					</dict>
 					<dict>
 						<key>include</key>
-						<string>#transform2d</string>
+						<string>#string</string>
 					</dict>
 					<dict>
 						<key>include</key>
-						<string>#javascript</string>
+						<string>#signal</string>
 					</dict>
 					<dict>
 						<key>include</key>
-						<string>#json</string>
+						<string>#set</string>
 					</dict>
 					<dict>
 						<key>include</key>
-						<string>#experimental</string>
+						<string>#regex</string>
+					</dict>
+					<dict>
+						<key>include</key>
+						<string>#random</string>
 					</dict>
 					<dict>
 						<key>include</key>
@@ -649,310 +589,78 @@
 					</dict>
 					<dict>
 						<key>include</key>
+						<string>#mouse</string>
+					</dict>
+					<dict>
+						<key>include</key>
+						<string>#maybe</string>
+					</dict>
+					<dict>
+						<key>include</key>
+						<string>#list</string>
+					</dict>
+					<dict>
+						<key>include</key>
+						<string>#keyboard</string>
+					</dict>
+					<dict>
+						<key>include</key>
+						<string>#json</string>
+					</dict>
+					<dict>
+						<key>include</key>
+						<string>#javascript</string>
+					</dict>
+					<dict>
+						<key>include</key>
+						<string>#http</string>
+					</dict>
+					<dict>
+						<key>include</key>
+						<string>#either</string>
+					</dict>
+					<dict>
+						<key>include</key>
+						<string>#dict</string>
+					</dict>
+					<dict>
+						<key>include</key>
+						<string>#date</string>
+					</dict>
+					<dict>
+						<key>include</key>
+						<string>#color</string>
+					</dict>
+					<dict>
+						<key>include</key>
+						<string>#char</string>
+					</dict>
+					<dict>
+						<key>include</key>
+						<string>#bitwise</string>
+					</dict>
+					<dict>
+						<key>include</key>
 						<string>#basics</string>
+					</dict>
+					<dict>
+						<key>include</key>
+						<string>#javascript.experimental</string>
+					</dict>
+					<dict>
+						<key>include</key>
+						<string>#graphics.input</string>
+					</dict>
+					<dict>
+						<key>include</key>
+						<string>#graphics.element</string>
+					</dict>
+					<dict>
+						<key>include</key>
+						<string>#graphics.collage</string>
 					</dict>
 				</array>
 			</dict>
-		<key>char</key>
-		<dict>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>variable.parameter</string>
-				</dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
-					<string>variable.parameter</string>
-				</dict>
-				<key>3</key>
-				<dict>
-					<key>name</key>
-					<string>support.function.elm</string>
-				</dict>
-			</dict>
-			<key>match</key>
-			<string>\b(Char)(.)(isUpper|isLower|isDigit|isOctDigit|isHexDigit|toUpper|toLower|toLocaleUpper|toLocaleLower|toCode|fromCode)\b</string>
-			<key>name</key>
-			<string>variable.parameter</string>
-		</dict>
-		<key>date</key>
-		<dict>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>variable.parameter</string>
-				</dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
-					<string>variable.parameter</string>
-				</dict>
-				<key>3</key>
-				<dict>
-					<key>name</key>
-					<string>support.function.elm</string>
-				</dict>
-			</dict>
-			<key>match</key>
-			<string>\b(Date)(.)(read|toTime|year|month|Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec|day|dayOfWeek|Mon|Tue|Wed|Thu|Fri|Sat|Sun|hour|minute|second|Month|Day|Date)\b</string>
-			<key>name</key>
-			<string>variable.parameter</string>
-		</dict>
-		<key>list</key>
-		<dict>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>variable.parameter</string>
-				</dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
-					<string>variable.parameter</string>
-				</dict>
-				<key>3</key>
-				<dict>
-					<key>name</key>
-					<string>support.function.elm</string>
-				</dict>
-			</dict>
-			<key>match</key>
-			<string>\b(List)(.)(length|reverse|map|head|tail|last|isEmpty|filter|take|drop|concat|concatMap|join|intersperse|zip|zipWith|split|partition|unzip|foldr|foldl|foldr1|foldl1|scanl|scanl1|sum|product|maximum|minimum|all|any|and|or)\b</string>
-			<key>name</key>
-			<string>variable.parameter</string>
-		</dict>
-		<key>dict</key>
-		<dict>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>variable.parameter</string>
-				</dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
-					<string>variable.parameter</string>
-				</dict>
-				<key>3</key>
-				<dict>
-					<key>name</key>
-					<string>support.function.elm</string>
-				</dict>
-			</dict>
-			<key>match</key>
-			<string>\b(Dict)(.)(empty|singleton|insert|remove|member|lookup|findWithDefault|union|intersect|diff|keys|values|toList|fromList|map|foldl|foldr)\b</string>
-			<key>name</key>
-			<string>variable.parameter</string>
-		</dict>
-		<key>set</key>
-		<dict>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>variable.parameter</string>
-				</dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
-					<string>variable.parameter</string>
-				</dict>
-				<key>3</key>
-				<dict>
-					<key>name</key>
-					<string>support.function.elm</string>
-				</dict>
-			</dict>
-			<key>match</key>
-			<string>\b(Set)(.)(empty|singleton|insert|remove|member|union|intersect|diff|toList|fromList|map|foldl|foldr)\b</string>
-			<key>name</key>
-			<string>variable.parameter</string>
-		</dict>
-		<key>maybe</key>
-		<dict>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>variable.parameter</string>
-				</dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
-					<string>variable.parameter</string>
-				</dict>
-				<key>3</key>
-				<dict>
-					<key>name</key>
-					<string>support.function.elm</string>
-				</dict>
-			</dict>
-			<key>match</key>
-			<string>\b(Maybe)(.)(Maybe|Just|Nothing|maybe|isJust|isNothing|justs|cons)\b</string>
-			<key>name</key>
-			<string>variable.parameter</string>
-		</dict>
-		<key>either</key>
-		<dict>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>variable.parameter</string>
-				</dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
-					<string>variable.parameter</string>
-				</dict>
-				<key>3</key>
-				<dict>
-					<key>name</key>
-					<string>support.function.elm</string>
-				</dict>
-			</dict>
-			<key>match</key>
-			<string>\b(Either)(.)(Either|Left|Right|either|isLeft|isRight|lefts|rights|partition|consLeft|consRight|consEither)\b</string>
-			<key>name</key>
-			<string>variable.parameter</string>
-		</dict>
-		<key>signal</key>
-		<dict>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>variable.parameter</string>
-				</dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
-					<string>variable.parameter</string>
-				</dict>
-				<key>3</key>
-				<dict>
-					<key>name</key>
-					<string>support.function.elm</string>
-				</dict>
-			</dict>
-			<key>match</key>
-			<string>\b(Signal)(.)(constant|lift[2345678]?|merge|merges|combine|foldp|count|countIf|keepIf|dropIf|keepWhen|dropWhen|dropRepeats|sampleOn)\b</string>
-			<key>name</key>
-			<string>variable.parameter</string>
-		</dict>
-		<key>automaton</key>
-		<dict>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>variable.parameter</string>
-				</dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
-					<string>variable.parameter</string>
-				</dict>
-				<key>3</key>
-				<dict>
-					<key>name</key>
-					<string>support.function.elm</string>
-				</dict>
-			</dict>
-			<key>match</key>
-			<string>\b(Automaton)(.)(Automaton|pure|state|hiddenState|run|step|combine|count|average|empty|enqueue|dequeue|Queue)\b</string>
-			<key>name</key>
-			<string>variable.parameter</string>
-		</dict>
-		<key>mouse</key>
-		<dict>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>variable.parameter</string>
-				</dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
-					<string>variable.parameter</string>
-				</dict>
-				<key>3</key>
-				<dict>
-					<key>name</key>
-					<string>support.function.elm</string>
-				</dict>
-			</dict>
-			<key>match</key>
-			<string>\b(Mouse)(.)(position|x|y|isDown|clicks|isClicked)\b</string>
-			<key>name</key>
-			<string>variable.parameter</string>
-		</dict>
-		<key>keyboard</key>
-		<dict>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>variable.parameter</string>
-				</dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
-					<string>variable.parameter</string>
-				</dict>
-				<key>3</key>
-				<dict>
-					<key>name</key>
-					<string>support.function.elm</string>
-				</dict>
-			</dict>
-			<key>match</key>
-			<string>\b(Keyboard)(.)(KeyCode|arrows|wasd|shift|enter|space|ctrl|isDown|keysDown|lastPressed|directions)\b</string>
-			<key>name</key>
-			<string>variable.parameter</string>
-		</dict>
-		<key>touch</key>
-		<dict>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>variable.parameter</string>
-				</dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
-					<string>variable.parameter</string>
-				</dict>
-				<key>3</key>
-				<dict>
-					<key>name</key>
-					<string>support.function.elm</string>
-				</dict>
-			</dict>
-			<key>match</key>
-			<string>\b(Touch)(.)(Touch|touches|taps)\b</string>
-			<key>name</key>
-			<string>variable.parameter</string>
-		</dict>
 		<key>window</key>
 		<dict>
 			<key>captures</key>
@@ -974,82 +682,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\b(Window)(.)(dimensions|width|height)\b</string>
-			<key>name</key>
-			<string>variable.parameter</string>
-		</dict>
-		<key>time</key>
-		<dict>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>variable.parameter</string>
-				</dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
-					<string>variable.parameter</string>
-				</dict>
-				<key>3</key>
-				<dict>
-					<key>name</key>
-					<string>support.function.elm</string>
-				</dict>
-			</dict>
-			<key>match</key>
-			<string>\b(Time)(.)(Time|millisecond|second|minute|hour|inMilliseconds|inSeconds|inMinutes|inHours|fps|fpsWhen|every|timestamp|delay|since)\b</string>
-			<key>name</key>
-			<string>variable.parameter</string>
-		</dict>
-		<key>random</key>
-		<dict>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>variable.parameter</string>
-				</dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
-					<string>variable.parameter</string>
-				</dict>
-				<key>3</key>
-				<dict>
-					<key>name</key>
-					<string>support.function.elm</string>
-				</dict>
-			</dict>
-			<key>match</key>
-			<string>\b(Random)(.)(range|float)\b</string>
-			<key>name</key>
-			<string>variable.parameter</string>
-		</dict>
-		<key>http</key>
-		<dict>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>variable.parameter</string>
-				</dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
-					<string>variable.parameter</string>
-				</dict>
-				<key>3</key>
-				<dict>
-					<key>name</key>
-					<string>support.function.elm</string>
-				</dict>
-			</dict>
-			<key>match</key>
-			<string>\b(Http)(.)(send|sendGet|get|post|request|Request|Response|Success|Waiting|Failure)\b</string>
+			<string>\b(Window)(.)(dimensions|height|width)\b</string>
 			<key>name</key>
 			<string>variable.parameter</string>
 		</dict>
@@ -1078,7 +711,7 @@
 			<key>name</key>
 			<string>variable.parameter</string>
 		</dict>
-		<key>element</key>
+		<key>transform2d</key>
 		<dict>
 			<key>captures</key>
 			<dict>
@@ -1099,11 +732,11 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\b(Graphics.Element)(.)(image|fittedImage|croppedImage|tiledImage|markdown|width|height|size|color|opacity|link|tag|widthOf|heightOf|sizeOf|above|below|beside|layers|flow|up|down|left|right|inward|outward|spacer|container|middle|midTop|midBottom|midLeft|midRight|topLeft|topRight|bottomLeft|bottomRight|middleAt|midTopAt|midBottomAt|midRightAt|topLeftAt|topRightAt|bottomLeftAt|bottomRightAt|absolute|relative|Properties|Element|emptyStr|newElement|ElementPrim|Image|ImageStyle|Container|Position|Flow|Direction|Spacer|RawHtml|Custom|Plain|Fitted|Cropped|Tiled|Three|P|Z|N|Pos|Pos|Absolute|Relative|DUp|DDown|DLeft|DRight|DIn|DOut)\b</string>
+			<string>\b(Transform2D)(.)(identity|matrix|multiply|rotation|scale|scaleX|scaleY|translation)\b</string>
 			<key>name</key>
 			<string>variable.parameter</string>
 		</dict>
-		<key>collage</key>
+		<key>touch</key>
 		<dict>
 			<key>captures</key>
 			<dict>
@@ -1124,11 +757,11 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\b(Graphics.Collage)(.)(collage|toForm|sprite|filled|textured|gradient|outlined|traced|move|moveX|moveY|alpha|scale|rotate|group|groupTransform|rect|oval|square|circle|ngon|polygon|segment|path|solid|dashed|dotted|defaultLine|Form|BasicForm|FillStyle|Solid|Texture|Grad|LineCap|Flat|Round|Padded|LineJoin|Smooth|Sharp|Clipped||LineStyle|FPath|FShape|FImage|FElement|FGroup|Path|Shape)\b</string>
+			<string>\b(Touch)(.)(taps|touches)\b</string>
 			<key>name</key>
 			<string>variable.parameter</string>
 		</dict>
-		<key>input</key>
+		<key>time</key>
 		<dict>
 			<key>captures</key>
 			<dict>
@@ -1149,32 +782,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\b(Graphics.Input)(.)(id|button|customButton|field|email|password|checkbox|dropDown|stringDropDown|buttons|customButtons|checkboxes|fields|FieldState|emptyFieldState|hoverable)\b</string>
-			<key>name</key>
-			<string>variable.parameter</string>
-		</dict>
-		<key>color</key>
-		<dict>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>variable.parameter</string>
-				</dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
-					<string>variable.parameter</string>
-				</dict>
-				<key>3</key>
-				<dict>
-					<key>name</key>
-					<string>support.function.elm</string>
-				</dict>
-			</dict>
-			<key>match</key>
-			<string>\b(Color)(.)(rgb|rgba|hsv|hsva|complement|linear|radial|[light|dark]?[y|Y]ellow|[light|dark]?[b|B]rown|[light|dark]?[g|G]reen|[light|dark]?[b|B]lue|[light|dark]?[p|P]urple|[light|dark]?[r|R]ed|[light|dark]?[g|G]r[e|a]y|[light|dark]?[c|C]harcoal|black|white|gr[e|a]yscale|Color|Gradient|Linear|Radial)\b</string>
+			<string>\b(Time)(.)(delay|every|fps|fpsWhen|hour|inHours|inMilliseconds|inMinutes|inSeconds|millisecond|minute|second|since|timestamp)\b</string>
 			<key>name</key>
 			<string>variable.parameter</string>
 		</dict>
@@ -1199,11 +807,11 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\b(Text)(.)(toText|plainText|asText|text|centered|justified|righted|bold|italic|underline|overline|strikeThrough|color|monospace|typeface|link|header|height|Text)\b</string>
+			<string>\b(Text)(.)(asText|bold|centered|color|height|italic|justified|link|markdown|monospace|overline|plainText|righted|strikeThrough|text|toText|typeface|underline)\b</string>
 			<key>name</key>
 			<string>variable.parameter</string>
 		</dict>
-		<key>transform2d</key>
+		<key>string</key>
 		<dict>
 			<key>captures</key>
 			<dict>
@@ -1224,11 +832,11 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\b(Transform2D)(.)(identity|matrix|rotation|multiply)\b</string>
+			<string>\b(String)(.)(all|any|append|concat|cons|contains|dropLeft|dropRight|endsWith|filter|foldl|foldr|fromList|indexes|indices|isEmpty|join|left|length|lines|map|pad|padLeft|padRight|repeat|reverse|right|split|startsWith|sub|toFloat|toInt|toList|toLower|toUpper|trim|trimLeft|trimRight|uncons|words)\b</string>
 			<key>name</key>
 			<string>variable.parameter</string>
 		</dict>
-		<key>javascript</key>
+		<key>signal</key>
 		<dict>
 			<key>captures</key>
 			<dict>
@@ -1249,11 +857,11 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\b(JavaScript)(.)(toString|toInt|toFloat|toBool|toList|fromString|fromInt|fromFloat|fromBool|fromList|toElement|fromElement|JSNumber|JSBool|JSString|JSArray|JSDomNode|JSObject)\b</string>
+			<string>\b(Signal)(.)((<~)|combine|constant|count|countIf|dropIf|dropRepeats|dropWhen|foldp|keepIf|keepWhen|lift|lift2|lift3|lift4|lift5|lift6|lift7|lift8|merge|merges|sampleOn|(~))\b</string>
 			<key>name</key>
 			<string>variable.parameter</string>
 		</dict>
-		<key>json</key>
+		<key>set</key>
 		<dict>
 			<key>captures</key>
 			<dict>
@@ -1274,11 +882,11 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\b(Json)(.)(JsonValue|String|Number|Boolean|Null|Array|Object|fromString|toString|toJSString|fromJSString|fromJSObject|toJSObject)\b</string>
+			<string>\b(Set)(.)(diff|empty|foldl|foldr|fromList|insert|intersect|map|member|remove|singleton|toList|union)\b</string>
 			<key>name</key>
 			<string>variable.parameter</string>
 		</dict>
-		<key>experimental</key>
+		<key>regex</key>
 		<dict>
 			<key>captures</key>
 			<dict>
@@ -1299,7 +907,32 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\b(JavaScript.Experimental)(.)(toRecord|fromRecord)\b</string>
+			<string>\b(Regex)(.)(caseInsensitive|contains|escape|find|findAll|pattern|replace|replaceAll|split|splitN)\b</string>
+			<key>name</key>
+			<string>variable.parameter</string>
+		</dict>
+		<key>random</key>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>support.function.elm</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>\b(Random)(.)(float|floatList|range)\b</string>
 			<key>name</key>
 			<string>variable.parameter</string>
 		</dict>
@@ -1324,7 +957,332 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\b(Prelude)(.)(show|readInt|readFloat)\b</string>
+			<string>\b(Prelude)(.)(show)\b</string>
+			<key>name</key>
+			<string>variable.parameter</string>
+		</dict>
+		<key>mouse</key>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>support.function.elm</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>\b(Mouse)(.)(clicks|isClicked|isDown|position|x|y)\b</string>
+			<key>name</key>
+			<string>variable.parameter</string>
+		</dict>
+		<key>maybe</key>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>support.function.elm</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>\b(Maybe)(.)(isJust|isNothing|justs|maybe)\b</string>
+			<key>name</key>
+			<string>variable.parameter</string>
+		</dict>
+		<key>list</key>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>support.function.elm</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>\b(List)(.)((++)|(::)|all|and|any|concat|concatMap|drop|filter|foldl|foldl1|foldr|foldr1|head|intersperse|isEmpty|join|last|length|map|maximum|minimum|or|partition|product|repeat|reverse|scanl|scanl1|sort|sortBy|sortWith|sum|tail|take|unzip|zip|zipWith)\b</string>
+			<key>name</key>
+			<string>variable.parameter</string>
+		</dict>
+		<key>keyboard</key>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>support.function.elm</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>\b(Keyboard)(.)(arrows|ctrl|directions|enter|isDown|keysDown|lastPressed|shift|space|wasd)\b</string>
+			<key>name</key>
+			<string>variable.parameter</string>
+		</dict>
+		<key>json</key>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>support.function.elm</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>\b(Json)(.)(fromJSObject|fromJSString|fromString|toJSObject|toJSString|toString)\b</string>
+			<key>name</key>
+			<string>variable.parameter</string>
+		</dict>
+		<key>javascript</key>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>support.function.elm</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>\b(JavaScript)(.)(fromBool|fromFloat|fromInt|fromList|fromString|toBool|toFloat|toInt|toList|toString)\b</string>
+			<key>name</key>
+			<string>variable.parameter</string>
+		</dict>
+		<key>http</key>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>support.function.elm</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>\b(Http)(.)(get|post|request|send|sendGet)\b</string>
+			<key>name</key>
+			<string>variable.parameter</string>
+		</dict>
+		<key>either</key>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>support.function.elm</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>\b(Either)(.)(either|isLeft|isRight|lefts|partition|rights)\b</string>
+			<key>name</key>
+			<string>variable.parameter</string>
+		</dict>
+		<key>dict</key>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>support.function.elm</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>\b(Dict)(.)(diff|empty|findWithDefault|foldl|foldr|fromList|insert|intersect|keys|lookup|map|member|remove|singleton|toList|union|update|values)\b</string>
+			<key>name</key>
+			<string>variable.parameter</string>
+		</dict>
+		<key>date</key>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>support.function.elm</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>\b(Date)(.)(day|dayOfWeek|hour|minute|month|read|second|toTime|year)\b</string>
+			<key>name</key>
+			<string>variable.parameter</string>
+		</dict>
+		<key>color</key>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>support.function.elm</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>\b(Color)(.)(black|blue|brown|charcoal|complement|darkBlue|darkBrown|darkCharcoal|darkGray|darkGreen|darkGrey|darkOrange|darkPurple|darkRed|darkYellow|gray|grayscale|green|grey|greyscale|hsv|hsva|lightBlue|lightBrown|lightCharcoal|lightGray|lightGreen|lightGrey|lightOrange|lightPurple|lightRed|lightYellow|linear|orange|purple|radial|red|rgb|rgba|white|yellow)\b</string>
+			<key>name</key>
+			<string>variable.parameter</string>
+		</dict>
+		<key>char</key>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>support.function.elm</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>\b(Char)(.)(fromCode|isDigit|isHexDigit|isLower|isOctDigit|isUpper|toCode|toLocaleLower|toLocaleUpper|toLower|toUpper)\b</string>
+			<key>name</key>
+			<string>variable.parameter</string>
+		</dict>
+		<key>bitwise</key>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>support.function.elm</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>\b(Bitwise)(.)(and|complement|or|shiftLeft|shiftRight|shiftRightLogical|xor)\b</string>
 			<key>name</key>
 			<string>variable.parameter</string>
 		</dict>
@@ -1349,7 +1307,107 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\b(Basics)(.)(compare|xor|not|otherwise|div|rem|mod|abs|sqrt|logBase|e|max|min|clamp|pi|cos|sin|tan|acos|asin|atan|atan2|round|floor|ceiling|truncate|toFloat|radians|degrees|turns|toPolar|fromPolar|fst|snd|id|flip|curry|uncurry)\b</string>
+			<string>\b(Basics)(.)((&&)|(*)|(+)|(-)|(.)|(/)|(/=)|(<)|(<=)|(<|)|(==)|(>)|(>=)|(^)|abs|acos|always|asin|atan|atan2|ceiling|clamp|compare|cos|curry|degrees|div|e|flip|floor|fromPolar|fst|id|logBase|max|min|mod|not|otherwise|pi|radians|rem|round|sin|snd|sqrt|tan|toFloat|toPolar|truncate|turns|uncurry|xor|(|>)|(||))\b</string>
+			<key>name</key>
+			<string>variable.parameter</string>
+		</dict>
+		<key>javascript.experimental</key>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>support.function.elm</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>\b(JavaScript.Experimental)(.)(fromRecord|toRecord)\b</string>
+			<key>name</key>
+			<string>variable.parameter</string>
+		</dict>
+		<key>graphics.input</key>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>support.function.elm</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>\b(Graphics.Input)(.)(button|buttons|checkbox|checkboxes|customButton|customButtons|dropDown|email|emptyFieldState|field|fields|hoverable|hoverables|password|stringDropDown)\b</string>
+			<key>name</key>
+			<string>variable.parameter</string>
+		</dict>
+		<key>graphics.element</key>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>support.function.elm</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>\b(Graphics.Element)(.)(above|absolute|below|beside|bottomLeft|bottomLeftAt|bottomRight|bottomRightAt|color|container|croppedImage|down|empty|fittedImage|flow|height|heightOf|image|inward|layers|left|link|midBottom|midBottomAt|midLeft|midLeftAt|midRight|midRightAt|midTop|midTopAt|middle|middleAt|opacity|outward|relative|right|size|sizeOf|spacer|tag|tiledImage|topLeft|topLeftAt|topRight|topRightAt|up|width|widthOf)\b</string>
+			<key>name</key>
+			<string>variable.parameter</string>
+		</dict>
+		<key>graphics.collage</key>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>support.function.elm</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>\b(Graphics.Collage)(.)(alpha|circle|collage|dashed|defaultLine|dotted|filled|form|gradient|group|groupTransform|move|moveX|moveY|ngon|outlined|oval|path|polygon|rect|rotate|scale|segment|solid|sprite|square|textured|toForm|traced)\b</string>
 			<key>name</key>
 			<string>variable.parameter</string>
 		</dict>
