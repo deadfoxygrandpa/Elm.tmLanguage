@@ -326,6 +326,12 @@
 		</dict>
 		<dict>
 			<key>match</key>
+			<string>\bport\b</string>
+			<key>name</key>
+			<string>keyword.other.port.elm</string>
+		</dict>
+		<dict>
+			<key>match</key>
 			<string>\b[A-Z]\w*\b</string>
 			<key>name</key>
 			<string>constant.other.elm</string>
@@ -507,7 +513,7 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>\b(port|Int|Float|Char|Bool|String|Time|Text|Signal|Maybe|Color|Gradient|Order|Direction|ElementPrim|ImageStyle|Pos|Three|Element|Position|Properties|BasicForm|FillStyle|LineCap|LineJoin|Form|LineStyle|Path|Shape)\b</string>
+					<string>\b(Int|Float|Char|Bool|String|Time|Text|Signal|Maybe|Color|Gradient|Order|Direction|ElementPrim|ImageStyle|Pos|Three|Element|Position|Properties|BasicForm|FillStyle|LineCap|LineJoin|Form|LineStyle|Path|Shape)\b</string>
 					<key>name</key>
 					<string>support.type.prelude.elm</string>
 				</dict>
