@@ -857,7 +857,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\b(Signal)(.)((<~)|combine|constant|count|countIf|dropIf|dropRepeats|dropWhen|foldp|keepIf|keepWhen|lift|lift2|lift3|lift4|lift5|lift6|lift7|lift8|merge|merges|sampleOn|(~)|Signal)\b</string>
+			<string>\b(Signal)(.)(combine|constant|count|countIf|dropIf|dropRepeats|dropWhen|foldp|keepIf|keepWhen|lift|lift2|lift3|lift4|lift5|lift6|lift7|lift8|merge|merges|sampleOn|Signal)\b</string>
 			<key>name</key>
 			<string>variable.parameter</string>
 		</dict>
@@ -1032,7 +1032,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\b(List)(.)((++)|(::)|all|and|any|concat|concatMap|drop|filter|foldl|foldl1|foldr|foldr1|head|intersperse|isEmpty|join|last|length|map|maximum|minimum|or|partition|product|repeat|reverse|scanl|scanl1|sort|sortBy|sortWith|sum|tail|take|unzip|zip|zipWith)\b</string>
+			<string>\b(List)(.)(all|and|any|concat|concatMap|drop|filter|foldl|foldl1|foldr|foldr1|head|intersperse|isEmpty|join|last|length|map|maximum|minimum|or|partition|product|repeat|reverse|scanl|scanl1|sort|sortBy|sortWith|sum|tail|take|unzip|zip|zipWith)\b</string>
 			<key>name</key>
 			<string>variable.parameter</string>
 		</dict>
@@ -1307,7 +1307,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\b(Basics)(.)((&&)|(*)|(+)|(-)|(.)|(/)|(/=)|(<)|(<=)|(<|)|(==)|(>)|(>=)|(^)|abs|acos|always|asin|atan|atan2|ceiling|clamp|compare|cos|curry|degrees|div|e|flip|floor|fromPolar|fst|id|logBase|max|min|mod|not|otherwise|pi|radians|rem|round|sin|snd|sqrt|tan|toFloat|toPolar|truncate|turns|uncurry|xor|(|>)|(||)|Order)\b</string>
+			<string>\b(Basics)(.)(abs|acos|always|asin|atan|atan2|ceiling|clamp|compare|cos|curry|degrees|div|e|flip|floor|fromPolar|fst|id|logBase|max|min|mod|not|otherwise|pi|radians|rem|round|sin|snd|sqrt|tan|toFloat|toPolar|truncate|turns|uncurry|xor|Order)\b</string>
 			<key>name</key>
 			<string>variable.parameter</string>
 		</dict>
