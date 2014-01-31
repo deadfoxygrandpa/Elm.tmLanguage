@@ -507,7 +507,7 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>\b(Int|Float|Char|Bool|String|Time|Text|Signal|Maybe|Color|Gradient|Order|Direction|ElementPrim|ImageStyle|Pos|Three|Element|Position|Properties|BasicForm|FillStyle|LineCap|LineJoin|Form|LineStyle|Path|Shape)\b</string>
+					<string>\b(port|Int|Float|Char|Bool|String|Time|Text|Signal|Maybe|Color|Gradient|Order|Direction|ElementPrim|ImageStyle|Pos|Three|Element|Position|Properties|BasicForm|FillStyle|LineCap|LineJoin|Form|LineStyle|Path|Shape)\b</string>
 					<key>name</key>
 					<string>support.type.prelude.elm</string>
 				</dict>
