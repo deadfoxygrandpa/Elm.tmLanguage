@@ -732,7 +732,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\b(Transform2D)(.)(identity|matrix|multiply|rotation|scale|scaleX|scaleY|translation)\b</string>
+			<string>\b(Transform2D)(.)(identity|matrix|multiply|rotation|scale|scaleX|scaleY|translation|Transform2D)\b</string>
 			<key>name</key>
 			<string>variable.parameter</string>
 		</dict>
@@ -757,7 +757,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\b(Touch)(.)(taps|touches)\b</string>
+			<string>\b(Touch)(.)(taps|touches|Touch)\b</string>
 			<key>name</key>
 			<string>variable.parameter</string>
 		</dict>
@@ -782,7 +782,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\b(Time)(.)(delay|every|fps|fpsWhen|hour|inHours|inMilliseconds|inMinutes|inSeconds|millisecond|minute|second|since|timestamp)\b</string>
+			<string>\b(Time)(.)(delay|every|fps|fpsWhen|hour|inHours|inMilliseconds|inMinutes|inSeconds|millisecond|minute|second|since|timestamp|Time)\b</string>
 			<key>name</key>
 			<string>variable.parameter</string>
 		</dict>
@@ -807,7 +807,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\b(Text)(.)(asText|bold|centered|color|height|italic|justified|link|markdown|monospace|overline|plainText|righted|strikeThrough|text|toText|typeface|underline)\b</string>
+			<string>\b(Text)(.)(asText|bold|centered|color|height|italic|justified|link|markdown|monospace|overline|plainText|righted|strikeThrough|text|toText|typeface|underline|Text)\b</string>
 			<key>name</key>
 			<string>variable.parameter</string>
 		</dict>
@@ -857,7 +857,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\b(Signal)(.)((<~)|combine|constant|count|countIf|dropIf|dropRepeats|dropWhen|foldp|keepIf|keepWhen|lift|lift2|lift3|lift4|lift5|lift6|lift7|lift8|merge|merges|sampleOn|(~))\b</string>
+			<string>\b(Signal)(.)((<~)|combine|constant|count|countIf|dropIf|dropRepeats|dropWhen|foldp|keepIf|keepWhen|lift|lift2|lift3|lift4|lift5|lift6|lift7|lift8|merge|merges|sampleOn|(~)|Signal)\b</string>
 			<key>name</key>
 			<string>variable.parameter</string>
 		</dict>
@@ -907,7 +907,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\b(Regex)(.)(caseInsensitive|contains|escape|find|findAll|pattern|replace|replaceAll|split|splitN)\b</string>
+			<string>\b(Regex)(.)(caseInsensitive|contains|escape|find|findAll|pattern|replace|replaceAll|split|splitN|Match|Regex)\b</string>
 			<key>name</key>
 			<string>variable.parameter</string>
 		</dict>
@@ -1007,7 +1007,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\b(Maybe)(.)(isJust|isNothing|justs|maybe)\b</string>
+			<string>\b(Maybe)(.)(isJust|isNothing|justs|maybe|Maybe)\b</string>
 			<key>name</key>
 			<string>variable.parameter</string>
 		</dict>
@@ -1057,7 +1057,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\b(Keyboard)(.)(arrows|ctrl|directions|enter|isDown|keysDown|lastPressed|shift|space|wasd)\b</string>
+			<string>\b(Keyboard)(.)(arrows|ctrl|directions|enter|isDown|keysDown|lastPressed|shift|space|wasd|KeyCode)\b</string>
 			<key>name</key>
 			<string>variable.parameter</string>
 		</dict>
@@ -1082,7 +1082,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\b(Json)(.)(fromJSObject|fromJSString|fromString|toJSObject|toJSString|toString)\b</string>
+			<string>\b(Json)(.)(fromJSObject|fromJSString|fromString|toJSObject|toJSString|toString|JsonValue)\b</string>
 			<key>name</key>
 			<string>variable.parameter</string>
 		</dict>
@@ -1107,7 +1107,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\b(JavaScript)(.)(fromBool|fromFloat|fromInt|fromList|fromString|toBool|toFloat|toInt|toList|toString)\b</string>
+			<string>\b(JavaScript)(.)(fromBool|fromFloat|fromInt|fromList|fromString|toBool|toFloat|toInt|toList|toString|JSArray|JSBool|JSDomNode|JSNumber|JSObject|JSString)\b</string>
 			<key>name</key>
 			<string>variable.parameter</string>
 		</dict>
@@ -1132,7 +1132,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\b(Http)(.)(get|post|request|send|sendGet)\b</string>
+			<string>\b(Http)(.)(get|post|request|send|sendGet|Request|Response)\b</string>
 			<key>name</key>
 			<string>variable.parameter</string>
 		</dict>
@@ -1157,7 +1157,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\b(Either)(.)(either|isLeft|isRight|lefts|partition|rights)\b</string>
+			<string>\b(Either)(.)(either|isLeft|isRight|lefts|partition|rights|Either)\b</string>
 			<key>name</key>
 			<string>variable.parameter</string>
 		</dict>
@@ -1207,7 +1207,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\b(Date)(.)(day|dayOfWeek|hour|minute|month|read|second|toTime|year)\b</string>
+			<string>\b(Date)(.)(day|dayOfWeek|hour|minute|month|read|second|toTime|year|Date|Day|Month)\b</string>
 			<key>name</key>
 			<string>variable.parameter</string>
 		</dict>
@@ -1232,7 +1232,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\b(Color)(.)(black|blue|brown|charcoal|complement|darkBlue|darkBrown|darkCharcoal|darkGray|darkGreen|darkGrey|darkOrange|darkPurple|darkRed|darkYellow|gray|grayscale|green|grey|greyscale|hsv|hsva|lightBlue|lightBrown|lightCharcoal|lightGray|lightGreen|lightGrey|lightOrange|lightPurple|lightRed|lightYellow|linear|orange|purple|radial|red|rgb|rgba|white|yellow)\b</string>
+			<string>\b(Color)(.)(black|blue|brown|charcoal|complement|darkBlue|darkBrown|darkCharcoal|darkGray|darkGreen|darkGrey|darkOrange|darkPurple|darkRed|darkYellow|gray|grayscale|green|grey|greyscale|hsv|hsva|lightBlue|lightBrown|lightCharcoal|lightGray|lightGreen|lightGrey|lightOrange|lightPurple|lightRed|lightYellow|linear|orange|purple|radial|red|rgb|rgba|white|yellow|Color|Gradient)\b</string>
 			<key>name</key>
 			<string>variable.parameter</string>
 		</dict>
@@ -1257,7 +1257,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\b(Char)(.)(fromCode|isDigit|isHexDigit|isLower|isOctDigit|isUpper|toCode|toLocaleLower|toLocaleUpper|toLower|toUpper)\b</string>
+			<string>\b(Char)(.)(fromCode|isDigit|isHexDigit|isLower|isOctDigit|isUpper|toCode|toLocaleLower|toLocaleUpper|toLower|toUpper|KeyCode)\b</string>
 			<key>name</key>
 			<string>variable.parameter</string>
 		</dict>
@@ -1307,7 +1307,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\b(Basics)(.)((&&)|(*)|(+)|(-)|(.)|(/)|(/=)|(<)|(<=)|(<|)|(==)|(>)|(>=)|(^)|abs|acos|always|asin|atan|atan2|ceiling|clamp|compare|cos|curry|degrees|div|e|flip|floor|fromPolar|fst|id|logBase|max|min|mod|not|otherwise|pi|radians|rem|round|sin|snd|sqrt|tan|toFloat|toPolar|truncate|turns|uncurry|xor|(|>)|(||))\b</string>
+			<string>\b(Basics)(.)((&&)|(*)|(+)|(-)|(.)|(/)|(/=)|(<)|(<=)|(<|)|(==)|(>)|(>=)|(^)|abs|acos|always|asin|atan|atan2|ceiling|clamp|compare|cos|curry|degrees|div|e|flip|floor|fromPolar|fst|id|logBase|max|min|mod|not|otherwise|pi|radians|rem|round|sin|snd|sqrt|tan|toFloat|toPolar|truncate|turns|uncurry|xor|(|>)|(||)|Order)\b</string>
 			<key>name</key>
 			<string>variable.parameter</string>
 		</dict>
@@ -1357,7 +1357,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\b(Graphics.Input)(.)(button|buttons|checkbox|checkboxes|customButton|customButtons|dropDown|email|emptyFieldState|field|fields|hoverable|hoverables|password|stringDropDown)\b</string>
+			<string>\b(Graphics.Input)(.)(button|buttons|checkbox|checkboxes|customButton|customButtons|dropDown|email|emptyFieldState|field|fields|hoverable|hoverables|password|stringDropDown|FieldState)\b</string>
 			<key>name</key>
 			<string>variable.parameter</string>
 		</dict>
@@ -1382,7 +1382,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\b(Graphics.Element)(.)(above|absolute|below|beside|bottomLeft|bottomLeftAt|bottomRight|bottomRightAt|color|container|croppedImage|down|empty|fittedImage|flow|height|heightOf|image|inward|layers|left|link|midBottom|midBottomAt|midLeft|midLeftAt|midRight|midRightAt|midTop|midTopAt|middle|middleAt|opacity|outward|relative|right|size|sizeOf|spacer|tag|tiledImage|topLeft|topLeftAt|topRight|topRightAt|up|width|widthOf)\b</string>
+			<string>\b(Graphics.Element)(.)(above|absolute|below|beside|bottomLeft|bottomLeftAt|bottomRight|bottomRightAt|color|container|croppedImage|down|empty|fittedImage|flow|height|heightOf|image|inward|layers|left|link|midBottom|midBottomAt|midLeft|midLeftAt|midRight|midRightAt|midTop|midTopAt|middle|middleAt|opacity|outward|relative|right|size|sizeOf|spacer|tag|tiledImage|topLeft|topLeftAt|topRight|topRightAt|up|width|widthOf|Element|Position|Properties|Direction|ElementPrim|ImageStyle|Pos|Three)\b</string>
 			<key>name</key>
 			<string>variable.parameter</string>
 		</dict>
@@ -1407,7 +1407,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\b(Graphics.Collage)(.)(alpha|circle|collage|dashed|defaultLine|dotted|filled|form|gradient|group|groupTransform|move|moveX|moveY|ngon|outlined|oval|path|polygon|rect|rotate|scale|segment|solid|sprite|square|textured|toForm|traced)\b</string>
+			<string>\b(Graphics.Collage)(.)(alpha|circle|collage|dashed|defaultLine|dotted|filled|form|gradient|group|groupTransform|move|moveX|moveY|ngon|outlined|oval|path|polygon|rect|rotate|scale|segment|solid|sprite|square|textured|toForm|traced|Form|LineStyle|Path|Shape|BasicForm|FillStyle|LineCap|LineJoin)\b</string>
 			<key>name</key>
 			<string>variable.parameter</string>
 		</dict>
