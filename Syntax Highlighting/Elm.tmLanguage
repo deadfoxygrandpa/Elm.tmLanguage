@@ -320,7 +320,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(Just|Nothing|Left|Right|True|False|LT|EQ|GT|\(\)|\[\]|Flat|Round|Padded|Smooth|Sharp|Clipped)\b</string>
+			<string>\b(\(\)|\[\]|True|False|Int|Char|Bool|String|Text|Signal|Just|Nothing|Color|Linear|Radial|LT|EQ|GT|DUp|DDown|DLeft|DRight|DIn|DOut|Image|Container|Flow|Spacer|RawHtml|Custom|Plain|Fitted|Cropped|Tiled|Absolute|Relative|P|Z|N|FPath|FShape|FImage|FElement|FGroup|Solid|Texture|Grad|Flat|Round|Padded|Smooth|Sharp|Clipped)\b</string>
 			<key>name</key>
 			<string>support.constant.elm</string>
 		</dict>
