@@ -3,7 +3,7 @@
 sampleOn ${1:signal} ${2:signal}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-	<tabTrigger>sampleOn</tabTrigger>
+	<tabTrigger>sampleon</tabTrigger>
 	<!-- Optional: Set a scope to limit where the snippet will trigger -->
 	<scope>source.elm</scope>
 	<description>Signal a -> Signal b -> Signal b</description>

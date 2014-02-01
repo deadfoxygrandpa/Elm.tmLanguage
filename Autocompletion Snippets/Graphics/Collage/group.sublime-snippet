@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-group ${1:[${2:form}]}
+group ${1:list}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>group</tabTrigger>

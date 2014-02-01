@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-maybe ${1:b} ${2:function} ${3:(${4:Just ${5:a}})}
+maybe ${1:b} ${2:function} ${3:maybe}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>maybe</tabTrigger>

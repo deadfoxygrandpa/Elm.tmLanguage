@@ -6,5 +6,5 @@ maximum ${1:list}
 	<tabTrigger>maximum</tabTrigger>
 	<!-- Optional: Set a scope to limit where the snippet will trigger -->
 	<scope>source.elm</scope>
-	<description>[number] -> number</description>
+	<description>[comparable] -> comparable</description>
 </snippet>

@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-collage ${1:width} ${2:height} ${3:[${4:form}]}
+collage ${1:int} ${2:int} ${3:list}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>collage</tabTrigger>

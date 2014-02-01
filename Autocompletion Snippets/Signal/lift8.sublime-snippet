@@ -6,5 +6,6 @@ lift8 ${1:function} ${2:signal} ${3:signal} ${4:signal} ${5:signal} ${6:signal} 
 	<tabTrigger>lift8</tabTrigger>
 	<!-- Optional: Set a scope to limit where the snippet will trigger -->
 	<scope>source.elm</scope>
-	<description>(a -> b -> c -> d -> e -> f -> g -> h -> i) -> Signal a -> Signal b -> Signal c -> Signal d -> Signal e -> Signal f -> Signal g -> Signal h -> Signal i</description>
+	<description>(a -> b -> c -> d -> e -> f -> g -> h -> i)
+      -> Signal a -> Signal b -> Signal c -> Signal d -> Signal e -> Signal f -> Signal g -> Signal h -> Signal i</description>
 </snippet>

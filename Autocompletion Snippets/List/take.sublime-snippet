@@ -1,7 +1,7 @@
 <snippet>
 	<content><![CDATA[
 take ${1:int} ${2:list}
-]]></content> 
+]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>take</tabTrigger>
 	<!-- Optional: Set a scope to limit where the snippet will trigger -->

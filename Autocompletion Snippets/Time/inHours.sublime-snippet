@@ -3,7 +3,7 @@
 inHours ${1:time}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-	<tabTrigger>inHours</tabTrigger>
+	<tabTrigger>inhours</tabTrigger>
 	<!-- Optional: Set a scope to limit where the snippet will trigger -->
 	<scope>source.elm</scope>
 	<description>Time -> Float</description>

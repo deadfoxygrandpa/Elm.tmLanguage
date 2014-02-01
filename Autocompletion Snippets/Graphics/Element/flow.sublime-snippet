@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-flow ${1:direction} ${2:[${3:element}, ${4:element}]}
+flow ${1:direction} ${2:list}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>flow</tabTrigger>

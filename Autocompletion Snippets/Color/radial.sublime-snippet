@@ -1,10 +1,10 @@
 <snippet>
 	<content><![CDATA[
-radial (${1:float}, ${2:float}) ${3:float} (${4:float}, ${5:float}) ${6:float} ${7:[(${8:float}, ${9:color})]}
+radial ${1:tuple} ${2:number} ${3:tuple} ${4:number} ${5:list}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>radial</tabTrigger>
 	<!-- Optional: Set a scope to limit where the snippet will trigger -->
 	<scope>source.elm</scope>
-	<description>(Float,Float) -> Float -> (Float,Float) -> Float -> [(Float,Color)] -> Gradient</description>
+	<description>(number,number) -> number -> (number,number) -> number -> [(Float,Color)] -> Gradient</description>
 </snippet>

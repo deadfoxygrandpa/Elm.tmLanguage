@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-sprite ${1:int} ${2:int} ${3:(${4:int}, ${5:int})} ${6:string}
+sprite ${1:int} ${2:int} ${3:tuple} ${4:string}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>sprite</tabTrigger>

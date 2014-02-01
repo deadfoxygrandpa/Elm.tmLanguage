@@ -6,5 +6,5 @@ foldl1 ${1:function} ${2:list}
 	<tabTrigger>foldl1</tabTrigger>
 	<!-- Optional: Set a scope to limit where the snippet will trigger -->
 	<scope>source.elm</scope>
-	<description>(a -> b -> b) -> [a] -> b</description>
+	<description>(a -> a -> a) -> [a] -> a</description>
 </snippet>

@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-${1:element} `above` ${2:element}
+above ${1:element} ${2:element}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>above</tabTrigger>

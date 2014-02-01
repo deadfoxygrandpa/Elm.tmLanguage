@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-concat ${1:[${2:appendable}, ${3:appendable}]}
+concat ${1:list}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>concat</tabTrigger>

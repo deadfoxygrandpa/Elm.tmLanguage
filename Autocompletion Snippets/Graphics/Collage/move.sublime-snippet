@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-move ${1:(${2:float}, ${3:float})} ${4:form}
+move ${1:tuple} ${2:form}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>move</tabTrigger>
