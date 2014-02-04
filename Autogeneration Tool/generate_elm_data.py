@@ -38,7 +38,7 @@ class Module(object):
 			path += '\\{}'
 
 			with open(path.format(name(v) + '.sublime-snippet'), 'w') as f:
-				f.write(s.format(autocomplete=make_autocomplete(v), name=name(v).lower(), signature=signature(v)))
+				f.write(s.format(autocomplete=make_autocomplete(v), name=name(v), signature=signature(v)))
 			
 			print 'Wrote {}'.format(path.format(name(v) + '.sublime-snippet'))
 
