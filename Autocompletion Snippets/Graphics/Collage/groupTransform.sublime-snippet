@@ -3,7 +3,7 @@
 groupTransform ${1:transform2d} ${2:list}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-	<tabTrigger>grouptransform</tabTrigger>
+	<tabTrigger>groupTransform</tabTrigger>
 	<!-- Optional: Set a scope to limit where the snippet will trigger -->
 	<scope>source.elm</scope>
 	<description>Transform2D -> [Form] -> Form</description>

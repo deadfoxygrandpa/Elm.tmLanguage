@@ -3,7 +3,7 @@
 fittedImage ${1:int} ${2:int} ${3:string}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-	<tabTrigger>fittedimage</tabTrigger>
+	<tabTrigger>fittedImage</tabTrigger>
 	<!-- Optional: Set a scope to limit where the snippet will trigger -->
 	<scope>source.elm</scope>
 	<description>Int -> Int -> String -> Element</description>

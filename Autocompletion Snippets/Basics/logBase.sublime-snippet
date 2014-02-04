@@ -3,7 +3,7 @@
 logBase ${1:number} ${2:number}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-	<tabTrigger>logbase</tabTrigger>
+	<tabTrigger>logBase</tabTrigger>
 	<!-- Optional: Set a scope to limit where the snippet will trigger -->
 	<scope>source.elm</scope>
 	<description>number -> number -> number</description>

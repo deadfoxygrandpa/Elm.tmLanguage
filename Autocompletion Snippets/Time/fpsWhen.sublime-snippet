@@ -3,7 +3,7 @@
 fpsWhen ${1:number} ${2:signal}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-	<tabTrigger>fpswhen</tabTrigger>
+	<tabTrigger>fpsWhen</tabTrigger>
 	<!-- Optional: Set a scope to limit where the snippet will trigger -->
 	<scope>source.elm</scope>
 	<description>number -> Signal Bool -> Signal Time</description>

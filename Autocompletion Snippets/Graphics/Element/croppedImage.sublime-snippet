@@ -3,7 +3,7 @@
 croppedImage ${1:tuple} ${2:int} ${3:int} ${4:string}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-	<tabTrigger>croppedimage</tabTrigger>
+	<tabTrigger>croppedImage</tabTrigger>
 	<!-- Optional: Set a scope to limit where the snippet will trigger -->
 	<scope>source.elm</scope>
 	<description>(Int,Int) -> Int -> Int -> String -> Element</description>
