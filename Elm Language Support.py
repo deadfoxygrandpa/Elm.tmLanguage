@@ -210,7 +210,7 @@ class ElmShowType(sublime_plugin.TextCommand):
 class ElmSetDocsPath(sublime_plugin.ApplicationCommand):
     def run(self):
         p = subprocess.Popen('elm-paths docs', stdout=subprocess.PIPE, shell=True)
-        version = p.communicate()[0].strip()
+        version = p.communicate()[0].strip() or ''
         if version.endswith('docs.json'):
             SETTINGS.set('elm_docs_path', version)
         print version or 'elm-paths not installed...'
