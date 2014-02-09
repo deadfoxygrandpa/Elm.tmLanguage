@@ -8,7 +8,7 @@ import sublime, sublime_plugin
 
 SETTINGS = sublime.load_settings('Elm Language Support.sublime-settings')
 
-ELM_DOCS_PATH = SETTINGS.get('elm_docs_path')
+ELM_DOCS_PATH = SETTINGS.get('elm_docs_path') or 'docs.json'
 
 
 class Module(object):
