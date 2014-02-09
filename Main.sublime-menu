@@ -18,7 +18,7 @@
                             {
                                 "command": "open_file", "args":
                                 {
-                                    "file": "${packages}/Elm Language Support/ElmLanguageSupport.sublime-settings"
+                                    "file": "${packages}/Elm Language Support/Elm Language Support.sublime-settings"
                                 },
                                 "caption": "Settings – Default"
                             },

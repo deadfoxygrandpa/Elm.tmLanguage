@@ -6,7 +6,7 @@ import time
 
 import sublime, sublime_plugin
 
-SETTINGS = sublime.load_settings('ElmLanguageSupport.sublime-settings')
+SETTINGS = sublime.load_settings('Elm Language Support.sublime-settings')
 
 ELM_DOCS_PATH = SETTINGS.get('elm_docs_path')
 
@@ -188,6 +188,10 @@ def get_type(view):
 
         return msg or ""
 
+# Load the modules from the Elm Standard Library docs
+MODULES = [Module(m) for m in load_docs(ELM_DOCS_PATH)]
+PRELUDE = get_prelude_modules(MODULES)
+
 
 class ElmLanguageSupport(sublime_plugin.EventListener):
     # TODO: implement completions based on current context
@@ -218,11 +222,3 @@ class ElmEnable(sublime_plugin.ApplicationCommand):
 class ElmDisable(sublime_plugin.ApplicationCommand):
     def run(self):
         SETTINGS.set("enabled", "false")                
-
-
-if SETTINGS.get('enabled'):
-    global MODULES
-    global PRELUDE
-    # Load the modules from the Elm Standard Library docs
-    MODULES = [Module(m) for m in load_docs(ELM_DOCS_PATH)]
-    PRELUDE = get_prelude_modules(MODULES)
