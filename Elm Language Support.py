@@ -206,6 +206,8 @@ class ElmLanguageSupport(sublime_plugin.EventListener):
 class ElmShowType(sublime_plugin.TextCommand):
     def run(self, edit):
         print get_type(self.view)
+        msg = get_type(self.view) or ''
+        sublime.status_message(msg)        
 
 class ElmSetDocsPath(sublime_plugin.ApplicationCommand):
     def run(self):
