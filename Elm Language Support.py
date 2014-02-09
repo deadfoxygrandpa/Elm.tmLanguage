@@ -186,7 +186,7 @@ def get_type(view):
             search_modules(value, [m for m in aliased_modules.keys() if module == aliased_modules[m]]) or \
             search_modules(word, [m for m in open_values.keys() if word in open_values[m]])
 
-        return msg or ""
+        return msg or ''
 
 # Load the modules from the Elm Standard Library docs
 MODULES = [Module(m) for m in load_docs(ELM_DOCS_PATH)]
@@ -200,7 +200,7 @@ class ElmLanguageSupport(sublime_plugin.EventListener):
 
     def on_selection_modified(self, view):
         if SETTINGS.get('enabled'):
-            msg = get_type(view)
+            msg = get_type(view) or ''
             sublime.status_message(msg)
 
 class ElmShowType(sublime_plugin.TextCommand):
