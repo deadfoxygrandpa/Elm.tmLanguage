@@ -1,0 +1,18 @@
+[
+	{
+        "caption": "Elm Language Support: Show type",
+        "command": "elm_show_type"
+    },
+    {
+    	"caption": "Elm Language Support: Autoset Docs Path",
+    	"command": "elm_set_docs_path"
+    },
+    {
+        "caption": "Elm Language Support: Enable",
+        "command": "elm_enable"
+    },
+    {
+        "caption": "Elm Language Support: Disable",
+        "command": "elm_disable"
+    }
+]
