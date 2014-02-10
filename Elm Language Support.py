@@ -199,7 +199,7 @@ class ElmLanguageSupport(sublime_plugin.EventListener):
     #     return []
 
     def on_selection_modified(self, view):
-        if SETTINGS.get('enabled'):
+        if SETTINGS.get('enabled', True):
             msg = get_type(view) or ''
             sublime.status_message(msg)
 
@@ -220,7 +220,9 @@ class ElmSetDocsPath(sublime_plugin.ApplicationCommand):
 class ElmEnable(sublime_plugin.ApplicationCommand):
     def run(self):
         SETTINGS.set("enabled", "true")
+        sublime.save_settings('Elm Language Support.sublime-settings')
 
 class ElmDisable(sublime_plugin.ApplicationCommand):
     def run(self):
-        SETTINGS.set("enabled", "false")                
+        SETTINGS.set("enabled", "false")
+        sublime.save_settings('Elm Language Support.sublime-settings')
