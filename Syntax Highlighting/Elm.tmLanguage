@@ -183,7 +183,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(deriving|data|type|case|of|let|in|newtype|default)\b</string>
+			<string>\b(data|type|case|of|let|in)\b</string>
 			<key>name</key>
 			<string>keyword.other.elm</string>
 		</dict>
