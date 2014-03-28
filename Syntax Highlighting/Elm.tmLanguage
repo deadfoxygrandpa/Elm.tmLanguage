@@ -170,12 +170,6 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\binfix[lr]?\b</string>
-			<key>name</key>
-			<string>keyword.operator.elm</string>
-		</dict>
-		<dict>
-			<key>match</key>
 			<string>\b(if|then|else)\b</string>
 			<key>name</key>
 			<string>keyword.control.elm</string>
@@ -273,15 +267,20 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^([a-z_][a-zA-Z0-9_']*|\([|!%$+\-.,=&lt;/&gt;]+\))\s*(:)</string>
+			<string>^(port\s+)?([a-z_][a-zA-Z0-9_']*|\([|!%$+\-.,=&lt;/&gt;]+\))\s*(:)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
 				<dict>
 					<key>name</key>
+					<string>keyword.other.port.elm</string>
+				</dict>				
+				<key>2</key>
+				<dict>
+					<key>name</key>
 					<string>entity.name.function.elm</string>
 				</dict>
-				<key>2</key>
+				<key>3</key>
 				<dict>
 					<key>name</key>
 					<string>keyword.other.colon.elm</string>
