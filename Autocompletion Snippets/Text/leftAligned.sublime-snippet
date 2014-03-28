@@ -1,10 +1,10 @@
 <snippet>
 	<content><![CDATA[
-typeface ${1:list} ${2:text}
+leftAligned ${1:text}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-	<tabTrigger>typeface</tabTrigger>
+	<tabTrigger>leftAligned</tabTrigger>
 	<!-- Optional: Set a scope to limit where the snippet will trigger -->
 	<scope>source.elm</scope>
-	<description>[String] -> Text -> Text</description>
+	<description>Text -> Element</description>
 </snippet>

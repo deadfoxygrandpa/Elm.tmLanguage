@@ -1,10 +1,10 @@
 <snippet>
 	<content><![CDATA[
-strikeThrough ${1:text}
+isNaN ${1:float}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-	<tabTrigger>strikeThrough</tabTrigger>
+	<tabTrigger>isNaN</tabTrigger>
 	<!-- Optional: Set a scope to limit where the snippet will trigger -->
 	<scope>source.elm</scope>
-	<description>Text -> Text</description>
+	<description>Float -> Bool</description>
 </snippet>
