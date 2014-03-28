@@ -101,9 +101,15 @@
 			<array>
 				<dict>
 					<key>match</key>
-					<string>(qualified|as|hiding)</string>
+					<string>(as)</string>
 					<key>name</key>
-					<string>keyword.other.elm</string>
+					<string>keyword.import.elm</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\(\.\.\)</string>
+					<key>name</key>
+					<string>keyword.import.elm</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -112,31 +118,6 @@
 				<dict>
 					<key>include</key>
 					<string>#module_exports</string>
-				</dict>
-			</array>
-		</dict>
-		<dict>
-			<key>begin</key>
-			<string>(deriving)\s*\(</string>
-			<key>beginCaptures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>keyword.other.elm</string>
-				</dict>
-			</dict>
-			<key>end</key>
-			<string>\)</string>
-			<key>name</key>
-			<string>meta.deriving.elm</string>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>match</key>
-					<string>\b[A-Z][a-zA-Z_']*</string>
-					<key>name</key>
-					<string>entity.other.inherited-class.elm</string>
 				</dict>
 			</array>
 		</dict>
