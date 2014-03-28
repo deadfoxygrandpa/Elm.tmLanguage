@@ -164,7 +164,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(data|type|case|of|let|in)\b</string>
+			<string>\b(data|type|case|of|let|in|as)\b</string>
 			<key>name</key>
 			<string>keyword.other.elm</string>
 		</dict>
