@@ -117,6 +117,7 @@ def modules_in_scope(view):
     modules = {}
     for imp in imports:
         if imp.startswith('open'):
+            ## This was removed in Elm 0.12, but keeping it in for now
             modules[imp[5:]] = 'open'
         elif len(imp.split(' as ')) == 2:
             x = imp.split(' as ')
@@ -124,7 +125,10 @@ def modules_in_scope(view):
         elif len(imp.split('(')) == 2:
             x = imp.replace(')', '').split('(')
             values = [v.strip() for v in x[1].split(',')]
-            modules[x[0].strip()] = values
+            if values[0] == '..':
+                modules[x[0].strip()] = 'open'
+            else:
+                modules[x[0].strip()] = values
         else:
             modules[imp] = 'qualified'
     for module in PRELUDE:
