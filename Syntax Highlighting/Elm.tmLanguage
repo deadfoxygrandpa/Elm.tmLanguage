@@ -84,13 +84,18 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>(import)</string>
+			<string>(import)(\s+(open)\s+)?</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
 				<dict>
 					<key>name</key>
 					<string>keyword.other.elm</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>invalid</string>
 				</dict>
 			</dict>
 			<key>end</key>
@@ -267,7 +272,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^(port\s+)?([a-z_][a-zA-Z0-9_']*|\([|!%$+\-.,=&lt;/&gt;]+\))\s*(:)</string>
+			<string>^(port\s+)?([a-z_][a-zA-Z0-9_']*|\([|!%$+\-.,=&lt;/&gt;]+\))\s*((:)([:]+)?)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -280,10 +285,15 @@
 					<key>name</key>
 					<string>entity.name.function.elm</string>
 				</dict>
-				<key>3</key>
+				<key>4</key>
 				<dict>
 					<key>name</key>
 					<string>keyword.other.colon.elm</string>
+				</dict>
+				<key>5</key>
+				<dict>
+					<key>name</key>
+					<string>invalid</string>
 				</dict>
 			</dict>
 			<key>end</key>
