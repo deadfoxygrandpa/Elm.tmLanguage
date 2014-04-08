@@ -44,15 +44,28 @@ def load_docs(path):
     with open(path) as f:
         return json.load(f)
 
-def path_to_dependency_docs():
+def load_dependency_docs(view):
     try:
-        with open(ELM_DEPENDENCIES) as f:
-            data = json.load(f)
+        directory = os.path.split(view.file_name())[0]
+        elm_dependencies = os.path.join(directory, ELM_DEPENDENCIES)
         try:
-            print data['dependencies']
-        except KeyError:
-            pass
-    except IOError:
+            with open(elm_dependencies) as f:
+                data = json.load(f)
+            try:
+                d = data['dependencies']
+                dependencies = d.items()
+                data = []
+                for root, dirs, files in os.walk(os.path.join(directory, 'docs')):
+                    for file in files:
+                        if file.endswith(".json"):
+                             with open(os.path.join(root, file)) as f:
+                                data.append(json.load(f))
+                return data
+            except KeyError:
+                return []
+        except IOError:
+            return []
+    except:
         return []
 
 
@@ -110,7 +123,7 @@ def search_modules(value, modules):
                         if name(datatype).split(' ')[0].strip() == value][0]
             names.append('data ' + module.name + '.' + name(datatype) + ' = ' + signature(datatype))
         elif value in module.aliases:
-            alias = [alias for alias in module.raw_aliases if name(alias) == value][0]
+            alias = [a for a in module.raw_aliases if name(a).startswith(value)][0]
             names.append('type ' + module.name + '.' + value + ' = ' + signature(alias))
         elif value == module.name:
             names.append('Module ' + module.name)
@@ -223,7 +236,8 @@ def get_type(view):
         return msg or ''
 
 # Load the modules from the Elm Standard Library docs
-MODULES = [Module(m) for m in load_docs(ELM_DOCS_PATH)]
+STD_LIBRARY = [Module(m) for m in load_docs(ELM_DOCS_PATH)]
+MODULES = STD_LIBRARY
 PRELUDE = get_prelude_modules(MODULES)
 
 
@@ -236,6 +250,12 @@ class ElmLanguageSupport(sublime_plugin.EventListener):
         if SETTINGS.get('enabled', True):
             msg = get_type(view) or ''
             sublime.status_message(msg)
+
+    def on_activated(self, view):
+        if SETTINGS.get('enabled', True):
+            global MODULES
+            deps = load_dependency_docs(view)
+            MODULES = STD_LIBRARY + [Module(m) for m in deps]
 
 class ElmShowType(sublime_plugin.TextCommand):
     def run(self, edit):
