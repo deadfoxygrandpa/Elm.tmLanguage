@@ -12,8 +12,6 @@ SETTINGS = sublime.load_settings('Elm Language Support.sublime-settings')
 
 ELM_DOCS_PATH = SETTINGS.get('elm_docs_path') or 'docs.json'
 
-ELM_DEPENDENCIES = 'elm_dependencies.json'
-
 
 class Module(object):
     """
@@ -85,42 +83,34 @@ def parse_print_types(s):
 def load_dependency_docs(name):
     try:
         directory = os.path.split(name)[0]
-        elm_dependencies = os.path.join(directory, ELM_DEPENDENCIES)
         try:
-            with open(elm_dependencies) as f:
-                data = json.load(f)
-            try:
-                d = data['dependencies']
-                dependencies = d.items()
-                data = []
-                source_files = []
-                for root, dirs, files in os.walk(directory):
-                    for filename in files:
-                        if filename.lower().endswith('.elm'):
-                            f = os.path.join(root, filename)
-                            if not '_internals' in f:
-                                source_files.append((f, filename))
-                queue = Queue.Queue()
-                threads = [threading.Thread(target=threadload, args=[f[0], directory, queue]) for f in source_files]
-                [thread.start() for thread in threads]
-                [thread.join() for thread in threads]
-                modules = []
-                while True:
-                    if not queue.empty():
-                        modules.append(queue.get())
-                    else:
-                        break
-                for root, dirs, files in os.walk(directory):
-                    for filename in files:
-                        if filename.lower().endswith('.json') and filename in [f[1][:-4] + '.json' for f in source_files]:
-                            x = os.path.join(root, filename.lower())
-                            if '_internals' not in x:
-                                with open(x) as f:
-                                    data.append(json.load(f))
-                return modules + data
-            except KeyError:
-                return []
-        except IOError:
+            data = []
+            source_files = []
+            for root, dirs, files in os.walk(directory):
+                for filename in files:
+                    if filename.lower().endswith('.elm'):
+                        f = os.path.join(root, filename)
+                        if not '_internals' in f:
+                            source_files.append((f, filename))
+            queue = Queue.Queue()
+            threads = [threading.Thread(target=threadload, args=[f[0], directory, queue]) for f in source_files]
+            [thread.start() for thread in threads]
+            [thread.join() for thread in threads]
+            modules = []
+            while True:
+                if not queue.empty():
+                    modules.append(queue.get())
+                else:
+                    break
+            for root, dirs, files in os.walk(directory):
+                for filename in files:
+                    if filename.lower().endswith('.json') and filename in [f[1][:-4] + '.json' for f in source_files]:
+                        x = os.path.join(root, filename.lower())
+                        if '_internals' not in x:
+                            with open(x) as f:
+                                data.append(json.load(f))
+            return modules + data
+        except KeyError:
             return []
     except:
         return []
