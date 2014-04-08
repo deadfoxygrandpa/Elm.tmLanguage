@@ -3,6 +3,7 @@ import subprocess
 import json
 import threading
 import time
+from collections import defaultdict
 
 import sublime, sublime_plugin
 
@@ -25,12 +26,12 @@ class Module(object):
                        for v in data['values']]
         self.value_names = [name(v) for v in self.values]
         self.datatypes = [v['name'] for v in data['datatypes']]
-        self.constructors = [[v['name'] for v in x['constructors']] 
+        self.constructors = [[v['name'] for v in x['constructors']]
                              for x in data['datatypes']]
         self.aliases = [v['name'] for v in data['aliases']]
         self.raw_aliases = [v['raw'] for v in data['aliases']]
         self.raw_datatypes = [v['raw'] for v in data['datatypes']]
-        self.types = dict(zip(self.value_names, 
+        self.types = dict(zip(self.value_names,
                               [signature(v) for v in self.values]))
 
 
@@ -75,9 +76,9 @@ def signature(t):
     Only works on single-line declarations
     """
     if t.startswith('type '):
-        return t[5:].split(' = ')[1].strip()  
+        return t[5:].split(' = ')[1].strip()
     elif t.startswith('data '):
-        return t[5:].split(' = ')[1].strip()  
+        return t[5:].split(' = ')[1].strip()
     return t.split(' : ')[1].strip()
 
 def search_modules(value, modules):
@@ -106,44 +107,64 @@ def modules_in_scope(view):
     Given a view, search for all import statements and return a dict mapping
     all modules in scope to their status.
     Possible statuses:
-        open: from an 'import open <module>' statement
-        qualified: from an 'import <module>' statement
-        <alias>: from an 'import <module> as <alias>' statement
-        [names]: from an 'import <module> ([names])' statement
+        open: True/False, from an 'import <module> (..)' statement
+        qualified: True/False, from an 'import <module>' statement
+        alias: A list of strings, from an 'import <module> as <alias>' statement
+        names: A list of strings, from an 'import <module> ([names])' statement
     """
     import_pattern = 'import\W+(open)?\W*([a-zA-Z0-9._\']+)(?:\\W+as\\W+([a-zA-Z0-9._\']+))?(?:\W+\((.*)\))?'
     regions = view.find_all(import_pattern)
     imports = [view.substr(region)[7:].strip() for region in regions]
-    modules = {}
+    modules = defaultdict(lambda: {'open': False, 'qualified': False, 'names': [], 'alias': []})
     for imp in imports:
+        status = {'open': False, 'qualified': False, 'names': [], 'alias': []}
+        name = ""
         if imp.startswith('open'):
             ## This was removed in Elm 0.12, but keeping it in for now
-            modules[imp[5:]] = 'open'
+            name = modules[imp[5:]]
+            status['open'] = True
         elif len(imp.split(' as ')) == 2:
             x = imp.split(' as ')
-            modules[x[0].strip()] = x[1].strip()
+            name = x[0].strip()
+            status['alias'].append(x[1].strip())
         elif len(imp.split('(')) == 2:
             x = imp.replace(')', '').split('(')
             values = [v.strip() for v in x[1].split(',')]
+            name = x[0].strip()
             if values[0] == '..':
-                modules[x[0].strip()] = 'open'
+                status['open'] = True
             else:
-                modules[x[0].strip()] = values
+                status['names'] += values
         else:
-            modules[imp] = 'qualified'
+            name = imp
+            status['qualified'] = True
+        modules = update_module_scope(status, modules, name)
     for module in PRELUDE:
-        modules[module] = 'open'
+        status = {'open': True, 'qualified': False, 'names': [], 'alias': []}
+        modules = update_module_scope(status, modules, module)
+    return modules
+
+def update_module_scope(status, modules, name):
+    """
+    Merge two module statuses together, used only by modules_in_scope
+    """
+    if modules.get(name) is not None:
+        status['open'] = status['open'] or modules[name]['open']
+        status['qualified'] = status['qualified'] or modules[name]['qualified']
+        status['names'] += modules[name]['names']
+        status['alias'] += modules[name]['alias']
+    modules[name] = status
     return modules
 
 def join_qualified(region, view):
     """
     Given a region, expand outward on periods to return a new region defining
     the entire word, in the context of Elm syntax.
-    
+
     For example, when the region encompasses the 'map' part of a larger
     'Dict.map' word, this function will return the entire region encompassing
     'Dict.map'. The same is true if the region is encompassing 'Dict'.
-    
+
     Recursively expands outward in both directions, correctly returning longer
     constructions such as 'Graphics.Input.button'
     """
@@ -154,7 +175,7 @@ def join_qualified(region, view):
         region = region.cover(view.word(region.a - 2))
     if suffix == '.':
         region = region.cover(view.word(region.b + 1))
-  
+
     if region == starting_region:
         return region
     else:
@@ -170,15 +191,10 @@ def get_type(view):
     scope = view.scope_name(region.b)
     if scope.find('source.elm') != -1 and scope.find('string') == -1 and scope.find('comment') == -1:
         in_scope = modules_in_scope(view)
-
-        open_modules = [m for m in MODULES if m.name in [v for v in in_scope.keys() if in_scope[v] == 'open']]
-        qualified_modules = [m for m in MODULES if m.name in [v for v in in_scope.keys() if in_scope[v] == 'qualified']]
-        aliased_modules = dict((m, in_scope[m.name]) for m in MODULES if m.name in 
-            [v for v in in_scope.keys() if in_scope[v] not in ['open', 'qualified'] \
-            and not isinstance(in_scope[v], list)])
-        
-        open_values = dict((m, in_scope[m.name]) for m in MODULES if m.name in 
-            [v for v in in_scope.keys() if isinstance(in_scope[v], list)])
+        open_modules = [m for m in MODULES if m.name in [v for v in in_scope.keys() if in_scope[v]['open']]]
+        qualified_modules = [m for m in MODULES if m.name in [v for v in in_scope.keys() if in_scope[v]['qualified']]]
+        aliased_modules = dict((m, in_scope[m.name]['alias']) for m in MODULES)
+        open_values = dict((m, in_scope[m.name]['names']) for m in MODULES)
 
         word = view.substr(region)
         module = '.'.join(word.split('.')[:-1])
@@ -187,7 +203,7 @@ def get_type(view):
             value = word.split('.')[-1]
         msg = search_modules(word, open_modules) or \
             search_modules(value, [m for m in qualified_modules if m.name == module]) or \
-            search_modules(value, [m for m in aliased_modules.keys() if module == aliased_modules[m]]) or \
+            search_modules(value, [m for m in aliased_modules.keys() if module in aliased_modules[m]]) or \
             search_modules(word, [m for m in open_values.keys() if word in open_values[m]])
 
         return msg or ''
@@ -211,7 +227,7 @@ class ElmShowType(sublime_plugin.TextCommand):
     def run(self, edit):
         print get_type(self.view)
         msg = get_type(self.view) or ''
-        sublime.status_message(msg)        
+        sublime.status_message(msg)
 
 class ElmSetDocsPath(sublime_plugin.ApplicationCommand):
     def run(self):
