@@ -44,9 +44,14 @@ def load_docs(path):
     with open(path) as f:
         return json.load(f)
 
-def load_dependency_docs(view):
+def threadload(f, directory):
+    p = subprocess.Popen('elm-doc ' + f, stdout=subprocess.PIPE, cwd=directory, shell=True)
+    output = p.communicate()[0].strip() or 'Could not document: ' + f
+    print output
+
+def load_dependency_docs(name):
     try:
-        directory = os.path.split(view.file_name())[0]
+        directory = os.path.split(name)[0]
         elm_dependencies = os.path.join(directory, ELM_DEPENDENCIES)
         try:
             with open(elm_dependencies) as f:
@@ -55,10 +60,19 @@ def load_dependency_docs(view):
                 d = data['dependencies']
                 dependencies = d.items()
                 data = []
-                for root, dirs, files in os.walk(os.path.join(directory, 'docs')):
-                    for file in files:
-                        if file.endswith(".json"):
-                             with open(os.path.join(root, file)) as f:
+                source_files = []
+                for root, dirs, files in os.walk(directory):
+                    for filename in files:
+                        if filename.lower().endswith('.elm'):
+                            f = os.path.join(root, filename)
+                            source_files.append((f, filename))
+                threads = [threading.Thread(target=threadload, args=[f[0], directory]) for f in source_files]
+                [thread.start() for thread in threads]
+                [thread.join() for thread in threads]
+                for root, dirs, files in os.walk(directory):
+                    for filename in files:
+                        if filename.lower().endswith('.json') and filename in [f[1][:-4] + '.json' for f in source_files]:
+                             with open(os.path.join(root, filename.lower())) as f:
                                 data.append(json.load(f))
                 return data
             except KeyError:
@@ -106,7 +120,7 @@ def signature(t):
         return t[5:].split(' = ')[1].strip()
     elif t.startswith('data '):
         return t[5:].split(' = ')[1].strip()
-    return t.split(' : ')[1].strip()
+    return t.split(':')[1].strip()
 
 def search_modules(value, modules):
     """
@@ -253,9 +267,13 @@ class ElmLanguageSupport(sublime_plugin.EventListener):
 
     def on_activated(self, view):
         if SETTINGS.get('enabled', True):
-            global MODULES
-            deps = load_dependency_docs(view)
-            MODULES = STD_LIBRARY + [Module(m) for m in deps]
+            threading.Thread(target=self.load_dependencies, args=[view.file_name()]).start()
+
+    def load_dependencies(self, filename):
+        global MODULES
+        global STD_LIBRARY
+        deps = load_dependency_docs(filename)
+        MODULES = STD_LIBRARY + [Module(m) for m in deps]
 
 class ElmShowType(sublime_plugin.TextCommand):
     def run(self, edit):
