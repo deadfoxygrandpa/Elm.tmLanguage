@@ -45,7 +45,7 @@ def load_docs(path):
         return json.load(f)
 
 def threadload(f, directory):
-    p = subprocess.Popen('elm-doc ' + f, stdout=subprocess.PIPE, cwd=directory, shell=True)
+    p = subprocess.Popen('elm-doc ' + os.path.relpath(f, directory), stdout=subprocess.PIPE, cwd=directory, shell=True)
     output = p.communicate()[0].strip() or 'Could not document: ' + f
     print output
 
@@ -65,15 +65,18 @@ def load_dependency_docs(name):
                     for filename in files:
                         if filename.lower().endswith('.elm'):
                             f = os.path.join(root, filename)
-                            source_files.append((f, filename))
+                            if not '_internals' in f:
+                                source_files.append((f, filename))
                 threads = [threading.Thread(target=threadload, args=[f[0], directory]) for f in source_files]
                 [thread.start() for thread in threads]
                 [thread.join() for thread in threads]
                 for root, dirs, files in os.walk(directory):
                     for filename in files:
                         if filename.lower().endswith('.json') and filename in [f[1][:-4] + '.json' for f in source_files]:
-                             with open(os.path.join(root, filename.lower())) as f:
-                                data.append(json.load(f))
+                            x = os.path.join(root, filename.lower())
+                            if '_internals' not in x:
+                                with open(x) as f:
+                                    data.append(json.load(f))
                 return data
             except KeyError:
                 return []
