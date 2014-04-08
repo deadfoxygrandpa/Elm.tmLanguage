@@ -58,6 +58,7 @@ def threadload(f, directory, queue):
             first_line = module.readline()
             if first_line.startswith('module ') and first_line.endswith(' where'):
                 module_name = first_line.split()[1]
+                module_name = module_name.split('(')[0]
             else:
                 module_name = os.path.split(f)[1][:-4]
         for t in types:
@@ -225,7 +226,17 @@ def modules_in_scope(view):
     for module in PRELUDE:
         status = {'open': True, 'qualified': False, 'names': [], 'alias': []}
         modules = update_module_scope(status, modules, module)
+    modules[current_module_name(view)] = {'open': True, 'qualified': False, 'names': [], 'alias': []}
     return modules
+
+def current_module_name(view):
+    module_pattern = 'module\W+.*\W+where\W*'
+    regions = view.find_all(module_pattern)
+    name = view.substr(regions[0]).split()[1]
+    file_name = os.path.split(view.file_name())[1]
+    if file_name.lower().endswith('.elm'):
+        file_name = file_name[:-4]
+    return name or file_name
 
 def update_module_scope(status, modules, name):
     """
