@@ -11,6 +11,8 @@ SETTINGS = sublime.load_settings('Elm Language Support.sublime-settings')
 
 ELM_DOCS_PATH = SETTINGS.get('elm_docs_path') or 'docs.json'
 
+ELM_DEPENDENCIES = 'elm_dependencies.json'
+
 
 class Module(object):
     """
@@ -41,6 +43,18 @@ def load_docs(path):
     """
     with open(path) as f:
         return json.load(f)
+
+def path_to_dependency_docs():
+    try:
+        with open(ELM_DEPENDENCIES) as f:
+            data = json.load(f)
+        try:
+            print data['dependencies']
+        except KeyError:
+            pass
+    except IOError:
+        return []
+
 
 def get_prelude_modules(modules):
     """
