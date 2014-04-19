@@ -35,6 +35,35 @@ class Module(object):
         self.types = dict(zip(self.value_names,
                               [signature(v) for v in self.values]))
 
+class Worker(threading.Thread):
+    """Thread executing tasks from a given tasks queue"""
+    def __init__(self, tasks):
+        threading.Thread.__init__(self)
+        self.tasks = tasks
+        self.daemon = True
+        self.start()
+
+    def run(self):
+        while True:
+            func, args, kargs = self.tasks.get()
+            try: func(*args, **kargs)
+            except Exception, e: print e
+            self.tasks.task_done()
+
+class ThreadPool(object):
+    """Pool of threads consuming tasks from a queue"""
+    def __init__(self, num_threads):
+        self.tasks = Queue.Queue(num_threads)
+        for _ in range(num_threads): Worker(self.tasks)
+
+    def add_task(self, func, *args, **kargs):
+        """Add a task to the queue"""
+        self.tasks.put((func, args, kargs))
+
+    def wait_completion(self):
+        """Wait for completion of all the tasks in the queue"""
+        self.tasks.join()
+
 
 def load_docs(path):
     """
@@ -93,9 +122,9 @@ def load_dependency_docs(name):
                         if not '_internals' in f:
                             source_files.append((f, filename))
             queue = Queue.Queue()
-            threads = [threading.Thread(target=threadload, args=[f[0], directory, queue]) for f in source_files]
-            [thread.start() for thread in threads]
-            [thread.join() for thread in threads]
+            global POOL
+            threads = [POOL.add_task(threadload, f[0], directory, queue) for f in source_files]
+            POOL.wait_completion()
             modules = []
             while True:
                 if not queue.empty():
@@ -296,7 +325,7 @@ def get_type(view):
 STD_LIBRARY = [Module(m) for m in load_docs(ELM_DOCS_PATH)]
 MODULES = STD_LIBRARY
 PRELUDE = get_prelude_modules(MODULES)
-
+POOL = ThreadPool(2)
 
 class ElmLanguageSupport(sublime_plugin.EventListener):
     # TODO: implement completions based on current context
@@ -304,16 +333,25 @@ class ElmLanguageSupport(sublime_plugin.EventListener):
     #     return []
 
     def on_selection_modified(self, view):
-        if SETTINGS.get('enabled', True):
+        sel = view.sel()[0]
+        region = join_qualified(view.word(sel), view)
+        scope = view.scope_name(region.b)
+        if SETTINGS.get('enabled', True) and scope.find('source.elm') != -1:
             msg = get_type(view) or ''
             sublime.status_message(msg)
 
     def on_activated(self, view):
-        if SETTINGS.get('enabled', True):
+        sel = view.sel()[0]
+        region = join_qualified(view.word(sel), view)
+        scope = view.scope_name(region.b)
+        if SETTINGS.get('enabled', True) and scope.find('source.elm') != -1:
             threading.Thread(target=self.load_dependencies, args=[view.file_name()]).start()
 
     def on_post_save(self, view):
-         if SETTINGS.get('enabled', True):
+        sel = view.sel()[0]
+        region = join_qualified(view.word(sel), view)
+        scope = view.scope_name(region.b)
+        if SETTINGS.get('enabled', True) and scope.find('source.elm') != -1:
             threading.Thread(target=self.load_dependencies, args=[view.file_name()]).start()
 
     def load_dependencies(self, filename):
