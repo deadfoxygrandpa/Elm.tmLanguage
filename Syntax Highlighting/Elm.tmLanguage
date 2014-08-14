@@ -43,7 +43,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>\b(module)\b</string>
+			<string>^\b(module)\s+</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
