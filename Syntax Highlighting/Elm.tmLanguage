@@ -84,7 +84,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^\b(import)\b(\s+(open)\s+)?</string>
+			<string>^\b(import)\s+((open)\s+)?</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -169,13 +169,13 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(data|type|case|of|let|in|as)\b</string>
+			<string>\b(data|type|case|of|let|in|as)\s+</string>
 			<key>name</key>
 			<string>keyword.other.elm</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(if|then|else)\b</string>
+			<string>\b(if|then|else)\s+</string>
 			<key>name</key>
 			<string>keyword.control.elm</string>
 		</dict>
@@ -316,7 +316,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\bport\b</string>
+			<string>\bport\s+</string>
 			<key>name</key>
 			<string>keyword.other.port.elm</string>
 		</dict>
