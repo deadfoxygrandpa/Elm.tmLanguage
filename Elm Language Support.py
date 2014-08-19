@@ -383,3 +383,39 @@ class ElmDisable(sublime_plugin.ApplicationCommand):
     def run(self):
         SETTINGS.set("enabled", "false")
         sublime.save_settings('Elm Language Support.sublime-settings')
+
+class ElmCase(sublime_plugin.TextCommand):
+    def run(self, edit):
+        view = self.view
+        sel = view.sel()
+        word = view.word(sel[0])
+        sel.add(self.get_lines(sel[0]))
+
+    def find_indent(self, x):
+        view = self.view
+        line = view.substr(view.line(x))
+        indent = len(line) - len(line.lstrip(' '))
+        return indent
+
+    def next_line(self, x):
+        view = self.view
+        line = view.line(x)
+        return view.line(line.b + 1)
+
+    def get_lines(self, x):
+        view = self.view
+        line = view.line(x)
+        case = view.find(' case ', line.begin())
+        if case is None or case.begin() > line.end():
+            return x
+        lines = [sublime.Region(case.begin() + 1, line.end())]
+        starting_indent = self.find_indent(self.next_line(x))
+        indent = starting_indent
+        y = x
+        while indent == starting_indent:
+            if self.find_indent(self.next_line(y)) < starting_indent:
+                break
+            lines.append(self.next_line(y))
+            indent = self.find_indent(self.next_line(y))
+            y = self.next_line(y)
+        return sublime.Region(min([v.begin() for v in lines]), max([v.end() for v in lines]))
