@@ -402,13 +402,33 @@ class ElmCase(sublime_plugin.TextCommand):
         line = view.line(x)
         return view.line(line.b + 1)
 
+    def previous_line(self, x):
+        view = self.view
+        line = view.line(x)
+        return view.line(line.begin() - 1)
+
     def get_lines(self, x):
         view = self.view
         line = view.line(x)
         case = view.find(' case ', line.begin())
-        if case is None or case.begin() > line.end():
-            return x
-        lines = [sublime.Region(case.begin() + 1, line.end())]
+        # if case is None or case.begin() > line.end():
+        #     return x
+        # lines = [sublime.Region(case.begin() + 1, line.end())]
+
+        lines = [line]
+
+        # add lines in current level above the current line
+        starting_indent = self.find_indent(line)
+        indent = starting_indent
+        y = x
+        while indent == starting_indent:
+            # if self.find_indent(self.previous_line(y)) < starting_indent:
+            #     break
+            lines.append(self.previous_line(y))
+            indent = self.find_indent(self.previous_line(y))
+            y = self.previous_line(y)
+
+        # add lines in current level below the current line
         starting_indent = self.find_indent(self.next_line(x))
         indent = starting_indent
         y = x
