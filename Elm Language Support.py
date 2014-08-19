@@ -410,10 +410,6 @@ class ElmCase(sublime_plugin.TextCommand):
     def get_lines(self, x):
         view = self.view
         line = view.line(x)
-        case = view.find(' case ', line.begin())
-        # if case is None or case.begin() > line.end():
-        #     return x
-        # lines = [sublime.Region(case.begin() + 1, line.end())]
 
         lines = [line]
 
@@ -438,4 +434,12 @@ class ElmCase(sublime_plugin.TextCommand):
             lines.append(self.next_line(y))
             indent = self.find_indent(self.next_line(y))
             y = self.next_line(y)
-        return sublime.Region(min([v.begin() for v in lines]), max([v.end() for v in lines]))
+
+        begin = min([v.begin() for v in lines])
+        end = max([v.end() for v in lines])
+
+        case = view.find(' case ', begin)
+        if case is None or case.begin() > end:
+            return x
+        else:
+            return sublime.Region(case.begin() + 1, end)
