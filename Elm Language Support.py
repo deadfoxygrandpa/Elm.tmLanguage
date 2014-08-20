@@ -407,6 +407,29 @@ class ElmCase(sublime_plugin.TextCommand):
         line = view.line(x)
         return view.line(line.begin() - 1)
 
+    class ElmCase(sublime_plugin.TextCommand):
+    def run(self, edit):
+        view = self.view
+        sel = view.sel()
+        word = view.word(sel[0])
+        sel.add(self.get_lines(sel[0]))
+
+    def find_indent(self, x):
+        view = self.view
+        line = view.substr(view.line(x))
+        indent = len(line) - len(line.lstrip(' '))
+        return indent
+
+    def next_line(self, x):
+        view = self.view
+        line = view.line(x)
+        return view.line(line.b + 1)
+
+    def previous_line(self, x):
+        view = self.view
+        line = view.line(x)
+        return view.line(line.begin() - 1)
+
     def get_lines(self, x):
         view = self.view
         line = view.line(x)
@@ -443,3 +466,34 @@ class ElmCase(sublime_plugin.TextCommand):
             return x
         else:
             return sublime.Region(case.begin() + 1, end)
+
+def select_block(view, keyword):
+    sel = view.sel()[0]
+    line = view.line(sel)
+    key_pattern = ' ' + keyword + ' '
+    key_pt = view.find(key_pattern, line.begin())
+
+    if key_pt is None:
+        return None
+
+    if key_pt < line.end():
+        starting_indent = find_indent(next_line(sel))
+    else:
+        starting_indent = find_indent(sel)
+
+    lines = [line]
+
+
+
+def find_indent(view):
+    line = view.substr(view.line(x))
+    indent = len(line) - len(line.lstrip(' '))
+    return indent
+
+def next_line(view):
+    line = view.line(x)
+    return view.line(line.end() + 1)
+
+def previous_line(view):
+    line = view.line(x)
+    return view.line(line.begin() - 1)
