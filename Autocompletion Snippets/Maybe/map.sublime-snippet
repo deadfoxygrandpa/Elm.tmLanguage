@@ -1,10 +1,10 @@
 <snippet>
 	<content><![CDATA[
-justs ${1:list}
+map ${1:function} ${2:maybe}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-	<tabTrigger>justs</tabTrigger>
+	<tabTrigger>map</tabTrigger>
 	<!-- Optional: Set a scope to limit where the snippet will trigger -->
 	<scope>source.elm</scope>
-	<description>[Maybe a] -> [a]</description>
+	<description>(a -> b) -> Maybe a -> Maybe b</description>
 </snippet>

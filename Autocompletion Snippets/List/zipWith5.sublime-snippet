@@ -1,10 +1,10 @@
 <snippet>
 	<content><![CDATA[
-hsva ${1:float} ${2:float} ${3:float} ${4:float}
+zipWith5 ${1:function} ${2:list} ${3:list} ${4:list} ${5:list} ${6:list}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-	<tabTrigger>hsva</tabTrigger>
+	<tabTrigger>zipWith5</tabTrigger>
 	<!-- Optional: Set a scope to limit where the snippet will trigger -->
 	<scope>source.elm</scope>
-	<description>Float -> Float -> Float -> Float -> Color</description>
+	<description>(a -> b -> c -> d -> e -> x) -> [a] -> [b] -> [c] -> [d] -> [e] -> [x]</description>
 </snippet>

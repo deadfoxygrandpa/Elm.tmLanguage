@@ -1,10 +1,10 @@
 <snippet>
 	<content><![CDATA[
-logBase ${1:float} ${2:float}
+negate ${1:number}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-	<tabTrigger>logBase</tabTrigger>
+	<tabTrigger>negate</tabTrigger>
 	<!-- Optional: Set a scope to limit where the snippet will trigger -->
 	<scope>source.elm</scope>
-	<description>Float -> Float -> Float</description>
+	<description>number -> number</description>
 </snippet>

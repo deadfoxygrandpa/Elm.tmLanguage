@@ -1,10 +1,10 @@
 <snippet>
 	<content><![CDATA[
-and ${1:list}
+toRgb ${1:color}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-	<tabTrigger>and</tabTrigger>
+	<tabTrigger>toRgb</tabTrigger>
 	<!-- Optional: Set a scope to limit where the snippet will trigger -->
 	<scope>source.elm</scope>
-	<description>[Bool] -> Bool</description>
+	<description>Color -> { red:Int, green:Int, blue:Int, alpha:Float }</description>
 </snippet>

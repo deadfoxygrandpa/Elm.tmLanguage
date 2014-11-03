@@ -1,10 +1,10 @@
 <snippet>
 	<content><![CDATA[
-logBase ${1:float} ${2:float}
+zipWith3 ${1:function} ${2:list} ${3:list} ${4:list}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-	<tabTrigger>logBase</tabTrigger>
+	<tabTrigger>zipWith3</tabTrigger>
 	<!-- Optional: Set a scope to limit where the snippet will trigger -->
 	<scope>source.elm</scope>
-	<description>Float -> Float -> Float</description>
+	<description>(a -> b -> c -> x) -> [a] -> [b] -> [c] -> [x]</description>
 </snippet>
