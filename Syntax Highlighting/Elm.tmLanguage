@@ -153,10 +153,6 @@
 			<string>constant.numeric.elm</string>
 		</dict>
 		<dict>
-			<key>include</key>
-			<string>#std_library</string>
-		</dict>
-		<dict>
 			<key>begin</key>
 			<string>"</string>
 			<key>beginCaptures</key>
