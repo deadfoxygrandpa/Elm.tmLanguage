@@ -154,6 +154,45 @@
 		</dict>
 		<dict>
 			<key>begin</key>
+			<string>"""</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.string.begin.elm</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>"""</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.string.end.elm</string>
+				</dict>
+			</dict>
+			<key>name</key>
+			<string>string.quoted.double.elm</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>\\(NUL|SOH|STX|ETX|EOT|ENQ|ACK|BEL|BS|HT|LF|VT|FF|CR|SO|SI|DLE|DC1|DC2|DC3|DC4|NAK|SYN|ETB|CAN|EM|SUB|ESC|FS|GS|RS|US|SP|DEL|[abfnrtv\\'\&amp;])</string>
+					<key>name</key>
+					<string>constant.character.escape.elm</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\^[A-Z@\[\]\\\^_]</string>
+					<key>name</key>
+					<string>constant.character.escape.control.elm</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>begin</key>
 			<string>"</string>
 			<key>beginCaptures</key>
 			<dict>
