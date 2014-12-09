@@ -128,7 +128,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(type|alias|case|of|let|in|as)\s+</string>
+			<string>\b(type alias|type|case|of|let|in|as)\s+</string>
 			<key>name</key>
 			<string>keyword.other.elm</string>
 		</dict>
