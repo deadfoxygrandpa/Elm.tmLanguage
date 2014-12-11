@@ -127,6 +127,47 @@
 			</array>
 		</dict>
 		<dict>
+			<key>begin</key>
+			<string>(\[)(glsl)(\|)</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.other.elm</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>support.function.prelude.elm</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.other.elm</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>(\|\])</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.other.elm</string>
+				</dict>
+			</dict>
+			<key>name</key>
+			<string>entity.glsl.elm</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>source.glsl</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
 			<key>match</key>
 			<string>\b(type alias|type|case|of|let|in|as)\s+</string>
 			<key>name</key>
