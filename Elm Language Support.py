@@ -75,6 +75,15 @@ def switch_color_scheme(view, color_scheme_path):
 
 # Commands
 
+def hide_scopes(view):
+    point = view.sel()[0].a
+    score = view.score_selector(point, 'entity.glsl.elm')
+    if score == 0:
+        regions = view.find_by_selector('entity.glsl.elm')
+        view.add_regions('elmlanguagesupporthidden', regions, 'elmlanguagesupport')
+    else:
+        view.erase_regions('elmlanguagesupporthidden')
+
 class CreateAndSwitchColorScheme(sublime_plugin.TextCommand):
 	def run(self, edit):
 		view = self.view
@@ -85,11 +94,10 @@ class CreateAndSwitchColorScheme(sublime_plugin.TextCommand):
 class HideScopes(sublime_plugin.TextCommand):
     def run(self, edit):
         view = self.view
-        point = view.sel()[0].a
-        score = view.score_selector(point, 'entity.glsl.elm')
-        print 'SCORE: ', score
-        if score == 0:
-            regions = view.find_by_selector('entity.glsl.elm')
-            view.add_regions('elmlanguagesupporthidden', regions, 'elmlanguagesupport')
-        else:
-            view.erase_regions('elmlanguagesupporthidden')
+        hide_scopes(view)
+
+# Event Listeners
+
+class ElmLanguageSupportEventListener(sublime_plugin.EventListener):
+    def on_selection_modified(self, view):
+        hide_scopes(view)
