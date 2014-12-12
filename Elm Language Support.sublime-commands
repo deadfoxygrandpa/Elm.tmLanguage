@@ -2,5 +2,9 @@
 	{
         "caption": "Elm Language Support: Color Scheme",
         "command": "create_and_switch_color_scheme"
+    },
+    {
+        "caption": "Elm Language Support: Scope Hide",
+        "command": "hide_scopes"
     }
 ]

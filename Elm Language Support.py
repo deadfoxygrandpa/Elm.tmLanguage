@@ -78,8 +78,18 @@ def switch_color_scheme(view, color_scheme_path):
 class CreateAndSwitchColorScheme(sublime_plugin.TextCommand):
 	def run(self, edit):
 		view = self.view
-		print "HEY!!!!!!!!!!!!!!!!!!! : ", get_color_scheme(view)
 		color_scheme = read_color_scheme(get_color_scheme(view))
 		new_color_scheme_path = write_perturbed_color_scheme(color_scheme)
-		print "HEY!!!!!!!!!!!!!!!!!!! : ", new_color_scheme_path
 		switch_color_scheme(view, new_color_scheme_path)
+
+class HideScopes(sublime_plugin.TextCommand):
+    def run(self, edit):
+        view = self.view
+        point = view.sel()[0].a
+        score = view.score_selector(point, 'entity.glsl.elm')
+        print 'SCORE: ', score
+        if score == 0:
+            regions = view.find_by_selector('entity.glsl.elm')
+            view.add_regions('elmlanguagesupporthidden', regions, 'elmlanguagesupport')
+        else:
+            view.erase_regions('elmlanguagesupporthidden')
