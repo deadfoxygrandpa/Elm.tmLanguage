@@ -75,6 +75,11 @@ def switch_color_scheme(view, color_scheme_path):
 
 # Commands
 
+def create_and_switch_color_scheme(view):
+    color_scheme = read_color_scheme(get_color_scheme(view))
+    new_color_scheme_path = write_perturbed_color_scheme(color_scheme)
+    switch_color_scheme(view, new_color_scheme_path)
+
 def hide_scopes(view):
     point = view.sel()[0].a
     score = view.score_selector(point, 'entity.glsl.elm')
@@ -87,9 +92,7 @@ def hide_scopes(view):
 class CreateAndSwitchColorScheme(sublime_plugin.TextCommand):
 	def run(self, edit):
 		view = self.view
-		color_scheme = read_color_scheme(get_color_scheme(view))
-		new_color_scheme_path = write_perturbed_color_scheme(color_scheme)
-		switch_color_scheme(view, new_color_scheme_path)
+        create_and_switch_color_scheme(view)
 
 class HideScopes(sublime_plugin.TextCommand):
     def run(self, edit):
@@ -99,5 +102,9 @@ class HideScopes(sublime_plugin.TextCommand):
 # Event Listeners
 
 class ElmLanguageSupportEventListener(sublime_plugin.EventListener):
+
+    def on_load(self,view):
+        create_and_switch_color_scheme(view)
+
     def on_selection_modified(self, view):
         hide_scopes(view)
