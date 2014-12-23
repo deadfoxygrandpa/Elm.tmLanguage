@@ -1,0 +1,44 @@
+Name: get-elm-types
+Version: 0.1
+
+Synopsis:
+    A tool to get Elm types
+Description:
+    A tool to get Elm types
+
+Homepage:
+    http://elm-lang.org
+
+License: MIT
+
+Author:     Alex Neslusan
+Maintainer: deadfoxygrandpa@gmail.com
+Copyright:  Copyright (c) 2014 Alex Neslusan
+
+Category: Tool
+
+Build-type: Simple
+Cabal-version: >=1.9
+
+source-repository head
+    type:     git
+    location: git://github.com/deadfoxygrandpa/get-elm-types.git
+
+Executable get-elm-types
+
+    ghc-options:
+        -O2
+
+    hs-source-dirs:
+        src
+
+    Main-is:
+        GetTypes.hs
+
+    Build-depends:
+        base >=4.2 && <5,
+        elm-compiler >= 0.13,
+        filepath,
+        binary,
+        bytestring,
+        containers
