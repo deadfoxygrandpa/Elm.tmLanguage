@@ -1,1 +1,5 @@
 *.tmLang
+Get Types/dist/
+Get Types/.cabal-sandbox/
+cabal.sandbox.config
+*.elmi
