@@ -3,3 +3,5 @@ Get Types/dist/
 Get Types/.cabal-sandbox/
 cabal.sandbox.config
 *.elmi
+Color Scheme/.cabal-sandbox/
+Color Scheme/dist/
