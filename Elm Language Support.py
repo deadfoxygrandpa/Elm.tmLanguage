@@ -99,22 +99,13 @@ def hide_scopes(view):
     else:
         view.add_regions('elmlanguagesupporthidden', invert_regions(view.size(), regions), 'elmlanguagesupport')
 
-class CreateAndSwitchColorScheme(sublime_plugin.TextCommand):
-	def run(self, edit):
-		view = self.view
-        # create_and_switch_color_scheme(self.view)
-
-class HideScopes(sublime_plugin.TextCommand):
-    def run(self, edit):
-        view = self.view
-        hide_scopes(view)
-
 # Event Listeners
 
 class ElmLanguageSupportEventListener(sublime_plugin.EventListener):
 
     def on_load(self, view):
         create_and_switch_color_scheme(view)
+        hide_scopes(view)
 
     def on_selection_modified(self, view):
         hide_scopes(view)
