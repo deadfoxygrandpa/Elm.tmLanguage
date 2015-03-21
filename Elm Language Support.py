@@ -1,8 +1,13 @@
+from __future__ import print_function
+try:
+    import Queue as queue
+except ImportError as py3err:
+    import queue
+
 import os
 import subprocess
 import json
 import threading
-import Queue
 import time
 from collections import defaultdict
 
@@ -47,13 +52,13 @@ class Worker(threading.Thread):
         while True:
             func, args, kargs = self.tasks.get()
             try: func(*args, **kargs)
-            except Exception, e: print e
+            except Exception as e: print(e)
             self.tasks.task_done()
 
 class ThreadPool(object):
     """Pool of threads consuming tasks from a queue"""
     def __init__(self, num_threads):
-        self.tasks = Queue.Queue(num_threads)
+        self.tasks = queue.Queue(num_threads)
         for _ in range(num_threads): Worker(self.tasks)
 
     def add_task(self, func, *args, **kargs):
@@ -121,7 +126,7 @@ def load_dependency_docs(name):
                         f = os.path.join(root, filename)
                         if not '_internals' in f:
                             source_files.append((f, filename))
-            queue = Queue.Queue()
+            queue = queue.Queue()
             global POOL
             threads = [POOL.add_task(threadload, f[0], directory, queue) for f in source_files]
             POOL.wait_completion()
@@ -362,7 +367,7 @@ class ElmLanguageSupport(sublime_plugin.EventListener):
 
 class ElmShowType(sublime_plugin.TextCommand):
     def run(self, edit):
-        print get_type(self.view)
+        print(get_type(self.view))
         msg = get_type(self.view) or ''
         sublime.status_message(msg)
 
@@ -372,7 +377,7 @@ class ElmSetDocsPath(sublime_plugin.ApplicationCommand):
         version = p.communicate()[0].strip() or ''
         if version.endswith('docs.json'):
             SETTINGS.set('elm_docs_path', version)
-        print version or 'elm-paths not installed...'
+        print(version or 'elm-paths not installed...')
 
 class ElmEnable(sublime_plugin.ApplicationCommand):
     def run(self):
@@ -407,7 +412,7 @@ class ElmCase(sublime_plugin.TextCommand):
         line = view.line(x)
         return view.line(line.begin() - 1)
 
-    class ElmCase(sublime_plugin.TextCommand):
+class ElmCase(sublime_plugin.TextCommand):
     def run(self, edit):
         view = self.view
         sel = view.sel()
