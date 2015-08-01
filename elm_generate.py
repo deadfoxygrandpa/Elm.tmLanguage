@@ -14,7 +14,7 @@ class Module(object):
 	def include_text(self):
 		s = '<dict>\n\t<key>include</key>\n\t<string>#{}</string>\n</dict>'.format(self.name.lower())
 		return s
-		
+
 	def moduleText(self):
 		s = '<key>{nameLower}</key>\n<dict>\n\t<key>captures</key>\n\t<dict>\n\t\t<key>1</key>\n\t\t<dict>\n\t\t\t<key>name</key>\n\t\t\t<string>variable.parameter</string>\n\t\t</dict>\n\t\t<key>2</key>\n\t\t<dict>\n\t\t\t<key>name</key>\n\t\t\t<string>variable.parameter</string>\n\t\t</dict>\n\t\t<key>3</key>\n\t\t<dict>\n\t\t\t<key>name</key>\n\t\t\t<string>support.function.elm</string>\n\t\t</dict>\n\t</dict>\n\t<key>match</key>\n\t<string>\\b({name})(.)({values})\\b</string>\n\t<key>name</key>\n\t<string>variable.parameter</string>\n</dict>'
 		values = '|'.join([n for n in self.valueNames if not n.startswith('(')])
@@ -25,7 +25,7 @@ class Module(object):
 		return s.format(nameLower=self.name.lower(), name=self.name, values=values)
 
 	def snippets(self):
-		base = 'Autocompletion Snippets'
+		base = 'Snippets'
 		s = '<snippet>\n\t<content><![CDATA[\n{autocomplete}\n]]></content>\n\t<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->\n\t<tabTrigger>{name}</tabTrigger>\n\t<!-- Optional: Set a scope to limit where the snippet will trigger -->\n\t<scope>source.elm</scope>\n\t<description>{signature}</description>\n</snippet>'
 		for v in [func for func in self.values if not name(func).startswith('(')]:
 			subdirectories = self.name.split('.')
@@ -39,14 +39,14 @@ class Module(object):
 
 			with open(path.format(name(v) + '.sublime-snippet'), 'w') as f:
 				f.write(s.format(autocomplete=make_autocomplete(v), name=name(v), signature=signature(v)))
-			
+
 			print 'Wrote {}'.format(path.format(name(v) + '.sublime-snippet'))
 
 def name(t):
 	return t.split(' : ')[0].strip()
 
 def signature(t):
-	return t.split(' : ')[1].strip()	
+	return t.split(' : ')[1].strip()
 
 def hintize(t):
 	first = t[0].lower()
@@ -103,7 +103,7 @@ def argify(s):
 	elif len(s.split(' ')) > 1:
 		return s.split(' ')[0].lower()
 	else:
-		return s.lower()	
+		return s.lower()
 
 def loadDocs(path):
 	with open(path) as f:
@@ -160,6 +160,6 @@ if __name__ == '__main__':
 			m.snippets()
 			print '\n'*2
 
-	with open('Autocompletion Snippets\\Basics\\markdown.sublime-snippet', 'w') as f:
+	with open('Snippets\\Basics\\markdown.sublime-snippet', 'w') as f:
 		f.write('<snippet>\n<content><![CDATA[\n[markdown|\n\n${1}\n\n|]\n\n\n]]></content>\n<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->\n<tabTrigger>markdown</tabTrigger>\n<!-- Optional: Set a scope to limit where the snippet will trigger -->\n<scope>source.elm</scope>\n<description>A markdown block</description>\n</snippet>')
 	print 'Wrote markdown.sublime-snippet'
