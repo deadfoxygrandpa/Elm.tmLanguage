@@ -3,11 +3,26 @@ name: Metadata
 uuid: 64598216-cf92-4b00-961f-2b1478921c3e
 scope: source.elm
 settings:
-  increaseIndentPattern: ((^.*(=|[|!%$?~+:\-.=</>&\\*^]+|\bthen|\belse|\bof)\s*$)|(^.*\bif(?!.*\bthen\b.*\belse\b.*).*$))
+  increaseIndentPattern: |-
+    (?x)
+      (
+        (^.*
+          (=
+          |[|!%$?~+:\-.=</>&\\*^]+
+          |\bthen
+          |\belse
+          |\bof
+          )\s*$
+        )
+        |(^.*\bif
+          (?!.*\bthen\b.*\belse\b.*
+          ).*$
+        )
+      )
   shellVariables:
+  - name: TM_COMMENT_START
+    value: --
   - name: TM_COMMENT_START_2
     value: '{-'
   - name: TM_COMMENT_END_2
     value: -}
-  - name: TM_COMMENT_START
-    value: --

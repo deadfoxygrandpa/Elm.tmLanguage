@@ -9,9 +9,29 @@
 	<key>settings</key>
 	<dict>
 		<key>increaseIndentPattern</key>
-		<string>((^.*(=|[|!%$?~+:\-.=&lt;/&gt;&amp;\\*^]+|\bthen|\belse|\bof)\s*$)|(^.*\bif(?!.*\bthen\b.*\belse\b.*).*$))</string>
+		<string>(?x)
+  (
+    (^.*
+      (=
+      |[|!%$?~+:\-.=&lt;/&gt;&amp;\\*^]+
+      |\bthen
+      |\belse
+      |\bof
+      )\s*$
+    )
+    |(^.*\bif
+      (?!.*\bthen\b.*\belse\b.*
+      ).*$
+    )
+  )</string>
 		<key>shellVariables</key>
 		<array>
+			<dict>
+				<key>name</key>
+				<string>TM_COMMENT_START</string>
+				<key>value</key>
+				<string>--</string>
+			</dict>
 			<dict>
 				<key>name</key>
 				<string>TM_COMMENT_START_2</string>
@@ -23,12 +43,6 @@
 				<string>TM_COMMENT_END_2</string>
 				<key>value</key>
 				<string>-}</string>
-			</dict>
-			<dict>
-				<key>name</key>
-				<string>TM_COMMENT_START</string>
-				<key>value</key>
-				<string>--</string>
 			</dict>
 		</array>
 	</dict>
