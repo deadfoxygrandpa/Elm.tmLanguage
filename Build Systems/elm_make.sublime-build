@@ -1,0 +1,22 @@
+{
+    "cmd":
+    [
+        "elm-make",
+        "$file",
+        "--output=/dev/null",
+        "--yes"
+    ],
+    "selector": "source.elm",
+    "working_dir": "$project_path",
+    "osx":
+    {
+        "path": "/usr/local/bin:$PATH"
+    },
+    "linux":
+    {
+        "path": "$HOME/.cabal/bin:/usr/local/bin:$PATH"
+    },
+    "variants":
+    [
+    ]
+}
