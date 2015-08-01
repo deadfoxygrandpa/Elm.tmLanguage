@@ -3,11 +3,13 @@
 <plist version="1.0">
 <dict>
 	<key>name</key>
-	<string>Comments</string>
+	<string>Metadata</string>
 	<key>scope</key>
 	<string>source.elm</string>
 	<key>settings</key>
 	<dict>
+		<key>increaseIndentPattern</key>
+		<string>((^.*(=|[|!%$?~+:\-.=&lt;/&gt;&amp;\\*^]+|\bthen|\belse|\bof)\s*$)|(^.*\bif(?!.*\bthen\b.*\belse\b.*).*$))</string>
 		<key>shellVariables</key>
 		<array>
 			<dict>

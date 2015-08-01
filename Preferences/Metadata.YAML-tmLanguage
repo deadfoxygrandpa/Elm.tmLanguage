@@ -1,6 +1,13 @@
 # [PackageDev] target_format: plist, ext: tmPreferences
-name: Indent Patterns
-uuid: 47acfea7-21f0-4702-99d4-4aed8165750b
+name: Metadata
+uuid: 64598216-cf92-4b00-961f-2b1478921c3e
 scope: source.elm
 settings:
   increaseIndentPattern: ((^.*(=|[|!%$?~+:\-.=</>&\\*^]+|\bthen|\belse|\bof)\s*$)|(^.*\bif(?!.*\bthen\b.*\belse\b.*).*$))
+  shellVariables:
+  - name: TM_COMMENT_START_2
+    value: '{-'
+  - name: TM_COMMENT_END_2
+    value: -}
+  - name: TM_COMMENT_START
+    value: --
