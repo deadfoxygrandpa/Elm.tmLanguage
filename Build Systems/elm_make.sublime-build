@@ -39,7 +39,7 @@
             [
                 "elm-make",
                 "$file",
-                "--output={}",
+                "--output={0}",
                 "--report=json",
                 "--yes"
             ]

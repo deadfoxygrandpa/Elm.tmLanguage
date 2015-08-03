@@ -4,7 +4,7 @@ import json
 import os.path as fs
 
 PROJECT_NOT_FOUND_MSG = 'Valid elm-package.json NOT found for updating'
-PROJECT_UPDATED_MSG = 'elm-package.json updated : {} = {}'
+PROJECT_UPDATED_MSG = 'elm-package.json updated : {0} = {1}'
 
 class ElmProjectCommand(sublime_plugin.TextCommand):
 
@@ -20,6 +20,8 @@ class ElmProjectCommand(sublime_plugin.TextCommand):
         if not choices:
             return window.show_input_panel(caption, initial_value, self.on_finished, None, None)
         self.choices = choices
+        if int(sublime.version()) < 3000:
+            return window.show_quick_panel(choices, self.on_option)
         try:
             initial_index = [choice.lower() for choice in choices].index(initial_value.lower())
         except:
@@ -43,7 +45,7 @@ OUTPUT_DIR_KEY = OUTPUT_COMP_KEY + ('dir',)
 OUTPUT_NAME_KEY = OUTPUT_COMP_KEY + ('name',)
 OUTPUT_EXT_KEY = OUTPUT_COMP_KEY + ('ext',)
 
-class ElmProject:
+class ElmProject(object):
 
     @classmethod
     def find_json(cls, dir_path):

@@ -1,14 +1,18 @@
+import sublime
 import json
 import os.path as fs
 import re
 import string
-from .elm_project import ElmProject
 
-from importlib import import_module
-try:
-    default_exec = import_module('Highlight Build Errors').HighlightBuildErrors
-except:
-    import Default.exec as default_exec
+if int(sublime.version()) < 3000:
+    from elm_project import ElmProject
+    default_exec = __import__('exec')
+else:
+    from .elm_project import ElmProject
+    try:
+        default_exec = __import__('Highlight Build Errors').HighlightBuildErrors
+    except:
+        default_exec = __import__('Default.exec')
 
 class ElmMakeCommand(default_exec.ExecCommand):
     '''Inspired by:
