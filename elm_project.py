@@ -62,7 +62,7 @@ class ElmProject(object):
 
     def __init__(self, file_path):
         self.file_path = file_path
-        self.json_path = self.find_json(fs.dirname(file_path))
+        self.json_path = self.find_json(fs.dirname(file_path or ''))
         try:
             with open(self.json_path) as json_file:
                 self.data_dict = json.load(json_file)
@@ -95,7 +95,7 @@ class ElmProject(object):
 
     @property
     def working_dir(self):
-        return fs.dirname(self.json_path)
+        return fs.dirname(self.json_path or '')
 
     @property
     def main_path(self):
