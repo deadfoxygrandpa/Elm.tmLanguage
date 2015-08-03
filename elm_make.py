@@ -1,6 +1,8 @@
 import json
+import os.path as fs
 import re
 import string
+from .elm_project import ElmProject
 
 from importlib import import_module
 try:
@@ -16,9 +18,9 @@ class ElmMakeCommand(default_exec.ExecCommand):
     https://github.com/bblanchon/SublimeText-HighlightBuildErrors/blob/master/HighlightBuildErrors.py
     '''
 
-    def run(self, error_format, **kwargs):
+    def run(self, cmd, working_dir, error_format, **kwargs):
         self.error_format = string.Template(error_format)
-        super(ElmMakeCommand, self).run(**kwargs)
+        self.do_run(cmd, working_dir, **kwargs)
         self.debug_text = 'To highlight build errors : '
         try:
             if default_exec.g_show_errors:
@@ -27,6 +29,13 @@ class ElmMakeCommand(default_exec.ExecCommand):
                 self.debug_text += 'Open Command Pallete : Show Build Errors'
         except:
             self.debug_text += 'Install with Package Control : Highlight Build Errors'
+
+    def do_run(self, cmd, working_dir, **kwargs):
+        project = ElmProject(cmd[1])
+        cmd[1] = fs.expanduser(project.main_path)
+        cmd[2] = cmd[2].format(fs.expanduser(project.output_path))
+        project_dir = project.working_dir or working_dir
+        super(ElmMakeCommand, self).run(cmd, working_dir=project_dir, **kwargs)
 
     def on_data(self, proc, json_data):
         result_str = json_data.decode(self.encoding)

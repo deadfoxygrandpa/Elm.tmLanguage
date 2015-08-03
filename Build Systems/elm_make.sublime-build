@@ -20,7 +20,29 @@
     {
         "path": "$HOME/.cabal/bin:/usr/local/bin:$PATH"
     },
+    "windows":
+    {
+        "cmd":
+        [
+            "elm-make",
+            "$file",
+            "--output=NUL",
+            "--report=json",
+            "--yes"
+        ]
+    },
     "variants":
     [
+        {
+            "name": "Run",
+            "cmd":
+            [
+                "elm-make",
+                "$file",
+                "--output={}",
+                "--report=json",
+                "--yes"
+            ]
+        }
     ]
 }
