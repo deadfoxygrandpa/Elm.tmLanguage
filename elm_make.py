@@ -1,5 +1,6 @@
 import json
 import re
+import string
 
 from importlib import import_module
 try:
@@ -16,7 +17,7 @@ class ElmMakeCommand(default_exec.ExecCommand):
     '''
 
     def run(self, error_format, **kwargs):
-        self.error_format = error_format
+        self.error_format = string.Template(error_format)
         super(ElmMakeCommand, self).run(**kwargs)
         self.debug_text = 'To highlight build errors : '
         try:
@@ -37,10 +38,12 @@ class ElmMakeCommand(default_exec.ExecCommand):
         error_data = error_str.encode(self.encoding)
         super(ElmMakeCommand, self).on_data(proc, error_data)
 
-    def format_error(self, type, file, region, overview, details, **kwargs):
+    def format_error(shelf, type, file, region, overview, details, **kwargs):
         line = region['start']['line']
         column = region['start']['column']
         message = overview
         if details:
             message += '\n' + re.sub(r'(\n)+', r'\1', details)
-        return self.error_format.format(**locals())
+        # TypeError: substitute() got multiple values for argument 'self'
+        # https://bugs.python.org/issue23671
+        return shelf.error_format.substitute(**locals())
