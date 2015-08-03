@@ -3,8 +3,7 @@ import sublime_plugin
 import json
 import os.path as fs
 
-PROJECT_NOT_FOUND_MSG = 'Valid elm-package.json NOT found for updating'
-PROJECT_UPDATED_MSG = 'elm-package.json updated : {0} = {1}'
+strings = sublime.load_settings('Elm User Strings.sublime-settings')
 
 class ElmProjectCommand(sublime_plugin.TextCommand):
 
@@ -31,7 +30,7 @@ class ElmProjectCommand(sublime_plugin.TextCommand):
 
     def on_finished(self, value):
         setattr(self.project, self.prop_name, value)
-        sublime.status_message(PROJECT_UPDATED_MSG.format(self.prop_name, value))
+        sublime.status_message(strings.get('project_updated').format(self.prop_name, value))
 
     def on_option(self, index):
         if index != -1:
@@ -81,7 +80,7 @@ class ElmProject(object):
 
     def __setitem__(self, keys, value):
         if not self.exists:
-            return sublime.error_message(PROJECT_NOT_FOUND_MSG)
+            return sublime.error_message(strings.get('project_not_found'))
         item = self.data_dict
         for key in keys[0:-1]:
             item = item.setdefault(key, {})

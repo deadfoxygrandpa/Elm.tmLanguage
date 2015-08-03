@@ -14,6 +14,8 @@ else:
     except:
         default_exec = __import__('Default.exec')
 
+strings = sublime.load_settings('Elm User Strings.sublime-settings')
+
 class ElmMakeCommand(default_exec.ExecCommand):
     '''Inspired by:
     http://www.sublimetext.com/forum/viewtopic.php?t=12028
@@ -25,14 +27,13 @@ class ElmMakeCommand(default_exec.ExecCommand):
     def run(self, cmd, working_dir, error_format, **kwargs):
         self.error_format = string.Template(error_format)
         self.do_run(cmd, working_dir, **kwargs)
-        self.debug_text = 'To highlight build errors : '
         try:
             if default_exec.g_show_errors:
                 self.debug_text = ''
             else:
-                self.debug_text += 'Open Command Pallete : Show Build Errors'
+                self.debug_text = strings.get('make_highlighting_hidden')
         except:
-            self.debug_text += 'Install with Package Control : Highlight Build Errors'
+            self.debug_text = strings.get('make_highlighting_disabled')
 
     def do_run(self, cmd, working_dir, **kwargs):
         project = ElmProject(cmd[1])
