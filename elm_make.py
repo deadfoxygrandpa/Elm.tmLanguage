@@ -38,14 +38,22 @@ class ElmMakeCommand(default_exec.ExecCommand):
         super(ElmMakeCommand, self).run(cmd, working_dir=project_dir, **kwargs)
 
     def on_data(self, proc, json_data):
+        try:
+            error_list = self.decode_json(json_data)
+        except:
+            error_data = json_data
+        else:
+            error_data = '\n'.join(error_list).encode(self.encoding)
+        finally:
+            super(ElmMakeCommand, self).on_data(proc, error_data)
+
+    def decode_json(self, json_data): # throws
         result_str = json_data.decode(self.encoding)
         json_str, success_str = result_str.split('\n', 1)
         decode_error = lambda dict: self.format_error(**dict) if 'type' in dict else dict
         error_list = json.loads(json_str, object_hook=decode_error)
         error_list.append(success_str)
-        error_str = '\n'.join(error_list)
-        error_data = error_str.encode(self.encoding)
-        super(ElmMakeCommand, self).on_data(proc, error_data)
+        return error_list
 
     def format_error(shelf, type, file, region, overview, details, **kwargs):
         line = region['start']['line']
