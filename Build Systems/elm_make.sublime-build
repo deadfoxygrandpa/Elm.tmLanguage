@@ -1,9 +1,13 @@
 {
+    "target": "elm_make",
+    "error_format": "==== {type} in {file}:{line}:{column}: ====\n{message}\n----",
+    "file_regex": "==== \\w+ in (.+?):(\\d+):(\\d+): ====\\n([\\S\\s]+?)\\n----",
     "cmd":
     [
         "elm-make",
         "$file",
         "--output=/dev/null",
+        "--report=json",
         "--yes"
     ],
     "selector": "source.elm",
