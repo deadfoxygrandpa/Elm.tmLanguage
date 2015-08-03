@@ -1,18 +1,31 @@
 import json
 import re
-import Default.exec as default_exec
+
+from importlib import import_module
+try:
+    default_exec = import_module('Highlight Build Errors').HighlightBuildErrors
+except:
+    import Default.exec as default_exec
 
 class ElmMakeCommand(default_exec.ExecCommand):
     '''Inspired by:
     http://www.sublimetext.com/forum/viewtopic.php?t=12028
     https://github.com/search?q=sublime+filename%3Aexec.py
     https://github.com/search?q=finish+ExecCommand+NOT+ProcessListener+extension%3Apy
+    https://github.com/bblanchon/SublimeText-HighlightBuildErrors/blob/master/HighlightBuildErrors.py
     '''
 
     def run(self, error_format, **kwargs):
         self.error_format = error_format
         super(ElmMakeCommand, self).run(**kwargs)
-        self.debug_text = ''
+        self.debug_text = 'To highlight build errors : '
+        try:
+            if default_exec.g_show_errors:
+                self.debug_text = ''
+            else:
+                self.debug_text += 'Open Command Pallete : Show Build Errors'
+        except:
+            self.debug_text += 'Install with Package Control : Highlight Build Errors'
 
     def on_data(self, proc, json_data):
         result_str = json_data.decode(self.encoding)
