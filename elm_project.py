@@ -9,9 +9,6 @@ PROJECT_UPDATED_MSG = 'elm-package.json updated : {0} = {1}'
 class ElmProjectCommand(sublime_plugin.TextCommand):
 
     def run(self, edit, prop_name=None, choices=None, caption=None):
-        self.project = ElmProject(self.view.file_name())
-        if not self.project.exists:
-            return sublime.status_message(PROJECT_NOT_FOUND_MSG)
         window = self.view.window()
         if not prop_name:
             return window.open_file(self.project.json_path, sublime.TRANSIENT)
@@ -27,6 +24,10 @@ class ElmProjectCommand(sublime_plugin.TextCommand):
         except:
             initial_index = -1
         window.show_quick_panel(choices, self.on_option, selected_index=initial_index)
+
+    def is_enabled(self):
+        self.project = ElmProject(self.view.file_name())
+        return self.project.exists
 
     def on_finished(self, value):
         setattr(self.project, self.prop_name, value)
