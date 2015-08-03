@@ -38,6 +38,7 @@ class ElmProjectCommand(sublime_plugin.TextCommand):
 
 BUILD_KEY = ('sublime-build',)
 MAIN_KEY = BUILD_KEY + ('main',)
+HTML_KEY = BUILD_KEY + ('html',)
 OUTPUT_KEY = BUILD_KEY + ('output',)
 OUTPUT_PATH_KEY = OUTPUT_KEY + ('path',)
 OUTPUT_COMP_KEY = OUTPUT_KEY + ('components',)
@@ -103,6 +104,14 @@ class ElmProject(object):
     @main_path.setter
     def main_path(self, value):
         self[MAIN_KEY] = value
+
+    @property
+    def html_path(self):
+        return self[HTML_KEY] or self.output_path
+
+    @html_path.setter
+    def html_path(self, value):
+        self[HTML_KEY] = value
 
     @property
     def output_path(self):

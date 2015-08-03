@@ -12,6 +12,14 @@
         }
     },
     {
+        "caption": "Elm Build System: Set HTML Path",
+        "command": "elm_project", "args":
+        {
+            "prop_name": "html_path",
+            "caption": "Enter HTML path to open in browser: "
+        }
+    },
+    {
         "caption": "Elm Build System: Set Output Path",
         "command": "elm_project", "args":
         {
