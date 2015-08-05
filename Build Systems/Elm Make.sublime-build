@@ -1,5 +1,6 @@
 {
     "target": "elm_make",
+    "info_format": "=== $info ===",
     "error_format": "==== $type in $file:$line:$column: ====\n$message\n----",
     "file_regex": "==== \\w+ in (.+?):(\\d+):(\\d+): ====\\n([\\S\\s]+?)\\n----",
     "cmd":
