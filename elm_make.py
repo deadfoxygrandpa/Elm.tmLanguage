@@ -9,10 +9,8 @@ if int(sublime.version()) < 3000:
     default_exec = __import__('exec')
 else:
     from .elm_project import ElmProject
-    try:
-        default_exec = __import__('Highlight Build Errors').HighlightBuildErrors
-    except:
-        default_exec = __import__('Default.exec')
+    from importlib import import_module
+    default_exec = import_module('Default.exec')
 
 strings = sublime.load_settings('Elm User Strings.sublime-settings')
 
@@ -24,23 +22,30 @@ class ElmMakeCommand(default_exec.ExecCommand):
     https://github.com/bblanchon/SublimeText-HighlightBuildErrors/blob/master/HighlightBuildErrors.py
     '''
 
+    @staticmethod
+    def import_dependencies():
+        return __import__('Highlight Build Errors').HighlightBuildErrors.ExecCommand,
+
+    def __new__(cls, window):
+        try:
+            cls.__bases__ = cls.import_dependencies()
+            cls.is_patched = True
+        except:
+            cls.is_patched = False
+        finally:
+            return super(ElmMakeCommand, cls).__new__(cls)
+
     def run(self, cmd, working_dir, error_format, **kwargs):
         self.error_format = string.Template(error_format)
-        self.do_run(cmd, working_dir, **kwargs)
-        try:
-            if default_exec.g_show_errors:
-                self.debug_text = ''
-            else:
-                self.debug_text = strings.get('make_highlighting_hidden')
-        except:
-            self.debug_text = strings.get('make_highlighting_disabled')
-
-    def do_run(self, cmd, working_dir, **kwargs):
         project = ElmProject(cmd[1])
         cmd[1] = fs.expanduser(project.main_path)
         cmd[2] = cmd[2].format(fs.expanduser(project.output_path))
         project_dir = project.working_dir or working_dir
         super(ElmMakeCommand, self).run(cmd, working_dir=project_dir, **kwargs)
+        if self.is_patched:
+            self.debug_text = ''
+        else:
+            self.debug_text = strings.get('make_highlighting_disabled')
 
     def on_data(self, proc, json_data):
         try:
