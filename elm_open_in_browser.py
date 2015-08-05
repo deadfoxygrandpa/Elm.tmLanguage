@@ -22,6 +22,7 @@ class ElmOpenInBrowserCommand(sublime_plugin.TextCommand):
             self.import_dependencies()
             self.view.window().run_command('side_bar_open_in_browser', dict(paths=[html_path]))
         except:
+            print(strings.get('log_plugin_not_found').format('SideBarEnhancements'))
             if ElmViewInBrowserProxyCommand.is_patched:
                 self.view.run_command('elm_view_in_browser_proxy', dict(path=html_path))
             else:
@@ -46,6 +47,7 @@ class ElmViewInBrowserProxyCommand(sublime_plugin.TextCommand):
             cls.__bases__ = cls.import_dependencies()
             cls.is_patched = True
         except:
+            print(strings.get('log_plugin_not_found').format('View In Browser'))
             cls.is_patched = False
         finally:
             return super(ElmViewInBrowserProxyCommand, cls).__new__(cls)

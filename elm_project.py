@@ -67,7 +67,7 @@ class ElmProject(object):
             with open(self.json_path) as json_file:
                 self.data_dict = json.load(json_file)
         except:
-            pass
+            print(strings.get('log_project_invalid_json').format(self.json_path))
 
     def __getitem__(self, keys):
         if not self.exists:

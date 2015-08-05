@@ -1,3 +1,4 @@
+from __future__ import print_function
 import sublime
 import json
 import os.path as fs
@@ -31,6 +32,7 @@ class ElmMakeCommand(default_exec.ExecCommand):
             cls.__bases__ = cls.import_dependencies()
             cls.is_patched = True
         except:
+            print(strings.get('log_plugin_not_found').format('Highlight Build Errors'))
             cls.is_patched = False
         finally:
             return super(ElmMakeCommand, cls).__new__(cls)
@@ -60,6 +62,9 @@ class ElmMakeCommand(default_exec.ExecCommand):
             decode_error = lambda dict: self.format_error(**dict) if 'type' in dict else dict
             return json.loads(result_str, object_hook=decode_error)
         except:
+            log_reason = lambda: print(strings.get('log_make_invalid_json').format(result_str))
+            # ST2: RuntimeError: Must call on main thread
+            sublime.set_timeout(log_reason, 0)
             info_str = result_str.strip()
             return [self.info_format.substitute(info=info_str)] if info_str else []
 
