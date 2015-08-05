@@ -1,34 +1,58 @@
 import sublime
+import sublime_plugin
 import os.path as fs
 
 if int(sublime.version()) < 3000:
     from elm_project import ElmProject
-    from ViewInBrowserCommand import ViewInBrowserCommand as OpenInBrowserCommand
 else:
     from .elm_project import ElmProject
-    try:
-        from SideBarEnhancements.SideBar import SideBarOpenInBrowserCommand as OpenInBrowserCommand
-    except:
-        OpenInBrowserCommand = __import__('View In Browser').ViewInBrowserCommand.ViewInBrowserCommand
 
-class ElmOpenInBrowserCommand(OpenInBrowserCommand):
+strings = sublime.load_settings('Elm User Strings.sublime-settings')
 
-    def run(self, edit=None):
-        if edit: # ViewInBrowserCommand
-            super(ElmOpenInBrowserCommand, self).run(edit)
-        else: # SideBarOpenInBrowserCommand
-            super(ElmOpenInBrowserCommand, self).run([self.html_path()])
+class ElmOpenInBrowserCommand(sublime_plugin.TextCommand):
+
+    @staticmethod
+    def import_dependencies():
+        return __import__('SideBarEnhancements').SideBar.SideBarOpenInBrowserCommand,
+
+    def run(self, edit):
+        norm_path = fs.join(self.project.working_dir, fs.expanduser(self.project.html_path))
+        html_path = fs.abspath(norm_path)
+        try:
+            self.import_dependencies()
+            self.view.window().run_command('side_bar_open_in_browser', dict(paths=[html_path]))
+        except:
+            if ElmViewInBrowserProxyCommand.is_patched:
+                self.view.run_command('elm_view_in_browser_proxy', dict(path=html_path))
+            else:
+                sublime.status_message(strings.get('open_in_browser_plugin_required'))
 
     def is_enabled(self):
-        try: # ViewInBrowserCommand
-            self.project = ElmProject(self.view.file_name())
-        except: # SideBarOpenInBrowserCommand
-            self.project = ElmProject(self.window.active_view().file_name())
+        self.project = ElmProject(self.view.file_name())
         return self.project.exists
 
-    def normalizePath(self, fileToOpen): # ViewInBrowserCommand
-        return super(ElmOpenInBrowserCommand, self).normalizePath(self.html_path())
+class ElmViewInBrowserProxyCommand(sublime_plugin.TextCommand):
 
-    def html_path(self):
-        norm_path = fs.join(self.project.working_dir, fs.expanduser(self.project.html_path))
-        return fs.abspath(norm_path)
+    @staticmethod
+    def import_dependencies():
+        if int(sublime.version()) < 3000:
+            import ViewInBrowserCommand
+        else:
+            ViewInBrowserCommand = __import__('View In Browser').ViewInBrowserCommand
+        return ViewInBrowserCommand.ViewInBrowserCommand,
+
+    def __new__(cls, view):
+        try:
+            cls.__bases__ = cls.import_dependencies()
+            cls.is_patched = True
+        except:
+            cls.is_patched = False
+        finally:
+            return super(ElmViewInBrowserProxyCommand, cls).__new__(cls)
+
+    def run(self, edit, path):
+        self.path = path
+        super(ElmViewInBrowserProxyCommand, self).run(edit)
+
+    def normalizePath(self, fileToOpen): # override
+        return super(ElmViewInBrowserProxyCommand, self).normalizePath(self.path)

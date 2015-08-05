@@ -1,6 +1,7 @@
 {
     "make_highlighting_disabled":      "Elm says : To highlight build errors : Install with Package Control : Highlight Build Errors",
     "make_highlighting_hidden":        "Elm says : To highlight build errors : Open Command Pallete : Show Build Errors",
+    "open_in_browser_plugin_required": "Elm says : To open in browser : Install with Package Control : SideBarEnhancements or View In Browser",
     "project_not_found":               "Elm says : Valid elm-package.json NOT found for updating",
     "project_updated":                 "Elm says : elm-package.json updated : {0} = {1}"
 }
