@@ -256,7 +256,10 @@ def modules_in_scope(view):
 def current_module_name(view):
     module_pattern = 'module\W+.*\W+where\W*'
     regions = view.find_all(module_pattern)
-    name = view.substr(regions[0]).split()[1]
+    if len(regions) > 0:
+        name = view.substr(regions[0]).split()[1]
+    else:
+        name = ''
     file_name = os.path.split(view.file_name())[1]
     if file_name.lower().endswith('.elm'):
         file_name = file_name[:-4]
