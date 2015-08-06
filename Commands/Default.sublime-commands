@@ -8,7 +8,7 @@
             "encoding": "utf8",
             "cmd": ["elm-repl"],
             "cwd": "$file_path",
-            "syntax": "Packages/Elm Language Support/Syntax Highlighting/Elm.tmLanguage",
+            "syntax": "Packages/Elm Language Support/Syntaxes/Elm.tmLanguage",
             "external_id": "elm",
             "extend_env":
             {
