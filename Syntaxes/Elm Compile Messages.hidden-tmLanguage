@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>fileTypes</key>
+	<array/>
+	<key>name</key>
+	<string>Elm Compile Messages</string>
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>begin</key>
+			<string>^(={3}) </string>
+			<key>comment</key>
+			<string>=== Unparsed Compile Message ===</string>
+			<key>end</key>
+			<string> \1$</string>
+			<key>name</key>
+			<string>comment.line.heading.3.elm-build-output</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>comment</key>
+					<string>elm-lang/core OR build\index.html</string>
+					<key>match</key>
+					<string>\S+[/\.]\S+</string>
+					<key>name</key>
+					<string>markup.underline.link.elm-build-output</string>
+				</dict>
+				<dict>
+					<key>comment</key>
+					<string>Successfully generated</string>
+					<key>match</key>
+					<string>(?i)\bsuccess\w+</string>
+					<key>name</key>
+					<string>constant.language.boolean.true.elm-build-output</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>(?xi)          # Minimally modified `file_regex` from `Elm Make.sublime-build`
+  ^={4}[ ]     # Leading delimiter
+  ((error)     # \2: error
+  |(warning)   # \3: warning
+  |\w+         # \1: any $type
+  )[ ]in[ ]    # separator
+  (.+?):       # \4: $file
+  (\d+):       # \5: $line
+  (\d+):       # \6: $column
+  [ ]={4}\n    # Trailing delimiter</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>markup.heading.4.elm-build-output</string>
+				</dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>support.constant.type.elm-build-output</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>invalid.illegal.error.elm-build-output</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>invalid.deprecated.warning.elm-build-output</string>
+				</dict>
+				<key>4</key>
+				<dict>
+					<key>name</key>
+					<string>markup.underline.link.elm-build-output</string>
+				</dict>
+				<key>5</key>
+				<dict>
+					<key>name</key>
+					<string>constant.numeric.elm-build-output</string>
+				</dict>
+				<key>6</key>
+				<dict>
+					<key>name</key>
+					<string>constant.numeric.elm-build-output</string>
+				</dict>
+			</dict>
+			<key>comment</key>
+			<string>==== MediaWiki-Formatted ====\nCompile Message\n----</string>
+			<key>contentName</key>
+			<string>string.unquoted.elm-build-output</string>
+			<key>end</key>
+			<string>^-{4}$</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>meta.separator.elm-build-output</string>
+				</dict>
+			</dict>
+			<key>name</key>
+			<string>meta.report.elm-build-output</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>(`)(?!`)</string>
+					<key>captures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.raw.elm-build-output</string>
+						</dict>
+					</dict>
+					<key>comment</key>
+					<string>Inline `variable`</string>
+					<key>contentName</key>
+					<string>variable.other.elm.elm-build-output</string>
+					<key>end</key>
+					<string>\1</string>
+					<key>name</key>
+					<string>markup.raw.inline.elm-build-output</string>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>(?m)^ {4}</string>
+					<key>comment</key>
+					<string>Code Block</string>
+					<key>end</key>
+					<string>\n+(?!^ {4})</string>
+					<key>name</key>
+					<string>markup.raw.block.elm-build-output</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>source.elm</string>
+						</dict>
+					</array>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>^\[</string>
+			<key>comment</key>
+			<array>
+				<string>Finished in 4.2s</string>
+			</array>
+			<key>end</key>
+			<string>\]$</string>
+			<key>name</key>
+			<string>comment.line.brackets.elm-build-output</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.other.unit.elm-build-output</string>
+						</dict>
+					</dict>
+					<key>comment</key>
+					<string>4.2s</string>
+					<key>match</key>
+					<string>\b\d+\.\d+(s)\b</string>
+					<key>name</key>
+					<string>constant.numeric.elm-build-output</string>
+				</dict>
+			</array>
+		</dict>
+	</array>
+	<key>scopeName</key>
+	<string>text.html.mediawiki.elm-build-output</string>
+	<key>uuid</key>
+	<string>0e1a8891-7cc0-4991-8018-252d6f591f8f</string>
+</dict>
+</plist>

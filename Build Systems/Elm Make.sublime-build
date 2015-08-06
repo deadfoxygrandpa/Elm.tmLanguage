@@ -1,8 +1,11 @@
 {
     "target": "elm_make",
+    "selector": "source.elm",
     "info_format": "=== $info ===",
     "error_format": "==== $type in $file:$line:$column: ====\n$message\n----",
-    "file_regex": "==== \\w+ in (.+?):(\\d+):(\\d+): ====\\n([\\S\\s]+?)\\n----",
+    "file_regex": "(?i)={4} \\w+ in (.+?):(\\d+):(\\d+): ={4}\\n([\\S\\s]+?)\\n-{4}",
+    "syntax": "Elm Compile Messages.hidden-tmLanguage",
+    "working_dir": "$project_path",
     "cmd":
     [
         "elm-make",
@@ -11,8 +14,6 @@
         "--report=json",
         "--yes"
     ],
-    "selector": "source.elm",
-    "working_dir": "$project_path",
     "osx":
     {
         "path": "/usr/local/bin:$PATH"

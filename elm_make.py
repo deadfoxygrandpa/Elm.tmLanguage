@@ -37,18 +37,25 @@ class ElmMakeCommand(default_exec.ExecCommand):
         finally:
             return super(ElmMakeCommand, cls).__new__(cls)
 
-    def run(self, cmd, working_dir, info_format, error_format, **kwargs):
+    def run(self, info_format, error_format, **kwargs):
         self.info_format = string.Template(info_format)
         self.error_format = string.Template(error_format)
-        project = ElmProject(cmd[1])
-        cmd[1] = fs.expanduser(project.main_path)
-        cmd[2] = cmd[2].format(fs.expanduser(project.output_path))
-        project_dir = project.working_dir or working_dir
-        super(ElmMakeCommand, self).run(cmd, working_dir=project_dir, **kwargs)
+        self.do_run(**kwargs)
         if self.is_patched:
             self.debug_text = ''
         else:
             self.debug_text = strings.get('make_highlighting_disabled')
+
+    def do_run(self, cmd, working_dir, syntax, **kwargs):
+        project = ElmProject(cmd[1])
+        cmd[1] = fs.expanduser(project.main_path)
+        cmd[2] = cmd[2].format(fs.expanduser(project.output_path))
+        project_dir = project.working_dir or working_dir
+        elm_source = self.window.active_view().settings().get('syntax')
+        elm_output = re.sub('Elm.tmLanguage$', syntax, elm_source)
+        # ST2: TypeError: __init__() got an unexpected keyword argument 'syntax'
+        super(ElmMakeCommand, self).run(cmd, working_dir=project_dir, **kwargs)
+        self.output_view.set_syntax_file(elm_output)
 
     def on_data(self, proc, response_data):
         result_strs = response_data.decode(self.encoding).split('\n')
