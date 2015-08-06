@@ -52,9 +52,7 @@ class ElmMakeCommand(default_exec.ExecCommand):
         super(ElmMakeCommand, self).run(cmd, working_dir=project_dir, **kwargs)
 
     def post_run(self, syntax, color_scheme):
-        elm_source = self.window.active_view().settings().get('syntax')
-        elm_output = re.sub('Elm.tmLanguage$', syntax, elm_source)
-        self.output_view.set_syntax_file(elm_output)
+        self.output_view.set_syntax_file(syntax)
         self.output_view.settings().set('color_scheme', color_scheme)
         if self.is_patched:
             self.debug_text = ''
