@@ -29,10 +29,11 @@ class ElmMakeCommand(default_exec.ExecCommand):
     def __new__(cls, window):
         try:
             cls.__bases__ = cls.__import_dependencies()
-            cls.is_patched = True
-        except:
+        except ImportError:
             print(strings.get('log.missing_plugin').format('Highlight Build Errors'))
             cls.is_patched = False
+        else:
+            cls.is_patched = True
         finally:
             return super(ElmMakeCommand, cls).__new__(cls)
 
@@ -72,10 +73,10 @@ class ElmMakeCommand(default_exec.ExecCommand):
         super(ElmMakeCommand, self).on_finished(proc)
 
     def format_result(self, result_str):
+        decode_error = lambda dict: self.format_error(**dict) if 'type' in dict else dict
         try:
-            decode_error = lambda dict: self.format_error(**dict) if 'type' in dict else dict
             return json.loads(result_str, object_hook=decode_error)
-        except:
+        except ValueError:
             if not int(sublime.version()) < 3000:
                 # ST2: RuntimeError: Must call Settings.get on main thread
                 print(strings.get('make.log.invalid_json').format(result_str))

@@ -24,13 +24,14 @@ class ElmOpenInBrowserCommand(sublime_plugin.TextCommand):
         html_path = fs.abspath(norm_path)
         try:
             self.__import_dependencies()
-            self.view.window().run_command('side_bar_open_in_browser', dict(paths=[html_path]))
-        except:
+        except ImportError:
             print(strings.get('log.missing_plugin').format('SideBarEnhancements'))
             if ElmViewInBrowserProxyCommand.is_patched:
                 self.view.run_command('elm_view_in_browser_proxy', dict(path=html_path))
             else:
                 sublime.status_message(strings.get('open_in_browser.missing_plugin'))
+        else:
+            self.view.window().run_command('side_bar_open_in_browser', dict(paths=[html_path]))
 
 class ElmViewInBrowserProxyCommand(sublime_plugin.TextCommand):
 
@@ -45,10 +46,11 @@ class ElmViewInBrowserProxyCommand(sublime_plugin.TextCommand):
     def __new__(cls, view):
         try:
             cls.__bases__ = cls.__import_dependencies()
-            cls.is_patched = True
-        except:
+        except ImportError:
             print(strings.get('log.missing_plugin').format('View In Browser'))
             cls.is_patched = False
+        else:
+            cls.is_patched = True
         finally:
             return super(ElmViewInBrowserProxyCommand, cls).__new__(cls)
 

@@ -30,7 +30,7 @@ class ElmProjectCommand(sublime_plugin.TextCommand):
             initial_index = self.norm_choices.index(initial_value.lower())
             # ST2: Boost.Python.ArgumentError: Python argument types
             self.window.show_quick_panel(choices, self.on_choice, selected_index=initial_index)
-        except:
+        except: # simplest control flow
             if not int(sublime.version()) < 3000:
                 print(strings.get('project.log.invalid_choice').format(initial_value))
             self.window.show_quick_panel(choices, self.on_choice)
@@ -101,11 +101,12 @@ class ElmProject(object):
 
     def load_json(self):
         try:
-            with open(self.json_path) as json_file:
-                return json.load(json_file)
-        except:
+            if self.json_path:
+                with open(self.json_path) as json_file:
+                    return json.load(json_file)
+        except ValueError:
             print(strings.get('project.log.invalid_json').format(self.json_path))
-            return None
+        return None
 
     def save_json(self):
         with open(self.json_path, 'w') as json_file:
