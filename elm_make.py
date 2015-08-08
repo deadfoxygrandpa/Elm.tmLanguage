@@ -37,6 +37,7 @@ class ElmMakeCommand(default_exec.ExecCommand):
             return super(ElmMakeCommand, cls).__new__(cls)
 
     def run(self, info_format, error_format, syntax, color_scheme, **kwargs):
+        self.buffer = b''
         self.info_format = string.Template(info_format)
         self.error_format = string.Template(error_format)
         self.do_run(**kwargs)
@@ -59,12 +60,16 @@ class ElmMakeCommand(default_exec.ExecCommand):
         else:
             self.debug_text = strings.get('make.missing_plugin')
 
-    def on_data(self, proc, response_data):
-        result_strs = response_data.decode(self.encoding).split('\n')
+    def on_data(self, proc, data):
+        self.buffer += data
+
+    def on_finished(self, proc):
+        result_strs = self.buffer.decode(self.encoding).split('\n')
         flat_map = lambda f ,xss: sum(map(f, xss), [])
         output_strs = flat_map(self.format_result, result_strs) + ['']
         output_data = '\n'.join(output_strs).encode(self.encoding)
         super(ElmMakeCommand, self).on_data(proc, output_data)
+        super(ElmMakeCommand, self).on_finished(proc)
 
     def format_result(self, result_str):
         try:
