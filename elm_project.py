@@ -21,6 +21,7 @@ class ElmProjectCommand(sublime_plugin.TextCommand):
         try:
             initial_index = [choice.lower() for choice in choices].index(initial_value.lower())
         except:
+            print(strings.get('project.log.invalid_choice').format(initial_value))
             initial_index = -1
         window.show_quick_panel(choices, self.on_option, selected_index=initial_index)
 
@@ -30,7 +31,7 @@ class ElmProjectCommand(sublime_plugin.TextCommand):
 
     def on_finished(self, value):
         setattr(self.project, self.prop_name, value)
-        sublime.status_message(strings.get('project_updated').format(self.prop_name, value))
+        sublime.status_message(strings.get('project.updated').format(self.prop_name, value))
 
     def on_option(self, index):
         if index != -1:
@@ -67,7 +68,7 @@ class ElmProject(object):
             with open(self.json_path) as json_file:
                 self.data_dict = json.load(json_file)
         except:
-            print(strings.get('log_project_invalid_json').format(self.json_path))
+            print(strings.get('project.log.invalid_json').format(self.json_path))
 
     def __getitem__(self, keys):
         if not self.exists:
@@ -81,13 +82,20 @@ class ElmProject(object):
 
     def __setitem__(self, keys, value):
         if not self.exists:
-            return sublime.error_message(strings.get('project_not_found'))
+            return sublime.error_message(strings.get('project.not_found'))
         item = self.data_dict
         for key in keys[0:-1]:
             item = item.setdefault(key, {})
         item[keys[-1]] = value
         with open(self.json_path, 'w') as json_file:
             json.dump(self.data_dict, json_file, indent=4, separators=(',', ': '), sort_keys=True)
+
+    def __repr__(self):
+        members = [(name, getattr(self, name), ' ' * 4)
+            for name in dir(self) if name[0] != '_']
+        properties = ["{indent}{name}={value},".format(**locals())
+            for name, value, indent in members if not callable(value)]
+        return "{0}(\n{1}\n)".format(self.__class__.__name__, '\n'.join(properties))
 
     @property
     def exists(self):

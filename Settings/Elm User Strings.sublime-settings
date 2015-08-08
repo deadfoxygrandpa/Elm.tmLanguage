@@ -1,10 +1,10 @@
 {
-    "log_plugin_not_found":            "Elm says : Plugin NOT installed : {0}",
-    "log_make_invalid_json":           "Elm says : Invalid JSON from elm-make : {0}",
-    "log_project_invalid_json":        "Elm says : Invalid JSON from project file : {0}",
-    "log_project_invalid_choice":      "Elm says : Invalid choice from project file : {0}",
-    "make_highlighting_disabled":      "Elm says : To highlight build errors : Install with Package Control : Highlight Build Errors",
-    "open_in_browser_plugin_required": "Elm says : To open in browser : Install with Package Control : SideBarEnhancements or View In Browser",
-    "project_not_found":               "Elm says : Valid elm-package.json NOT found for updating",
-    "project_updated":                 "Elm says : elm-package.json updated : {0} = {1}"
+    "log.missing_plugin":              "Elm says: Missing plugin: {0}",
+    "make.missing_plugin":             "Elm says: To highlight build errors: Install with Package Control: Highlight Build Errors",
+    "make.log.invalid_json":           "Elm says: Invalid JSON from elm-make: {0}",
+    "open_in_browser.missing_plugin":  "Elm says: To open in browser: Install with Package Control: SideBarEnhancements or View In Browser",
+    "project.not_found":               "Elm says: Valid elm-package.json NOT found to update",
+    "project.updated":                 "Elm says: elm-package.json updated: {0} = {1}",
+    "project.log.invalid_choice":      "Elm says: Invalid choice in elm-package.json: {0}",
+    "project.log.invalid_json":        "Elm says: Invalid elm-package.json: {0}"
 }

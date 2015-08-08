@@ -1,4 +1,3 @@
-from __future__ import print_function
 import sublime
 import json
 import os.path as fs
@@ -32,7 +31,7 @@ class ElmMakeCommand(default_exec.ExecCommand):
             cls.__bases__ = cls.import_dependencies()
             cls.is_patched = True
         except:
-            print(strings.get('log_plugin_not_found').format('Highlight Build Errors'))
+            print(strings.get('log.missing_plugin').format('Highlight Build Errors'))
             cls.is_patched = False
         finally:
             return super(ElmMakeCommand, cls).__new__(cls)
@@ -41,23 +40,24 @@ class ElmMakeCommand(default_exec.ExecCommand):
         self.info_format = string.Template(info_format)
         self.error_format = string.Template(error_format)
         self.do_run(**kwargs)
-        self.post_run(syntax, color_scheme)
+        self.style_output(syntax, color_scheme)
 
     def do_run(self, cmd, working_dir, **kwargs):
         project = ElmProject(cmd[1])
+        print(repr(project))
         cmd[1] = fs.expanduser(project.main_path)
         cmd[2] = cmd[2].format(fs.expanduser(project.output_path))
         project_dir = project.working_dir or working_dir
         # ST2: TypeError: __init__() got an unexpected keyword argument 'syntax'
         super(ElmMakeCommand, self).run(cmd, working_dir=project_dir, **kwargs)
 
-    def post_run(self, syntax, color_scheme):
+    def style_output(self, syntax, color_scheme):
         self.output_view.set_syntax_file(syntax)
         self.output_view.settings().set('color_scheme', color_scheme)
         if self.is_patched:
             self.debug_text = ''
         else:
-            self.debug_text = strings.get('make_highlighting_disabled')
+            self.debug_text = strings.get('make.missing_plugin')
 
     def on_data(self, proc, response_data):
         result_strs = response_data.decode(self.encoding).split('\n')
@@ -71,9 +71,9 @@ class ElmMakeCommand(default_exec.ExecCommand):
             decode_error = lambda dict: self.format_error(**dict) if 'type' in dict else dict
             return json.loads(result_str, object_hook=decode_error)
         except:
-            log_reason = lambda: print(strings.get('log_make_invalid_json').format(result_str))
-            # ST2: RuntimeError: Must call on main thread
-            sublime.set_timeout(log_reason, 0)
+            if not int(sublime.version()) < 3000:
+                # ST2: RuntimeError: Must call Settings.get on main thread
+                print(strings.get('make.log.invalid_json').format(result_str))
             info_str = result_str.strip()
             return [self.info_format.substitute(info=info_str)] if info_str else []
 
