@@ -7,35 +7,41 @@ strings = sublime.load_settings('Elm User Strings.sublime-settings')
 
 class ElmProjectCommand(sublime_plugin.TextCommand):
 
-    def run(self, edit, prop_name=None, choices=None, caption=None):
-        window = self.view.window()
-        if not prop_name:
-            return window.open_file(self.project.json_path, sublime.TRANSIENT)
-        self.prop_name = prop_name
-        initial_value = getattr(self.project, prop_name)
-        if not choices:
-            return window.show_input_panel(caption, initial_value, self.on_finished, None, None)
-        self.choices = choices
-        if int(sublime.version()) < 3000:
-            return window.show_quick_panel(choices, self.on_option)
-        try:
-            initial_index = [choice.lower() for choice in choices].index(initial_value.lower())
-        except:
-            print(strings.get('project.log.invalid_choice').format(initial_value))
-            initial_index = -1
-        window.show_quick_panel(choices, self.on_option, selected_index=initial_index)
-
     def is_enabled(self):
         self.project = ElmProject(self.view.file_name())
         return self.project.exists
 
+    def run(self, edit, prop_name=None, choices=None, caption=None):
+        self.window = self.view.window()
+        if not prop_name:
+            self.window.open_file(self.project.json_path, sublime.TRANSIENT)
+            return
+        self.prop_name = prop_name
+        initial_value = getattr(self.project, prop_name)
+        if choices:
+            self.show_choices(choices, initial_value)
+        else:
+            self.window.show_input_panel(caption, initial_value, self.on_finished, None, None)
+
+    def show_choices(self, choices, initial_value):
+        self.norm_choices = [choice.lower() for choice in choices]
+        try:
+            # ValueError: $initial_value is not in list
+            initial_index = self.norm_choices.index(initial_value.lower())
+            # ST2: Boost.Python.ArgumentError: Python argument types
+            self.window.show_quick_panel(choices, self.on_choice, selected_index=initial_index)
+        except:
+            if not int(sublime.version()) < 3000:
+                print(strings.get('project.log.invalid_choice').format(initial_value))
+            self.window.show_quick_panel(choices, self.on_choice)
+
+    def on_choice(self, index):
+        if index != -1:
+            self.on_finished(self.norm_choices[index])
+
     def on_finished(self, value):
         setattr(self.project, self.prop_name, value)
         sublime.status_message(strings.get('project.updated').format(self.prop_name, value))
-
-    def on_option(self, index):
-        if index != -1:
-            self.on_finished(self.choices[index].lower())
 
 BUILD_KEY = ('sublime-build',)
 MAIN_KEY = BUILD_KEY + ('main',)
@@ -64,11 +70,7 @@ class ElmProject(object):
     def __init__(self, file_path):
         self.file_path = file_path
         self.json_path = self.find_json(fs.dirname(file_path or ''))
-        try:
-            with open(self.json_path) as json_file:
-                self.data_dict = json.load(json_file)
-        except:
-            print(strings.get('project.log.invalid_json').format(self.json_path))
+        self.data_dict = self.load_json()
 
     def __getitem__(self, keys):
         if not self.exists:
@@ -82,13 +84,13 @@ class ElmProject(object):
 
     def __setitem__(self, keys, value):
         if not self.exists:
-            return sublime.error_message(strings.get('project.not_found'))
+            sublime.error_message(strings.get('project.not_found'))
+            return
         item = self.data_dict
         for key in keys[0:-1]:
             item = item.setdefault(key, {})
         item[keys[-1]] = value
-        with open(self.json_path, 'w') as json_file:
-            json.dump(self.data_dict, json_file, indent=4, separators=(',', ': '), sort_keys=True)
+        self.save_json()
 
     def __repr__(self):
         members = [(name, getattr(self, name), ' ' * 4)
@@ -97,9 +99,21 @@ class ElmProject(object):
             for name, value, indent in members if not callable(value)]
         return "{0}(\n{1}\n)".format(self.__class__.__name__, '\n'.join(properties))
 
+    def load_json(self):
+        try:
+            with open(self.json_path) as json_file:
+                return json.load(json_file)
+        except:
+            print(strings.get('project.log.invalid_json').format(self.json_path))
+            return None
+
+    def save_json(self):
+        with open(self.json_path, 'w') as json_file:
+            json.dump(self.data_dict, json_file, indent=4, separators=(',', ': '), sort_keys=True)
+
     @property
     def exists(self):
-        return hasattr(self, 'data_dict')
+        return bool(self.data_dict)
 
     @property
     def working_dir(self):

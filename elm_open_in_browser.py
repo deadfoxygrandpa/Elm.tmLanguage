@@ -12,14 +12,18 @@ strings = sublime.load_settings('Elm User Strings.sublime-settings')
 class ElmOpenInBrowserCommand(sublime_plugin.TextCommand):
 
     @staticmethod
-    def import_dependencies():
+    def __import_dependencies():
         return __import__('SideBarEnhancements').SideBar.SideBarOpenInBrowserCommand,
+
+    def is_enabled(self):
+        self.project = ElmProject(self.view.file_name())
+        return self.project.exists
 
     def run(self, edit):
         norm_path = fs.join(self.project.working_dir, fs.expanduser(self.project.html_path))
         html_path = fs.abspath(norm_path)
         try:
-            self.import_dependencies()
+            self.__import_dependencies()
             self.view.window().run_command('side_bar_open_in_browser', dict(paths=[html_path]))
         except:
             print(strings.get('log.missing_plugin').format('SideBarEnhancements'))
@@ -28,14 +32,10 @@ class ElmOpenInBrowserCommand(sublime_plugin.TextCommand):
             else:
                 sublime.status_message(strings.get('open_in_browser.missing_plugin'))
 
-    def is_enabled(self):
-        self.project = ElmProject(self.view.file_name())
-        return self.project.exists
-
 class ElmViewInBrowserProxyCommand(sublime_plugin.TextCommand):
 
     @staticmethod
-    def import_dependencies():
+    def __import_dependencies():
         if int(sublime.version()) < 3000:
             import ViewInBrowserCommand
         else:
@@ -44,7 +44,7 @@ class ElmViewInBrowserProxyCommand(sublime_plugin.TextCommand):
 
     def __new__(cls, view):
         try:
-            cls.__bases__ = cls.import_dependencies()
+            cls.__bases__ = cls.__import_dependencies()
             cls.is_patched = True
         except:
             print(strings.get('log.missing_plugin').format('View In Browser'))
