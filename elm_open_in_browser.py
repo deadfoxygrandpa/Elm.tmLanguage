@@ -18,6 +18,9 @@ class ElmOpenInBrowserCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         norm_path = fs.join(self.project.working_dir, fs.expanduser(self.project.html_path))
         html_path = fs.abspath(norm_path)
+        if not fs.isfile(html_path):
+            sublime.status_message(get_string('open_in_browser.not_found', html_path))
+            return
         try:
             self.__import_dependencies()
         except ImportError:

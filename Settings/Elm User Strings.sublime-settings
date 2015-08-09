@@ -5,6 +5,7 @@
     "make.missing_plugin":             "To highlight build errors: Install with Package Control: Highlight Build Errors",
     "make.logging.invalid_json":       "Invalid JSON from elm-make: {0}",
 
+    "open_in_browser.not_found":       "HTML file NOT found to open: {0}",
     "open_in_browser.missing_plugin":  "To open in browser: Install with Package Control: SideBarEnhancements or View In Browser",
 
     "project.not_found":               "Valid elm-package.json NOT found to update",
