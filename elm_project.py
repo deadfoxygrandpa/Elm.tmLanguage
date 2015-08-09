@@ -1,3 +1,4 @@
+import collections
 import json
 
 try:     # ST3
@@ -41,7 +42,9 @@ class ElmProjectCommand(sublime_plugin.TextCommand):
 
     def on_finished(self, value):
         setattr(self.project, self.prop_name, value)
-        sublime.status_message(get_string('project.updated', self.prop_name, value))
+        keys = self.project._last_updated_key_path
+        if keys:
+            sublime.status_message(get_string('project.updated', '.'.join(keys), value))
 
 BUILD_KEY = ('sublime-build',)
 MAIN_KEY = BUILD_KEY + ('main',)
@@ -83,6 +86,7 @@ class ElmProject(object):
         return item
 
     def __setitem__(self, keys, value):
+        self._last_updated_key_path = None
         if not self.exists:
             sublime.error_message(get_string('project.not_found'))
             return
@@ -91,6 +95,7 @@ class ElmProject(object):
             item = item.setdefault(key, {})
         item[keys[-1]] = value
         self.save_json()
+        self._last_updated_key_path = keys
 
     def __repr__(self):
         members = [(name, getattr(self, name), ' ' * 4)
@@ -101,16 +106,23 @@ class ElmProject(object):
 
     def load_json(self):
         try:
-            if self.json_path:
-                with open(self.json_path) as json_file:
+            with open(self.json_path) as json_file:
+                if is_ST2(): # AttributeError: 'module' object has no attribute 'OrderedDict'
                     return json.load(json_file)
+                else:
+                    return json.load(json_file, object_pairs_hook=collections.OrderedDict)
+        except TypeError: # self.json_path == None
+            pass
         except ValueError:
             log_string('project.logging.invalid_json', self.json_path)
         return None
 
     def save_json(self):
         with open(self.json_path, 'w') as json_file:
-            json.dump(self.data_dict, json_file, indent=4, separators=(',', ': '), sort_keys=True)
+            json.dump(self.data_dict, json_file,
+                indent=4,
+                separators=(',', ': '),
+                sort_keys=is_ST2())
 
     @property
     def exists(self):
@@ -138,8 +150,8 @@ class ElmProject(object):
 
     @property
     def output_path(self):
-        formatted_path = fs.join(self.output_dir, self.output_name + '.' + self.output_ext)
-        return self[OUTPUT_PATH_KEY] or fs.normpath(formatted_path)
+        output_path = fs.join(self.output_dir, self.output_name + '.' + self.output_ext)
+        return self[OUTPUT_PATH_KEY] or fs.normpath(output_path)
 
     @output_path.setter
     def output_path(self, value):
