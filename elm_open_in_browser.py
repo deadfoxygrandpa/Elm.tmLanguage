@@ -1,13 +1,9 @@
-import sublime
-import sublime_plugin
-import os.path as fs
-
-if int(sublime.version()) < 3000:
-    from elm_project import ElmProject
-else:
+try:     # ST3
+    from .elm_plugin import *
     from .elm_project import ElmProject
-
-strings = sublime.load_settings('Elm User Strings.sublime-settings')
+except:  # ST2
+    from elm_plugin import *
+    from elm_project import ElmProject
 
 class ElmOpenInBrowserCommand(sublime_plugin.TextCommand):
 
@@ -25,11 +21,11 @@ class ElmOpenInBrowserCommand(sublime_plugin.TextCommand):
         try:
             self.__import_dependencies()
         except ImportError:
-            print(strings.get('log.missing_plugin').format('SideBarEnhancements'))
+            log_string('logging.missing_plugin', 'SideBarEnhancements')
             if ElmViewInBrowserProxyCommand.is_patched:
                 self.view.run_command('elm_view_in_browser_proxy', dict(path=html_path))
             else:
-                sublime.status_message(strings.get('open_in_browser.missing_plugin'))
+                sublime.status_message(get_string('open_in_browser.missing_plugin'))
         else:
             self.view.window().run_command('side_bar_open_in_browser', dict(paths=[html_path]))
 
@@ -37,7 +33,7 @@ class ElmViewInBrowserProxyCommand(sublime_plugin.TextCommand):
 
     @staticmethod
     def __import_dependencies():
-        if int(sublime.version()) < 3000:
+        if is_ST2():
             import ViewInBrowserCommand
         else:
             ViewInBrowserCommand = __import__('View In Browser').ViewInBrowserCommand
@@ -47,7 +43,7 @@ class ElmViewInBrowserProxyCommand(sublime_plugin.TextCommand):
         try:
             cls.__bases__ = cls.__import_dependencies()
         except ImportError:
-            print(strings.get('log.missing_plugin').format('View In Browser'))
+            log_string('logging.missing_plugin', 'View In Browser')
             cls.is_patched = False
         else:
             cls.is_patched = True

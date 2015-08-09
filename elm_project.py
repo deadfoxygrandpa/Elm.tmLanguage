@@ -1,9 +1,9 @@
-import sublime
-import sublime_plugin
 import json
-import os.path as fs
 
-strings = sublime.load_settings('Elm User Strings.sublime-settings')
+try:     # ST3
+    from .elm_plugin import *
+except:  # ST2
+    from elm_plugin import *
 
 class ElmProjectCommand(sublime_plugin.TextCommand):
 
@@ -31,8 +31,8 @@ class ElmProjectCommand(sublime_plugin.TextCommand):
             # ST2: Boost.Python.ArgumentError: Python argument types
             self.window.show_quick_panel(choices, self.on_choice, selected_index=initial_index)
         except: # simplest control flow
-            if not int(sublime.version()) < 3000:
-                print(strings.get('project.log.invalid_choice').format(initial_value))
+            if not is_ST2():
+                log_string('project.logging.invalid_choice', initial_value)
             self.window.show_quick_panel(choices, self.on_choice)
 
     def on_choice(self, index):
@@ -41,7 +41,7 @@ class ElmProjectCommand(sublime_plugin.TextCommand):
 
     def on_finished(self, value):
         setattr(self.project, self.prop_name, value)
-        sublime.status_message(strings.get('project.updated').format(self.prop_name, value))
+        sublime.status_message(get_string('project.updated', self.prop_name, value))
 
 BUILD_KEY = ('sublime-build',)
 MAIN_KEY = BUILD_KEY + ('main',)
@@ -84,7 +84,7 @@ class ElmProject(object):
 
     def __setitem__(self, keys, value):
         if not self.exists:
-            sublime.error_message(strings.get('project.not_found'))
+            sublime.error_message(get_string('project.not_found'))
             return
         item = self.data_dict
         for key in keys[0:-1]:
@@ -105,7 +105,7 @@ class ElmProject(object):
                 with open(self.json_path) as json_file:
                     return json.load(json_file)
         except ValueError:
-            print(strings.get('project.log.invalid_json').format(self.json_path))
+            log_string('project.logging.invalid_json', self.json_path)
         return None
 
     def save_json(self):

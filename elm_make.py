@@ -1,18 +1,16 @@
-import sublime
 import json
-import os.path as fs
 import re
 import string
 
-if int(sublime.version()) < 3000:
-    from elm_project import ElmProject
-    default_exec = __import__('exec')
-else:
+try:     # ST3
+    from .elm_plugin import *
     from .elm_project import ElmProject
     from importlib import import_module
     default_exec = import_module('Default.exec')
-
-strings = sublime.load_settings('Elm User Strings.sublime-settings')
+except:  # ST2
+    from elm_plugin import *
+    from elm_project import ElmProject
+    default_exec = __import__('exec')
 
 class ElmMakeCommand(default_exec.ExecCommand):
     '''Inspired by:
@@ -30,7 +28,7 @@ class ElmMakeCommand(default_exec.ExecCommand):
         try:
             cls.__bases__ = cls.__import_dependencies()
         except ImportError:
-            print(strings.get('log.missing_plugin').format('Highlight Build Errors'))
+            log_string('logging.missing_plugin', 'Highlight Build Errors')
             cls.is_patched = False
         else:
             cls.is_patched = True
@@ -46,7 +44,7 @@ class ElmMakeCommand(default_exec.ExecCommand):
 
     def do_run(self, cmd, working_dir, **kwargs):
         project = ElmProject(cmd[1])
-        print(repr(project))
+        log_string('project.logging.settings', repr(project))
         cmd[1] = fs.expanduser(project.main_path)
         cmd[2] = cmd[2].format(fs.expanduser(project.output_path))
         project_dir = project.working_dir or working_dir
@@ -59,7 +57,7 @@ class ElmMakeCommand(default_exec.ExecCommand):
         if self.is_patched:
             self.debug_text = ''
         else:
-            self.debug_text = strings.get('make.missing_plugin')
+            self.debug_text = get_string('make.missing_plugin')
 
     def on_data(self, proc, data):
         self.buffer += data
@@ -77,9 +75,7 @@ class ElmMakeCommand(default_exec.ExecCommand):
         try:
             return json.loads(result_str, object_hook=decode_error)
         except ValueError:
-            if not int(sublime.version()) < 3000:
-                # ST2: RuntimeError: Must call Settings.get on main thread
-                print(strings.get('make.log.invalid_json').format(result_str))
+            log_string('make.logging.invalid_json', result_str)
             info_str = result_str.strip()
             return [self.info_format.substitute(info=info_str)] if info_str else []
 
