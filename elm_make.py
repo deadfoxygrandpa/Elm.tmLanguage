@@ -21,19 +21,12 @@ class ElmMakeCommand(default_exec.ExecCommand):
     '''
 
     @staticmethod
-    def __import_dependencies():
+    def _import_bases():
         return __import__('Highlight Build Errors').HighlightBuildErrors.ExecCommand,
 
     def __new__(cls, window):
-        try:
-            cls.__bases__ = cls.__import_dependencies()
-        except ImportError:
-            log_string('logging.missing_plugin', 'Highlight Build Errors')
-            cls.is_patched = False
-        else:
-            cls.is_patched = True
-        finally:
-            return super(ElmMakeCommand, cls).__new__(cls)
+        patch_class(cls, 'Highlight Build Errors')
+        return super(ElmMakeCommand, cls).__new__(cls)
 
     def run(self, info_format, error_format, syntax, color_scheme, **kwargs):
         self.buffer = b''

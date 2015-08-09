@@ -25,3 +25,14 @@ def _log_string(retry, key, *args):
     else:
         if settings.get('debug'):
             print(get_string(key, *args))
+
+def patch_class(cls, name):
+    try:
+        cls.__bases__ = cls._import_bases()
+    except ImportError:
+        log_string('logging.missing_plugin', name)
+        cls.is_patched = False
+    else:
+        cls.is_patched = True
+    finally:
+        return cls.is_patched
