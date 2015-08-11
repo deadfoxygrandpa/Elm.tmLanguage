@@ -1,38 +1,61 @@
 [
     {
-        "caption": "Preferences",
-        "mnemonic": "n",
+        "id": "tools",
+        "children":
+        [{
+            "id": "SublimeREPL",
+            "children":
+            [
+                {
+                    "caption": "Elm",
+                    "id": "repl_elm",
+                    "command": "repl_open", "args":
+                    {
+                        "type": "subprocess",
+                        "encoding": "utf8",
+                        "cmd": ["elm-repl"],
+                        "cwd": "$file_path",
+                        "syntax": "Packages/Elm Language Support/Syntaxes/Elm.tmLanguage",
+                        "external_id": "elm",
+                        "extend_env":
+                        {
+                            "osx": {"PATH": "{PATH}:/usr/local/bin"},
+                            "linux": {"PATH": "{PATH}:/usr/local/bin:{HOME}/.cabal/bin"},
+                            "windows": {}
+                        }
+                    }
+                }
+            ]
+        }]
+    },
+    {
         "id": "preferences",
         "children":
-        [
-              {
-                "caption": "Package Settings",
-                "mnemonic": "P",
-                "id": "package-settings",
-                "children":
-                [
-                    {
-                        "caption": "Elm Language Support",
-                        "children":
-                        [
+        [{
+            "id": "package-settings",
+            "children":
+            [
+                {
+                    "caption": "Elm Language Support",
+                    "children":
+                    [
+                        {
+                            "caption": "Settings – Default",
+                            "command": "open_file", "args":
                             {
-                                "command": "open_file", "args":
-                                {
-                                    "file": "${packages}/Elm Language Support/Elm Language Support.sublime-settings"
-                                },
-                                "caption": "Settings – Default"
-                            },
-                            {
-                                "command": "open_file", "args":
-                                {
-                                    "file": "${packages}/User/Elm Language Support.sublime-settings"
-                                },
-                                "caption": "Settings – User"
+                                "file": "${packages}/Elm Language Support/Elm Language Support.sublime-settings"
                             }
-                        ]
-                    }
-                ]
-              }
-        ]
+                        },
+                        {
+                            "caption": "Settings – User",
+                            "command": "open_file", "args":
+                            {
+                                "file": "${packages}/User/Elm Language Support.sublime-settings"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }]
     }
 ]
