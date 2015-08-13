@@ -35,7 +35,7 @@ def import_module(path):
     return base
 
 # defer import as long as possible in case plugin not loaded
-def monkey_patch(path):
+def replace_base_class(path):
     def splice_bases(old_base, *extra_bases):
         try:
             new_base = import_module(path)
@@ -46,18 +46,23 @@ def monkey_patch(path):
         else:
             return (new_base,) + extra_bases
 
-    def decorator(old_cls):
-        def method_new(new_cls, *args, **kwargs):
-            if not hasattr(old_cls, 'is_patched'):
-                new_bases = splice_bases(old_cls.__bases__)
-                old_cls.is_patched = bool(new_bases)
-                if new_bases:
-                    old_cls.__bases__ = new_bases
-            new = super(MonkeyPatch, new_cls).__new__
-            # TypeError: object() takes no parameters
-            return new(new_cls) if new is object.__new__ else new(new_cls, *args, **kwargs)
+    def monkey_patch(target_cls):
+        if not hasattr(target_cls, 'is_patched'):
+            new_bases = splice_bases(target_cls.__bases__)
+            target_cls.is_patched = bool(new_bases)
+            if new_bases:
+                target_cls.__bases__ = new_bases
 
-        MonkeyPatch = type(old_cls.__name__, (old_cls,), dict(__new__=method_new))
-        return MonkeyPatch
+    def decorator(target_cls):
+        def new(cls, *args, **kwargs):
+            monkey_patch(target_cls)
+            super_ = super(target_cls, cls).__new__
+            # TypeError: object() takes no parameters
+            return super_(cls) if super_ is object.__new__ else super_(cls, *args, **kwargs)
+
+        assert '__new__' not in target_cls.__dict__
+        # ST2: TypeError: unbound method new()
+        target_cls.__new__ = classmethod(new)
+        return target_cls
 
     return decorator

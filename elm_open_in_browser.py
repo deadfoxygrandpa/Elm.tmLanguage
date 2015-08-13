@@ -23,11 +23,11 @@ class ElmOpenInBrowserCommand(sublime_plugin.TextCommand):
         else:
             sublime.status_message(get_string('open_in_browser.missing_plugin'))
 
-@monkey_patch('SideBarEnhancements.SideBar.SideBarOpenInBrowserCommand')
+@replace_base_class('SideBarEnhancements.SideBar.SideBarOpenInBrowserCommand')
 class ElmOpenInBrowserWithSbeCommand(sublime_plugin.WindowCommand):
     pass
 
-@monkey_patch('View In Browser.ViewInBrowserCommand.ViewInBrowserCommand')
+@replace_base_class('View In Browser.ViewInBrowserCommand.ViewInBrowserCommand')
 class ElmOpenInBrowserWithVibCommand(sublime_plugin.TextCommand):
 
     def run(self, edit, path):

@@ -10,7 +10,7 @@ except:  # ST2
     from elm_project import ElmProject
 default_exec = import_module('Default.exec')
 
-@monkey_patch('Highlight Build Errors.HighlightBuildErrors.ExecCommand')
+@replace_base_class('Highlight Build Errors.HighlightBuildErrors.ExecCommand')
 class ElmMakeCommand(default_exec.ExecCommand):
 
     # inspired by: http://www.sublimetext.com/forum/viewtopic.php?t=12028
