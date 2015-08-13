@@ -7,10 +7,6 @@ except:  # ST2
 
 class ElmOpenInBrowserCommand(sublime_plugin.TextCommand):
 
-    @staticmethod
-    def _import_bases():
-        return __import__('SideBarEnhancements').SideBar.SideBarOpenInBrowserCommand,
-
     def is_enabled(self):
         self.project = ElmProject(self.view.file_name())
         return self.project.exists
@@ -20,35 +16,23 @@ class ElmOpenInBrowserCommand(sublime_plugin.TextCommand):
         html_path = fs.abspath(norm_path)
         if not fs.isfile(html_path):
             sublime.status_message(get_string('open_in_browser.not_found', html_path))
-            return
-        try:
-            self._import_bases()
-        except ImportError:
-            log_string('logging.missing_plugin', 'SideBarEnhancements')
-            if ElmViewInBrowserProxyCommand.is_patched:
-                self.view.run_command('elm_view_in_browser_proxy', dict(path=html_path))
-            else:
-                sublime.status_message(get_string('open_in_browser.missing_plugin'))
+        elif ElmOpenInBrowserWithSbeCommand.is_patched:
+            self.view.window().run_command('elm_open_in_browser_with_sbe', dict(paths=[html_path]))
+        elif ElmOpenInBrowserWithVibCommand.is_patched:
+            self.view.run_command('elm_open_in_browser_with_vib', dict(path=html_path))
         else:
-            self.view.window().run_command('side_bar_open_in_browser', dict(paths=[html_path]))
+            sublime.status_message(get_string('open_in_browser.missing_plugin'))
 
-class ElmViewInBrowserProxyCommand(sublime_plugin.TextCommand):
+@monkey_patch('SideBarEnhancements.SideBar.SideBarOpenInBrowserCommand')
+class ElmOpenInBrowserWithSbeCommand(sublime_plugin.WindowCommand):
+    pass
 
-    @staticmethod
-    def _import_bases():
-        if is_ST2():
-            import ViewInBrowserCommand
-        else:
-            ViewInBrowserCommand = __import__('View In Browser').ViewInBrowserCommand
-        return ViewInBrowserCommand.ViewInBrowserCommand,
-
-    def __new__(cls, view):
-        patch_class(cls, 'View In Browser')
-        return super(ElmViewInBrowserProxyCommand, cls).__new__(cls)
+@monkey_patch('View In Browser.ViewInBrowserCommand.ViewInBrowserCommand')
+class ElmOpenInBrowserWithVibCommand(sublime_plugin.TextCommand):
 
     def run(self, edit, path):
         self.path = path
-        super(ElmViewInBrowserProxyCommand, self).run(edit)
+        super(ElmOpenInBrowserWithVibCommand, self).run(edit)
 
     def normalizePath(self, fileToOpen): # override
-        return super(ElmViewInBrowserProxyCommand, self).normalizePath(self.path)
+        return super(ElmOpenInBrowserWithVibCommand, self).normalizePath(self.path)

@@ -5,29 +5,15 @@ import string
 try:     # ST3
     from .elm_plugin import *
     from .elm_project import ElmProject
-    from importlib import import_module
-    default_exec = import_module('Default.exec')
 except:  # ST2
     from elm_plugin import *
     from elm_project import ElmProject
-    default_exec = __import__('exec')
+default_exec = import_module('Default.exec')
 
+@monkey_patch('Highlight Build Errors.HighlightBuildErrors.ExecCommand')
 class ElmMakeCommand(default_exec.ExecCommand):
-    '''Inspired by:
-    http://www.sublimetext.com/forum/viewtopic.php?t=12028
-    https://github.com/search?q=sublime+filename%3Aexec.py
-    https://github.com/search?q=finish+ExecCommand+NOT+ProcessListener+extension%3Apy
-    https://github.com/bblanchon/SublimeText-HighlightBuildErrors/blob/master/HighlightBuildErrors.py
-    '''
 
-    @staticmethod
-    def _import_bases():
-        return __import__('Highlight Build Errors').HighlightBuildErrors.ExecCommand,
-
-    def __new__(cls, window):
-        patch_class(cls, 'Highlight Build Errors')
-        return super(ElmMakeCommand, cls).__new__(cls)
-
+    # inspired by: http://www.sublimetext.com/forum/viewtopic.php?t=12028
     def run(self, info_format, error_format, syntax, color_scheme, **kwargs):
         self.buffer = b''
         self.info_format = string.Template(info_format)
