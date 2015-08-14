@@ -3,7 +3,7 @@
     "selector": "source.elm",
     "info_format": "=== $info ===",
     "error_format": "==== $type in $file:$line:$column: ====\n$message\n----",
-    "file_regex": "(?i)={4} \\w+ in (.+?):(\\d+):(\\d+): ={4}\\n([\\S\\s]+?)\\n-{4}",
+    "file_regex": "(?i)^={4} \\w+ in (.+?):(\\d+):(\\d+): ={4}$",
     "syntax": "Packages/Elm Language Support/Syntaxes/Elm Compile Messages.hidden-tmLanguage",
     "color_scheme": "Packages/Color Scheme - Default/Sunburst.tmTheme",
     "working_dir": "$project_path",
