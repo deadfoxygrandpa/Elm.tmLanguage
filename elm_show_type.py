@@ -5,6 +5,7 @@ except ImportError as py3err:
     import queue
 
 import os
+import os.path as fs
 import subprocess
 import json
 import threading
@@ -74,7 +75,7 @@ def load_docs(path):
     """
     Load docs.json into memory
     """
-    with open(path) as f:
+    with open(fs.join(fs.dirname(__file__), path)) as f:
         return json.load(f)
 
 def threadload(f, directory, queue):

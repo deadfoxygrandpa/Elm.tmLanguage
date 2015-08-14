@@ -40,7 +40,7 @@ class Module(object):
 			with open(path.format(name(v) + '.sublime-snippet'), 'w') as f:
 				f.write(s.format(autocomplete=make_autocomplete(v), name=name(v), signature=signature(v)))
 
-			print 'Wrote {}'.format(path.format(name(v) + '.sublime-snippet'))
+			print('Wrote {}'.format(path.format(name(v) + '.sublime-snippet')))
 
 def name(t):
 	return t.split(' : ')[0].strip()
@@ -69,8 +69,8 @@ def tokenize(t):
 	return [v.strip() for v in t.split('->')]
 
 def print_type(t):
-	print name(t)
-	print [typeFormat(v) for v in tokenize(signature(t))]
+	print(name(t))
+	print([typeFormat(v) for v in tokenize(signature(t))])
 
 def make_autocomplete(t):
 	s = '{}'.format(name(t))
@@ -117,49 +117,49 @@ if __name__ == '__main__':
 
 	modules = [Module(m) for m in loadDocs(path)]
 
-	print 'Prelude:'
-	print 'show|'
+	print('Prelude:')
+	print('show|')
 	for m in modules:
 		if m.name in prelude:
-			print '|'.join([n for n in m.valueNames if not n.startswith('(')])
+			print('|'.join([n for n in m.valueNames if not n.startswith('(')]))
 
-	print '\n'*5
+	print('\n'*5)
 
-	print 'Prelude Aliases and Datatypes:'
-	print 'Int|Float|Char|Bool|String|True|False'
+	print('Prelude Aliases and Datatypes:')
+	print('Int|Float|Char|Bool|String|True|False')
 	for m in modules:
 		if m.name in prelude:
-			print '|'.join([n for n in (m.datatypes + m.aliases) if not n.startswith('(')]) + '|'
+			print('|'.join([n for n in (m.datatypes + m.aliases) if not n.startswith('(')]) + '|')
 
-	print '\n'*5
+	print('\n'*5)
 
-	print 'Includes:'
+	print('Includes:')
 	for m in modules:
-		print m.include_text()
+		print(m.include_text())
 
-	print '\n'*5
+	print('\n'*5)
 
-	print 'Includes Continued:'
+	print('Includes Continued:')
 	for m in modules:
-		print m.moduleText()
+		print(m.moduleText())
 
-	print '\n'*5
+	print('\n'*5)
 
-	print 'Constructors:'
-	print '\(\)|\[\]|True|False|Int|Char|Bool|String|'
+	print('Constructors:')
+	print('\(\)|\[\]|True|False|Int|Char|Bool|String|')
 	for m in modules:
 		if m.name in prelude:
 			for c in m.constructors:
-				print '|'.join(c) + '|'
+				print('|'.join(c) + '|')
 
-	print '\n'*5
+	print('\n'*5)
 
-	print 'Writing Autocompletion Snippets...:'
+	print('Writing Autocompletion Snippets...:')
 	for m in modules:
 		if m.name in prelude:
 			m.snippets()
-			print '\n'*2
+			print('\n'*2)
 
 	with open('Snippets\\Basics\\markdown.sublime-snippet', 'w') as f:
 		f.write('<snippet>\n<content><![CDATA[\n[markdown|\n\n${1}\n\n|]\n\n\n]]></content>\n<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->\n<tabTrigger>markdown</tabTrigger>\n<!-- Optional: Set a scope to limit where the snippet will trigger -->\n<scope>source.elm</scope>\n<description>A markdown block</description>\n</snippet>')
-	print 'Wrote markdown.sublime-snippet'
+	print('Wrote markdown.sublime-snippet')
