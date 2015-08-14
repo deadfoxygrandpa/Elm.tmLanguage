@@ -1,3 +1,4 @@
 {
-    "install": "README.md"
+    "install": "README.md",
+    "0.15.0": "0.15.0.md"
 }
