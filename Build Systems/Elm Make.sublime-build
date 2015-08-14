@@ -1,0 +1,51 @@
+{
+    "target": "elm_make",
+    "selector": "source.elm",
+    "info_format": "=== $info ===",
+    "error_format": "==== $type in $file:$line:$column: ====\n$message\n----",
+    "file_regex": "(?i)^={4} \\w+ in (.+?):(\\d+):(\\d+): ={4}$",
+    "syntax": "Packages/Elm Language Support/Syntaxes/Elm Compile Messages.hidden-tmLanguage",
+    "color_scheme": "Packages/Color Scheme - Default/Sunburst.tmTheme",
+    "working_dir": "$project_path",
+    "cmd":
+    [
+        "elm-make",
+        "$file",
+        "--output=/dev/null",
+        "--report=json",
+        "--yes"
+    ],
+    "osx":
+    {
+        "path": "/usr/local/bin:$PATH"
+    },
+    "linux":
+    {
+        "path": "$HOME/.cabal/bin:/usr/local/bin:$PATH"
+    },
+    "windows":
+    {
+        "cmd":
+        [
+            "elm-make",
+            "$file",
+            "--output=NUL",
+            "--report=json",
+            "--yes"
+        ]
+    },
+    "variants":
+    [
+        {
+            "name": "Run",
+            "cmd":
+            [
+                "elm-make",
+                "$file",
+                "--output={0}",
+                "--report=json",
+                "--yes"
+            ]
+        }
+    ]
+}

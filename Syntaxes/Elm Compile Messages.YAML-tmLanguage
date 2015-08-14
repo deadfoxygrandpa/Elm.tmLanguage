@@ -1,0 +1,69 @@
+# [PackageDev] target_format: plist, ext: hidden-tmLanguage
+---
+name: Elm Compile Messages
+scopeName: text.html.mediawiki.elm-build-output
+fileTypes: []
+uuid: 0e1a8891-7cc0-4991-8018-252d6f591f8f
+
+patterns:
+- comment: === Unparsed Compile Message ===
+  name: comment.line.heading.3.elm-build-output
+  begin: '^(={3}) '
+  end: ' \1$'
+  patterns:
+  - comment: elm-lang/core OR build\index.html
+    name: markup.underline.link.elm-build-output
+    match: \S+[/\.]\S+
+  - comment: Successfully generated
+    name: constant.language.boolean.true.elm-build-output
+    match: (?i)\bsuccess\w+
+- comment: ==== MediaWiki-Formatted ====\nCompile Message\n----
+  name: meta.report.elm-build-output
+  contentName: string.unquoted.elm-build-output
+  begin: |-
+    (?xi)          # Minimally modified `file_regex` from `Elm Make.sublime-build`
+      ^={4}[ ]     # Leading delimiter
+      ((error)     # \2: error
+      |(warning)   # \3: warning
+      |\w+         # \1: any $type
+      )[ ]in[ ]    # separator
+      (.+?):       # \4: $file
+      (\d+):       # \5: $line
+      (\d+):       # \6: $column
+      [ ]={4}\n    # Trailing delimiter
+  beginCaptures:
+    '0': {name: markup.heading.4.elm-build-output}
+    '1': {name: support.constant.type.elm-build-output}
+    '2': {name: invalid.illegal.error.elm-build-output}
+    '3': {name: invalid.deprecated.warning.elm-build-output}
+    '4': {name: markup.underline.link.elm-build-output}
+    '5': {name: constant.numeric.elm-build-output}
+    '6': {name: constant.numeric.elm-build-output}
+  end: ^-{4}$
+  endCaptures:
+    '0': {name: meta.separator.elm-build-output}
+  patterns:
+  - comment: 'Inline `variable`'
+    name: markup.raw.inline.elm-build-output
+    contentName: variable.other.elm.elm-build-output
+    begin: (`)(?!`)
+    end: \1
+    captures:
+      '0': {name: punctuation.definition.raw.elm-build-output}
+  - comment: Code Block
+    name: markup.raw.block.elm-build-output
+    begin: (?m)^ {4}
+    end: \n+(?!^ {4})
+    patterns:
+    - include: source.elm
+- comment: [Finished in 4.2s]
+  name: comment.line.brackets.elm-build-output
+  begin: ^\[
+  end: \]$
+  patterns:
+  - comment: 4.2s
+    name: constant.numeric.elm-build-output
+    match: \b\d+\.\d+(s)\b
+    captures:
+      '1': {name: keyword.other.unit.elm-build-output}
+...

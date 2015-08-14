@@ -1,0 +1,58 @@
+[
+    {
+        "caption": "Elm Build System: View elm-package.json",
+        "command": "elm_project"
+    },
+    {
+        "caption": "Elm Build System: Set Main Path",
+        "command": "elm_project", "args":
+        {
+            "prop_name": "main_path",
+            "caption": "Enter main path to build from: "
+        }
+    },
+    {
+        "caption": "Elm Build System: Set HTML Path",
+        "command": "elm_project", "args":
+        {
+            "prop_name": "html_path",
+            "caption": "Enter HTML path to open in browser: "
+        }
+    },
+    {
+        "caption": "Elm Build System: Set Output Path",
+        "command": "elm_project", "args":
+        {
+            "prop_name": "output_path",
+            "caption": "Enter path to build output to: "
+        }
+    },
+    {
+        "caption": "Elm Build System: Set Output Directory",
+        "command": "elm_project", "args":
+        {
+            "prop_name": "output_dir",
+            "caption": "Enter directory to build output to: "
+        }
+    },
+    {
+        "caption": "Elm Build System: Set Output Base Name",
+        "command": "elm_project", "args":
+        {
+            "prop_name": "output_name",
+            "caption": "Enter base name to build output with: "
+        }
+    },
+    {
+        "caption": "Elm Build System: Set Output Extension",
+        "command": "elm_project", "args":
+        {
+            "prop_name": "output_ext",
+            "choices":
+            [
+                "HTML",
+                "JS"
+            ]
+        }
+    }
+]
