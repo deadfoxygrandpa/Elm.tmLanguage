@@ -22,7 +22,7 @@
 - Type hints for standard library functions
 - Integration with popular plugins (installed separately)
     1. [SublimeREPL][] — Run `elm-repl` in an editor tab with syntax highlighting. ![SublimeREPL screenshot](images/elm_repl.jpg)
-    2. [Highlight Build Errors][] — Does what it says on the box...usually.
+    2. [Highlight Build Errors][] — Does what it says on the box … usually.
     3. [SideBarEnhancements][] — Open your compiled program in a configurable browser from the Command Palette.
     4. [View In Browser][] — Same as above but compatible with ST2.
 
