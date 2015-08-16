@@ -45,7 +45,10 @@
                 "--output={0}",
                 "--report=json",
                 "--yes"
-            ]
+            ],
+            "windows":
+            {
+            }
         }
     ]
 }
