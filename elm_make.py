@@ -14,10 +14,10 @@ default_exec = import_module('Default.exec')
 class ElmMakeCommand(default_exec.ExecCommand):
 
     # inspired by: http://www.sublimetext.com/forum/viewtopic.php?t=12028
-    def run(self, info_format, error_format, syntax, color_scheme, null_device, **kwargs):
+    def run(self, error_format, info_format, syntax, color_scheme, null_device, **kwargs):
         self.buffer = b''
-        self.info_format = string.Template(info_format)
         self.error_format = string.Template(error_format)
+        self.info_format = string.Template(info_format)
         self.do_run(null_device=null_device, **kwargs)
         self.style_output(syntax, color_scheme)
 
