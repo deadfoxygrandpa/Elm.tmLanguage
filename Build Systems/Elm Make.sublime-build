@@ -6,12 +6,13 @@
     "file_regex": "(?i)^={4} \\w+ in (.+?):(\\d+):(\\d+): ={4}$",
     "syntax": "Packages/Elm Language Support/Syntaxes/Elm Compile Messages.hidden-tmLanguage",
     "color_scheme": "Packages/Color Scheme - Default/Sunburst.tmTheme",
+    "null_device": "/dev/null"
     "working_dir": "$project_path",
     "cmd":
     [
         "elm-make",
         "$file",
-        "--output=/dev/null",
+        "--output=$null",
         "--report=json",
         "--yes"
     ],
@@ -25,14 +26,7 @@
     },
     "windows":
     {
-        "cmd":
-        [
-            "elm-make",
-            "$file",
-            "--output=NUL",
-            "--report=json",
-            "--yes"
-        ]
+        "null_device": "NUL"
     },
     "variants":
     [
@@ -42,13 +36,10 @@
             [
                 "elm-make",
                 "$file",
-                "--output={0}",
+                "--output=$output",
                 "--report=json",
                 "--yes"
-            ],
-            "windows":
-            {
-            }
+            ]
         }
     ]
 }
