@@ -14,18 +14,19 @@ default_exec = import_module('Default.exec')
 class ElmMakeCommand(default_exec.ExecCommand):
 
     # inspired by: http://www.sublimetext.com/forum/viewtopic.php?t=12028
-    def run(self, info_format, error_format, syntax, color_scheme, **kwargs):
+    def run(self, error_format, info_format, syntax, color_scheme, null_device, **kwargs):
         self.buffer = b''
-        self.info_format = string.Template(info_format)
         self.error_format = string.Template(error_format)
-        self.do_run(**kwargs)
+        self.info_format = string.Template(info_format)
+        self.do_run(null_device=null_device, **kwargs)
         self.style_output(syntax, color_scheme)
 
-    def do_run(self, cmd, working_dir, **kwargs):
+    def do_run(self, cmd, working_dir, null_device, **kwargs):
         project = ElmProject(cmd[1])
         log_string('project.logging.settings', repr(project))
         cmd[1] = fs.expanduser(project.main_path)
-        cmd[2] = cmd[2].format(fs.expanduser(project.output_path))
+        output_path = fs.expanduser(project.output_path)
+        cmd[2] = string.Template(cmd[2]).substitute(null=null_device, output=output_path)
         project_dir = project.working_dir or working_dir
         # ST2: TypeError: __init__() got an unexpected keyword argument 'syntax'
         super(ElmMakeCommand, self).run(cmd, working_dir=project_dir, **kwargs)
