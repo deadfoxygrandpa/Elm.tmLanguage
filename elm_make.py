@@ -26,7 +26,7 @@ class ElmMakeCommand(default_exec.ExecCommand):
         log_string('project.logging.settings', repr(project))
         cmd[1] = fs.expanduser(project.main_path)
         output_path = fs.expanduser(project.output_path)
-        cmd[2] = string.Template(cmd[2]).substitute(null=null_device, output=output_path)
+        cmd[2] = cmd[2].format(null=null_device, output=output_path)
         project_dir = project.working_dir or working_dir
         # ST2: TypeError: __init__() got an unexpected keyword argument 'syntax'
         super(ElmMakeCommand, self).run(cmd, working_dir=project_dir, **kwargs)
