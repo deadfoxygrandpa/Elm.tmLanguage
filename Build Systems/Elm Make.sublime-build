@@ -5,7 +5,7 @@
     [
         "elm-make",
         "$file",
-        "--output=$null",
+        "--output={null}",
         "--report=json",
         "--yes"
     ],
@@ -15,7 +15,7 @@
     "info_format": "=== $info ===",
     "syntax": "Packages/Elm Language Support/Syntaxes/Elm Compile Messages.hidden-tmLanguage",
     "color_scheme": "Packages/Color Scheme - Default/Sunburst.tmTheme",
-    "null_device": "/dev/null"
+    "null_device": "/dev/null",
     "windows":
     {
         "null_device": "NUL"
@@ -36,7 +36,7 @@
             [
                 "elm-make",
                 "$file",
-                "--output=$output",
+                "--output={output}",
                 "--report=json",
                 "--yes"
             ]
