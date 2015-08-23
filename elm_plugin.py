@@ -7,16 +7,23 @@ import os.path as fs
 def is_ST2():
     return sublime.version().startswith('2')
 
+def retry_on_main_thread(callback, *args, **kwargs):
+    try:
+        # ST2: RuntimeError: Must call on main thread
+        callback(*args, **kwargs)
+    except RuntimeError:
+        sublime.set_timeout(lambda: callback(*args, **kwargs), 0)
+
 def show_quick_panel(window, items, on_select, selected_index=-1, on_highlight=None):
     kwargs = {} if is_ST2() else dict(selected_index=selected_index, on_highlight=on_highlight)
-    window.show_quick_panel(items, on_select, **kwargs)
+    retry_on_main_thread(window.show_quick_panel, items, on_select, **kwargs)
 
-def fetch_json(url, callback=None, *args):
+def fetch_json(url, callback=None, *args, **kwargs):
     from package_control.clients.json_api_client import JSONApiClient
     from package_control.http_cache import HttpCache
     from threading import Thread
     if callback:
-        worker = lambda: callback(fetch_json(url), *args)
+        worker = lambda: callback(fetch_json(url), *args, **kwargs)
         Thread(target=worker).start()
     else:
         settings = dict(cache=HttpCache(604800))
@@ -29,21 +36,12 @@ def get_string(key, *args):
     return strings.get('logging.prefix') + strings.get(key).format(*args)
 
 def log_string(key, *args):
-    def log_string_with_retry(retry):
-        try:
-            # ST2: RuntimeError: Must call on main thread
-            settings = sublime.load_settings('Elm Language Support.sublime-settings')
-        except RuntimeError:
-            if retry:
-                sublime.set_timeout(lambda: log_string_with_retry(False), 0)
-            else:
-                import traceback
-                traceback.print_exc()
-        else:
-            if settings.get('debug'):
-                print(get_string(key, *args))
+    def on_retry():
+        settings = sublime.load_settings('Elm Language Support.sublime-settings')
+        if settings.get('debug'):
+            print(get_string(key, *args))
 
-    log_string_with_retry(True)
+    retry_on_main_thread(on_retry)
 
 # MARK: imports
 
