@@ -76,8 +76,6 @@ class ElmLanguageSupport(sublime_plugin.EventListener):
         scope = view.scope_name(region.b)
         if SETTINGS.get('enabled', True) and scope.find('source.elm') != -1:
             view.run_command('elm_show_type')
-            # msg = get_type(view) or ''
-            # sublime.status_message(msg)
 
 class ElmShowType(sublime_plugin.TextCommand):
     def run(self, edit):
