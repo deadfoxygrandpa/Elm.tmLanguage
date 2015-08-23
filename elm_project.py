@@ -29,14 +29,12 @@ class ElmProjectCommand(sublime_plugin.TextCommand):
         try:
             # ValueError: $initial_value is not in list
             initial_index = self.norm_choices.index(initial_value.lower())
-            # ST2: Boost.Python.ArgumentError: Python argument types
-            self.window.show_quick_panel(choices, self.on_choice, selected_index=initial_index)
         except: # simplest control flow
-            if not is_ST2():
-                log_string('project.logging.invalid_choice', initial_value)
-            self.window.show_quick_panel(choices, self.on_choice)
+            log_string('project.logging.invalid_choice', initial_value)
+        finally:
+            show_quick_panel(self.window, choices, self.on_select, selected_index=initial_index)
 
-    def on_choice(self, index):
+    def on_select(self, index):
         if index != -1:
             self.on_finished(self.norm_choices[index])
 

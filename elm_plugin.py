@@ -2,8 +2,27 @@ import sublime
 import sublime_plugin
 import os.path as fs
 
+# MARK: Sublime
+
 def is_ST2():
     return sublime.version().startswith('2')
+
+def show_quick_panel(window, items, on_select, selected_index=-1, on_highlight=None):
+    kwargs = {} if is_ST2() else dict(selected_index=selected_index, on_highlight=on_highlight)
+    window.show_quick_panel(items, on_select, **kwargs)
+
+def fetch_json(url, callback=None, *args):
+    from package_control.clients.json_api_client import JSONApiClient
+    from package_control.http_cache import HttpCache
+    from threading import Thread
+    if callback:
+        worker = lambda: callback(fetch_json(url), *args)
+        Thread(target=worker).start()
+    else:
+        settings = dict(cache=HttpCache(604800))
+        return JSONApiClient(settings).fetch_json(url, prefer_cached=True)
+
+# MARK: logging
 
 def get_string(key, *args):
     strings = sublime.load_settings('Elm User Strings.sublime-settings')
@@ -25,6 +44,8 @@ def log_string(key, *args):
                 print(get_string(key, *args))
 
     log_string_with_retry(True)
+
+# MARK: imports
 
 def import_module(path):
     names = path.split('.')
