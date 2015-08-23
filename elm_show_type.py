@@ -43,7 +43,7 @@ def get_type(view):
     scope = view.scope_name(region.b)
     if scope.find('source.elm') != -1 and scope.find('string') == -1 and scope.find('comment') == -1:
         filename = view.file_name()
-        word = view.substr(region)
+        word = view.substr(region).strip()
         sublime.set_timeout_async(lambda: query_oracle(filename, word), 0)
         return ''
 
@@ -52,8 +52,11 @@ def query_oracle(filename, query):
         return None
     p = subprocess.Popen('elm-oracle ' + filename + ' ' + query, stdout=subprocess.PIPE, cwd=os.path.dirname(filename), shell=True)
     output = p.communicate()[0].strip()
-    data = json.loads(output.decode('utf-8'))
-    if len(data) > 0:
+    try:
+        data = json.loads(output.decode('utf-8'))
+    except ValueError:
+        return None
+    if len(data) == 1:
         data = data[0]
         if data['name'] != query.split('.')[-1]:
             return None
