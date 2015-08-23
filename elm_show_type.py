@@ -56,12 +56,14 @@ def query_oracle(filename, query):
         data = json.loads(output.decode('utf-8'))
     except ValueError:
         return None
-    if len(data) == 1:
-        data = data[0]
-        if data['name'] != query.split('.')[-1]:
-            return None
-        type_signature = data['fullName'] + ' : ' + data['signature']
-        sublime.status_message(type_signature)
+    if len(data) > 0:
+        for item in data:
+            if item['name'] == query.split('.')[-1]:
+                type_signature = item['fullName'] + ' : ' + item['signature']
+                sublime.status_message(type_signature)
+                break
+    return None
+
 
 class ElmLanguageSupport(sublime_plugin.EventListener):
     # TODO: implement completions based on current context
@@ -73,12 +75,12 @@ class ElmLanguageSupport(sublime_plugin.EventListener):
         region = join_qualified(view.word(sel), view)
         scope = view.scope_name(region.b)
         if SETTINGS.get('enabled', True) and scope.find('source.elm') != -1:
-            msg = get_type(view) or ''
+            view.run_command('elm_show_type')
+            # msg = get_type(view) or ''
             # sublime.status_message(msg)
 
 class ElmShowType(sublime_plugin.TextCommand):
     def run(self, edit):
-        print(get_type(self.view))
         msg = get_type(self.view) or ''
         sublime.status_message(msg)
 
