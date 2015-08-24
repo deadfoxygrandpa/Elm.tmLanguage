@@ -1,6 +1,6 @@
 {
-    "target": "elm_make",
     "selector": "source.elm",
+    "target": "elm_make",
     "cmd":
     [
         "elm-make",
@@ -15,11 +15,6 @@
     "info_format": "=== $info ===",
     "syntax": "Packages/Elm Language Support/Syntaxes/Elm Compile Messages.hidden-tmLanguage",
     "color_scheme": "Packages/Color Scheme - Default/Sunburst.tmTheme",
-    "null_device": "/dev/null",
-    "windows":
-    {
-        "null_device": "NUL"
-    },
     "osx":
     {
         "path": "/usr/local/bin:$PATH"
