@@ -25,18 +25,15 @@ class ElmProjectCommand(sublime_plugin.TextCommand):
             self.window.show_input_panel(caption, initial_value, self.on_finished, None, None)
 
     def show_choices(self, choices, initial_value):
-        self.norm_choices = [choice.lower() for choice in choices]
+        norm_choices = [choice.lower() for choice in choices]
         try:
             # ValueError: $initial_value is not in list
-            initial_index = self.norm_choices.index(initial_value.lower())
+            initial_index = norm_choices.index(initial_value.lower())
         except: # simplest control flow
             log_string('project.logging.invalid_choice', initial_value)
         finally:
-            show_quick_panel(self.window, choices, self.on_select, selected_index=initial_index)
-
-    def on_select(self, index):
-        if index != -1:
-            self.on_finished(self.norm_choices[index])
+            on_select = lambda i: self.on_finished(norm_choices[i]) if i != -1 else None
+            show_quick_panel(self.window, choices, on_select, selected_index=initial_index)
 
     def on_finished(self, value):
         setattr(self.project, self.prop_name, value)

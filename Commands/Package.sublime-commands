@@ -1,14 +1,13 @@
 [
     {
-        "caption": "Elm Package Manager: Open in Browser",
-        "command": "elm_package_open", "args":
+        "caption": "Elm Package Manager: Install Package",
+        "command": "elm_package_install", "args":
         {
-            "json_url": "http://package.elm-lang.org/all-packages",
-            "repo_url": "https://api.github.com/repos/{name}",
-            "open_url": "http://package.elm-lang.org/packages/{name}/latest",
-            "default_url": "http://package.elm-lang.org/packages",
-            "default_package": "All Packages",
-            "detail_format": "♆ {name}  v{version}  ⇅ {date:%Y-%b-%d}  ★ {rating:.1f}"
+            "build_system": "Packages/Elm Language Support/Build Systems/Elm Package.sublime-build"
         }
+    },
+    {
+        "caption": "Elm Package Manager: Open in Browser",
+        "command": "elm_package_open"
     }
 ]
