@@ -14,15 +14,37 @@ except:  # ST2
 default_exec = import_module('Default.exec')
 
 class ElmPackageCommand(ElmBinCommandBase, default_exec.ExecCommand):
-    package = None
+    class Args:
+        env_key = 'build_env'
+        package_key = 'elm_package'
+        version_key = 'elm_package_version'
+
+        def __init__(self, view):
+            self.settings = view.settings()
+
+        @property
+        def package(self):
+            env = self.settings.get(self.env_key, {})
+            return env.get(self.package_key), env.get(self.version_key)
+
+        @package.setter
+        def package(self, value):
+            name, version = value
+            if name:
+                env = {self.package_key: name or '', self.version_key: version}
+                self.settings.set(self.env_key, env)
+            else:
+                self.settings.erase(self.env_key)
 
     def run(self, cmd, working_dir, **kwargs):
         project = ElmProject(cmd.pop())
-        if self.package:
-            cmd.append(self.package[0])
-            if self.package[1]:
-                cmd.append(self.package[1])
-            self.package = None
+        args = self.Args(self.window.active_view())
+        package_name, version = args.package
+        if package_name:
+            cmd.append(package_name)
+            if version:
+                cmd.append(version)
+            args.package = None, None
         project_dir = project.working_dir or working_dir
         super(ElmPackageCommand, self).run(cmd, working_dir=project_dir, **kwargs)
 
@@ -105,7 +127,7 @@ class ElmPackageInstallCommand(ElmPackageCommandBase, sublime_plugin.TextCommand
     def on_version(self, package_name, version):
         self.window.run_command('set_build_system', dict(file=self.build_system))
         specific_version = version if version != self.default_version else None
-        ElmPackageCommand.package = (package_name, specific_version) if package_name else None
+        ElmPackageCommand.Args(self.view).package = package_name, specific_version
         self.window.run_command('build')
 
 class ElmPackageOpenCommand(ElmPackageCommandBase, sublime_plugin.WindowCommand):
