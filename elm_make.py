@@ -13,7 +13,7 @@ except:  # ST2
 default_exec = import_module('Default.exec')
 
 @replace_base_class('Highlight Build Errors.HighlightBuildErrors.ExecCommand')
-class ElmMakeCommand(default_exec.ExecCommand):
+class ElmMakeCommand(ElmBinCommandBase, default_exec.ExecCommand):
 
     # inspired by: http://www.sublimetext.com/forum/viewtopic.php?t=12028
     def run(self, error_format, info_format, syntax, color_scheme, **kwargs):
