@@ -15,6 +15,20 @@ def import_module(path):
         base = getattr(base, name)
     return base
 
+# copied from https://github.com/PythonCharmers/python-future/blob/v0.15.0/src/past/utils/__init__.py
+def abstract_class(*bases):
+    from abc import ABCMeta
+
+    class metaclass(ABCMeta):
+        __call__ = type.__call__
+        __init__ = type.__init__
+        def __new__(cls, name, this_bases, d):
+            if this_bases is None:
+                return type.__new__(cls, name, (), d)
+            return ABCMeta(name, bases, d)
+
+    return metaclass('temporary_class', None, {})
+
 def retry_on_main_thread(callback, *args, **kwargs):
     try:
         # ST2: RuntimeError: Must call on main thread
@@ -39,6 +53,7 @@ def fetch_json(url, callback=None, *args, **kwargs):
     from package_control.clients.json_api_client import JSONApiClient
     from package_control.http_cache import HttpCache
     from threading import Thread
+
     if callback:
         worker = lambda: callback(fetch_json(url), *args, **kwargs)
         Thread(target=worker).start()
@@ -48,9 +63,10 @@ def fetch_json(url, callback=None, *args, **kwargs):
 
 # MARK: logging
 
-def get_string(key, *args):
+def get_string(key, *args, **kwargs):
     strings = sublime.load_settings('Elm User Strings.sublime-settings')
-    return strings.get('logging.prefix') + strings.get(key).format(*args)
+    prefix = strings.get('logging.prefix') if kwargs.get('use_prefix', True) else ''
+    return prefix + strings.get(key).format(*args, **kwargs)
 
 def log_string(key, *args):
     def on_retry():

@@ -1,68 +1,117 @@
 import collections
 import webbrowser
 
+from abc import abstractmethod
 from datetime import datetime
 
 try:     # ST3
     from .elm_plugin import *
+    from .elm_project import ElmProject
 except:  # ST2
     from elm_plugin import *
+    from elm_project import ElmProject
 
-class ElmPackageOpenCommand(sublime_plugin.WindowCommand):
-    Package = collections.namedtuple('Package', [
-        'name',
-        'description',
-        'version',
-        'repo_url',
-        'open_url'])
+default_exec = import_module('Default.exec')
 
-    def run(self, json_url, repo_url, open_url, default_url, default_package, detail_format):
+class ElmPackageCommand(ElmBinCommandBase, default_exec.ExecCommand):
+    package = None
+
+    def run(self, cmd, working_dir, **kwargs):
+        project = ElmProject(cmd.pop())
+        if self.package:
+            cmd.append(self.package[0])
+            if self.package[1]:
+                cmd.append(self.package[1])
+            self.package = None
+        project_dir = project.working_dir or working_dir
+        super(ElmPackageCommand, self).run(cmd, working_dir=project_dir, **kwargs)
+
+class ElmPackageCommandBase(abstract_class()):
+    default_package_key = None
+
+    Package = collections.namedtuple('Package', ['name', 'summary', 'versions'])
+
+    def run(self, **kwargs):
         def on_fetch(json):
-            default_item = self.Package(
-                name=default_package,
-                description='',
-                version=None,
-                repo_url=None,
-                open_url=default_url)
-            decode_package = lambda json: self.decode_package(json, repo_url, open_url)
-            self.packages = [default_item] + list(map(decode_package, json))
-            self.show_packages(detail_format)
+            default_package = self.Package(
+                name=self.get_string(self.default_package_key),
+                summary='',
+                versions=None)
+            decode_package = lambda json: self.Package(**json)
+            self.packages = [default_package] + list(map(decode_package, json))
+            self.show_packages()
 
-        fetch_json(json_url, on_fetch)
+        on_retry = lambda json: retry_on_main_thread(on_fetch, json)
+        fetch_json(self.get_string('url.json'), on_retry)
 
-    def decode_package(self, json, repo_url, open_url):
-        name = json['name']
-        return self.Package(
-            name=name,
-            description=json['summary'],
-            version=json['versions'][0],
-            repo_url=repo_url.format(name=name),
-            open_url=open_url.format(name=name))
+    def get_string(self, key, *args, **kwargs):
+        if 'use_prefix' not in kwargs:
+            kwargs['use_prefix'] = False
+        return get_string('package.' + key, *args, **kwargs)
 
-    def show_packages(self, detail_format):
-        format_entry = lambda package: [package.name, package.description]
+    def show_packages(self):
+        format_entry = lambda package: [package.name, package.summary]
         entries = list(map(format_entry, self.packages))
-        on_highlight = lambda index: self.on_highlight(index, detail_format)
-        show_quick_panel(self.window, entries, self.on_select, on_highlight=on_highlight)
+        on_select = lambda i: self.on_select(self.packages[i]) if i != -1 else None
+        show_quick_panel(self.window, entries, on_select, on_highlight=self.on_highlight)
 
-    def on_select(self, index):
-        if index != -1:
-            package = self.packages[index]
-            webbrowser.open_new_tab(package.open_url)
+    @abstractmethod
+    def on_select(self, package):
+        pass
 
-    def on_highlight(self, index, detail_format):
+    def on_highlight(self, index):
         def on_fetch(json):
             if index == self.highlighted_index:
-                forks = json['forks_count']
-                stars = json['stargazers_count']
-                watchers = json['subscribers_count']
-                sublime.status_message(detail_format.format(
+                stats = self.get_string('stats',
                     name=package.name,
-                    version=package.version,
+                    version=package.versions[0],
                     date=datetime.strptime(json['pushed_at'], "%Y-%m-%dT%H:%M:%SZ"),
-                    rating=((forks + 1) * (stars + 1) * (watchers + 1)) ** (1.0 / 3)))
+                    rating=self.calculate_rating(json),
+                    use_prefix=True)
+                sublime.status_message(stats)
 
         self.highlighted_index = index
         package = self.packages[index]
-        if package.repo_url:
-            fetch_json(package.repo_url, on_fetch)
+        if package.versions:
+            fetch_json(self.get_string('url.repo', package.name), on_fetch)
+
+    def calculate_rating(self, json):
+        forks = json['forks_count']
+        stars = json['stargazers_count']
+        watchers = json['subscribers_count']
+        return ((forks + 1) * (stars + 1) * (watchers + 1)) ** (1.0 / 3)
+
+class ElmPackageInstallCommand(ElmPackageCommandBase, sublime_plugin.TextCommand):
+    default_package_key = 'install.no_package'
+
+    def is_enabled(self):
+        self.project = ElmProject(self.view.file_name())
+        return self.project.exists
+
+    def run(self, edit, build_system):
+        self.window = self.view.window()
+        self.build_system = build_system
+        self.default_version = self.get_string('install.no_version')
+        super(ElmPackageInstallCommand, self).run()
+
+    def on_select(self, package):
+        if package.versions:
+            versions = [self.default_version] + package.versions
+            on_version = lambda i: self.on_version(package.name, versions[i]) if i != -1 else None
+            show_quick_panel(self.window, versions, on_version)
+        else:
+            self.on_version(None, None)
+
+    def on_version(self, package_name, version):
+        self.window.run_command('set_build_system', dict(file=self.build_system))
+        specific_version = version if version != self.default_version else None
+        ElmPackageCommand.package = (package_name, specific_version) if package_name else None
+        self.window.run_command('build')
+
+class ElmPackageOpenCommand(ElmPackageCommandBase, sublime_plugin.WindowCommand):
+    default_package_key = 'open.no_package'
+
+    def on_select(self, package):
+        default_url = self.get_string('url.open_all')
+        url = self.get_string('url.open', package.name) if package.versions else default_url
+        webbrowser.open_new_tab(url)

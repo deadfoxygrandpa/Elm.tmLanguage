@@ -7,6 +7,15 @@
 
     "open_in_browser.not_found":       "HTML file NOT found to open: {0}",
 
+    "package.stats":                   "{name}  ♆ {version}  ⇅ {date:%Y-%b-%d}  ★ {rating:.1f}",
+    "package.install.no_package":      "Configured Dependencies",
+    "package.install.no_version":      "Current Version",
+    "package.open.no_package":         "All Packages",
+    "package.url.json":                "http://package.elm-lang.org/all-packages",
+    "package.url.open":                "http://package.elm-lang.org/packages/{0}/latest",
+    "package.url.open_all":            "http://package.elm-lang.org/packages",
+    "package.url.repo":                "https://api.github.com/repos/{0}",
+
     "project.not_found":               "Valid elm-package.json NOT found to update",
     "project.updated":                 "elm-package.json updated: {0} = {1}",
     "project.logging.invalid_choice":  "Invalid choice in elm-package.json: {0}",
