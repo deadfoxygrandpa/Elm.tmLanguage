@@ -28,6 +28,13 @@ def show_quick_panel(window, items, on_select, selected_index=-1, on_highlight=N
 
 # MARK: Sublime
 
+class ElmBinCommandBase(object):
+
+    def run(self, cmd, *args, **kwargs):
+        settings = sublime.load_settings('Elm Language Support.sublime-settings')
+        cmd[0] = fs.join(settings.get('elm_bin_dir'), cmd[0])
+        super(ElmBinCommandBase, self).run(cmd, *args, **kwargs)
+
 def fetch_json(url, callback=None, *args, **kwargs):
     from package_control.clients.json_api_client import JSONApiClient
     from package_control.http_cache import HttpCache
