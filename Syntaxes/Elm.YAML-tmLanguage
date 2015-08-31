@@ -38,7 +38,7 @@ patterns:
   end: ($|;)
   patterns:
   - name: keyword.import.elm
-    match: (as)
+    match: (as|exposing)
   - name: keyword.import.elm
     match: \(\.\.\)
   - include: '#module_name'
