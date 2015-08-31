@@ -127,8 +127,18 @@ patterns:
 - name: keyword.operator.elm
   match: '[|!%$?~+:\-.=</>&\\*^]+'
 
-- name: punctuation.separator.comma.elm
-  match: ','
+# Note: Sublime color schemes consistently decline to apply colors to
+# delimiters of literals. This does Elm users a disservice since
+# Elm's function application syntax thrives on a clear visual distinction
+# between literal delimiters and expressions.
+# We therefore go out of our way to make sure delimiters are colorized.
+- name: constant.language.delimiter.elm
+  match: '([\[\]\{\},])'
+  captures:
+    '1': {name: support.function.delimiter.elm}
+
+- name: keyword.other.parenthesis.elm
+  match: '([\(\)])'
 
 repository:
   block_comment:

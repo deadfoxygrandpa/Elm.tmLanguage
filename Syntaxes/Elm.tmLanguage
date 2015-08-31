@@ -363,10 +363,24 @@
 			<string>keyword.operator.elm</string>
 		</dict>
 		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>support.function.delimiter.elm</string>
+				</dict>
+			</dict>
 			<key>match</key>
-			<string>,</string>
+			<string>([\[\]\{\},])</string>
 			<key>name</key>
-			<string>punctuation.separator.comma.elm</string>
+			<string>constant.language.delimiter.elm</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>([\(\)])</string>
+			<key>name</key>
+			<string>keyword.other.parenthesis.elm</string>
 		</dict>
 	</array>
 	<key>repository</key>
