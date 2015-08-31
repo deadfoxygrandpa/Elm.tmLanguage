@@ -36,12 +36,6 @@
 			<string>constant.language.unit.elm</string>
 		</dict>
 		<dict>
-			<key>match</key>
-			<string>\[\]</string>
-			<key>name</key>
-			<string>constant.language.empty-list.elm</string>
-		</dict>
-		<dict>
 			<key>begin</key>
 			<string>^\b(module)\s+</string>
 			<key>beginCaptures</key>

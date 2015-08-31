@@ -14,9 +14,6 @@ patterns:
 - name: constant.language.unit.elm
   match: \(\)
 
-- name: constant.language.empty-list.elm
-  match: \[\]
-
 - name: meta.declaration.module.elm
   begin: ^\b(module)\s+
   beginCaptures:
