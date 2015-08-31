@@ -111,12 +111,6 @@
 					<string>keyword.import.elm</string>
 				</dict>
 				<dict>
-					<key>match</key>
-					<string>\(\.\.\)</string>
-					<key>name</key>
-					<string>keyword.import.elm</string>
-				</dict>
-				<dict>
 					<key>include</key>
 					<string>#module_name</string>
 				</dict>

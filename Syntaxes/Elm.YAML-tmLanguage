@@ -39,8 +39,6 @@ patterns:
   patterns:
   - name: keyword.import.elm
     match: (as|exposing)
-  - name: keyword.import.elm
-    match: \(\.\.\)
   - include: '#module_name'
   - include: '#module_exports'
 
