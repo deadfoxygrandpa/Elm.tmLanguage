@@ -72,15 +72,15 @@ class ElmPackageCommandBase(abstract_class()):
         return get_string('package.' + key, *args, **kwargs)
 
     def show_packages(self):
+        for name in reversed(self.project.dependencies):
+            matches = [i for i, package in enumerate(self.packages) if package.name == name]
+            self.dependency_found(matches[0])
         format_entry = lambda package: [package.name, package.summary]
         entries = list(map(format_entry, self.packages))
-        for name in reversed(self.project.dependencies):
-            matches = [i for i, entry in enumerate(entries) if entry[0] == name]
-            self.update_dependency_entry(matches[0], entries)
         on_select = lambda i: self.on_select(self.packages[i]) if i != -1 else None
         show_quick_panel(self.window, entries, on_select, on_highlight=self.on_highlight)
 
-    def update_dependency_entry(self, index, entries):
+    def dependency_found(self, index):
         pass
 
     @abstractmethod
@@ -123,8 +123,8 @@ class ElmPackageInstallCommand(ElmPackageCommandBase, sublime_plugin.TextCommand
         self.default_version = self.get_string('install.no_version')
         super(ElmPackageInstallCommand, self).run()
 
-    def update_dependency_entry(self, index, entries):
-        del entries[index]
+    def dependency_found(self, index):
+        del self.packages[index]
 
     def on_select(self, package):
         if package.versions:
@@ -152,5 +152,5 @@ class ElmPackageOpenCommand(ElmPackageCommandBase, sublime_plugin.WindowCommand)
         url = self.get_string('url.open', package.name) if package.versions else default_url
         webbrowser.open_new_tab(url)
 
-    def update_dependency_entry(self, index, entries):
-        entries.insert(1, entries.pop(index))
+    def dependency_found(self, index):
+        self.packages.insert(1, self.packages.pop(index))
