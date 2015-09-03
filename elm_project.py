@@ -41,6 +41,7 @@ class ElmProjectCommand(sublime_plugin.TextCommand):
         if keys:
             sublime.status_message(get_string('project.updated', '.'.join(keys), value))
 
+DEPENDENCIES_KEY = ('dependencies',)
 BUILD_KEY = ('sublime-build',)
 MAIN_KEY = BUILD_KEY + ('main',)
 HTML_KEY = BUILD_KEY + ('html',)
@@ -126,6 +127,11 @@ class ElmProject(object):
     @property
     def working_dir(self):
         return fs.dirname(self.json_path or '')
+
+    @property
+    def dependencies(self):
+        dependencies = self[DEPENDENCIES_KEY]
+        return list(dependencies.keys()) if dependencies else []
 
     @property
     def main_path(self):
