@@ -39,9 +39,9 @@ class ElmPackageCommand(ElmBinCommandBase, default_exec.ExecCommand):
     def run(self, cmd, working_dir, **kwargs):
         project = ElmProject(cmd.pop())
         args = self.Args(self.window.active_view())
-        package_name, version = args.package
-        if package_name:
-            cmd.append(package_name)
+        name, version = args.package
+        if name:
+            cmd.append(name)
             if version:
                 cmd.append(version)
             args.package = None, None
@@ -74,8 +74,14 @@ class ElmPackageCommandBase(abstract_class()):
     def show_packages(self):
         format_entry = lambda package: [package.name, package.summary]
         entries = list(map(format_entry, self.packages))
+        for name in reversed(self.project.dependencies):
+            matches = [i for i, entry in enumerate(entries) if entry[0] == name]
+            self.update_dependency_entry(matches[0], entries)
         on_select = lambda i: self.on_select(self.packages[i]) if i != -1 else None
         show_quick_panel(self.window, entries, on_select, on_highlight=self.on_highlight)
+
+    def update_dependency_entry(self, index, entries):
+        pass
 
     @abstractmethod
     def on_select(self, package):
@@ -101,6 +107,7 @@ class ElmPackageCommandBase(abstract_class()):
         forks = json['forks_count']
         stars = json['stargazers_count']
         watchers = json['subscribers_count']
+        # just the geometric mean
         return ((forks + 1) * (stars + 1) * (watchers + 1)) ** (1.0 / 3)
 
 class ElmPackageInstallCommand(ElmPackageCommandBase, sublime_plugin.TextCommand):
@@ -116,6 +123,9 @@ class ElmPackageInstallCommand(ElmPackageCommandBase, sublime_plugin.TextCommand
         self.default_version = self.get_string('install.no_version')
         super(ElmPackageInstallCommand, self).run()
 
+    def update_dependency_entry(self, index, entries):
+        del entries[index]
+
     def on_select(self, package):
         if package.versions:
             versions = [self.default_version] + package.versions
@@ -124,16 +134,23 @@ class ElmPackageInstallCommand(ElmPackageCommandBase, sublime_plugin.TextCommand
         else:
             self.on_version(None, None)
 
-    def on_version(self, package_name, version):
+    def on_version(self, name, version):
         self.window.run_command('set_build_system', dict(file=self.build_system))
         specific_version = version if version != self.default_version else None
-        ElmPackageCommand.Args(self.view).package = package_name, specific_version
+        ElmPackageCommand.Args(self.view).package = name, specific_version
         self.window.run_command('build')
 
 class ElmPackageOpenCommand(ElmPackageCommandBase, sublime_plugin.WindowCommand):
     default_package_key = 'open.no_package'
 
+    def is_enabled(self):
+        self.project = ElmProject(self.window.active_view().file_name())
+        return True
+
     def on_select(self, package):
         default_url = self.get_string('url.open_all')
         url = self.get_string('url.open', package.name) if package.versions else default_url
         webbrowser.open_new_tab(url)
+
+    def update_dependency_entry(self, index, entries):
+        entries.insert(1, entries.pop(index))
