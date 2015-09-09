@@ -10,20 +10,14 @@
 	<dict>
 		<key>increaseIndentPattern</key>
 		<string>(?x)
-  (
-    (^.*
-      (=
-      |[|!%$?~+:\-.=&lt;/&gt;&amp;\\*^]+
-      |\bthen
-      |\belse
-      |\bof
-      )\s*$
+  ^.*
+    (=
+    |[|!%$?~+:\-.=&lt;/&gt;&amp;\\*^]+
+    |\bthen
+    |\belse
+    |\bof
     )
-    |(^.*\bif
-      (?!.*\bthen\b.*\belse\b.*
-      ).*$
-    )
-  )</string>
+  \s*$</string>
 		<key>shellVariables</key>
 		<array>
 			<dict>

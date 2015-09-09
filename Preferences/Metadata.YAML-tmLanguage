@@ -5,20 +5,14 @@ scope: source.elm
 settings:
   increaseIndentPattern: |-
     (?x)
-      (
-        (^.*
-          (=
-          |[|!%$?~+:\-.=</>&\\*^]+
-          |\bthen
-          |\belse
-          |\bof
-          )\s*$
+      ^.*
+        (=
+        |[|!%$?~+:\-.=</>&\\*^]+
+        |\bthen
+        |\belse
+        |\bof
         )
-        |(^.*\bif
-          (?!.*\bthen\b.*\belse\b.*
-          ).*$
-        )
-      )
+      \s*$
   shellVariables:
   - name: TM_COMMENT_START
     value: --
