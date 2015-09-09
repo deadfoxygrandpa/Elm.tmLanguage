@@ -1,0 +1,13 @@
+[
+    {
+        "caption": "Elm Package Manager: Install Package",
+        "command": "elm_package_install", "args":
+        {
+            "build_system": "Packages/Elm Language Support/Build Systems/Elm Package.sublime-build"
+        }
+    },
+    {
+        "caption": "Elm Package Manager: Open in Browser",
+        "command": "elm_package_open"
+    }
+]

@@ -1,5 +1,6 @@
 {
+    "elm_bin_dir": "",
     "debug": false,
-	"enabled": true,
-	"elm_docs_path": "docs.json"
+    "enabled": true,
+    "elm_docs_path": "docs.json"
 }

@@ -1,4 +1,5 @@
 import json
+import os
 import re
 import string
 
@@ -8,20 +9,21 @@ try:     # ST3
 except:  # ST2
     from elm_plugin import *
     from elm_project import ElmProject
+
 default_exec = import_module('Default.exec')
 
 @replace_base_class('Highlight Build Errors.HighlightBuildErrors.ExecCommand')
-class ElmMakeCommand(default_exec.ExecCommand):
+class ElmMakeCommand(ElmBinCommandBase, default_exec.ExecCommand):
 
     # inspired by: http://www.sublimetext.com/forum/viewtopic.php?t=12028
-    def run(self, error_format, info_format, syntax, color_scheme, null_device, **kwargs):
+    def run(self, error_format, info_format, syntax, color_scheme, **kwargs):
         self.buffer = b''
         self.error_format = string.Template(error_format)
         self.info_format = string.Template(info_format)
-        self.run_with_project(null_device=null_device, **kwargs)
+        self.run_with_project(**kwargs)
         self.style_output(syntax, color_scheme)
 
-    def run_with_project(self, cmd, working_dir, null_device, **kwargs):
+    def run_with_project(self, cmd, working_dir, **kwargs):
         file_arg, output_arg = cmd[1:3]
         project = ElmProject(file_arg)
         log_string('project.logging.settings', repr(project))
@@ -31,7 +33,7 @@ class ElmMakeCommand(default_exec.ExecCommand):
             cmd[2] = output_arg.format(output=output_path)
         else:
             # cmd[1] builds active file rather than project main
-            cmd[2] = output_arg.format(null=null_device)
+            cmd[2] = output_arg.format(null=os.devnull)
         project_dir = project.working_dir or working_dir
         # ST2: TypeError: __init__() got an unexpected keyword argument 'syntax'
         super(ElmMakeCommand, self).run(cmd, working_dir=project_dir, **kwargs)

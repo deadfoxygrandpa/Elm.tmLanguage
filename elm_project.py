@@ -25,20 +25,15 @@ class ElmProjectCommand(sublime_plugin.TextCommand):
             self.window.show_input_panel(caption, initial_value, self.on_finished, None, None)
 
     def show_choices(self, choices, initial_value):
-        self.norm_choices = [choice.lower() for choice in choices]
+        norm_choices = [choice.lower() for choice in choices]
         try:
             # ValueError: $initial_value is not in list
-            initial_index = self.norm_choices.index(initial_value.lower())
-            # ST2: Boost.Python.ArgumentError: Python argument types
-            self.window.show_quick_panel(choices, self.on_choice, selected_index=initial_index)
+            initial_index = norm_choices.index(initial_value.lower())
         except: # simplest control flow
-            if not is_ST2():
-                log_string('project.logging.invalid_choice', initial_value)
-            self.window.show_quick_panel(choices, self.on_choice)
-
-    def on_choice(self, index):
-        if index != -1:
-            self.on_finished(self.norm_choices[index])
+            log_string('project.logging.invalid_choice', initial_value)
+        finally:
+            on_select = lambda i: self.on_finished(norm_choices[i]) if i != -1 else None
+            show_quick_panel(self.window, choices, on_select, selected_index=initial_index)
 
     def on_finished(self, value):
         setattr(self.project, self.prop_name, value)
@@ -46,6 +41,7 @@ class ElmProjectCommand(sublime_plugin.TextCommand):
         if keys:
             sublime.status_message(get_string('project.updated', '.'.join(keys), value))
 
+DEPENDENCIES_KEY = ('dependencies',)
 BUILD_KEY = ('sublime-build',)
 MAIN_KEY = BUILD_KEY + ('main',)
 HTML_KEY = BUILD_KEY + ('html',)
@@ -131,6 +127,11 @@ class ElmProject(object):
     @property
     def working_dir(self):
         return fs.dirname(self.json_path or '')
+
+    @property
+    def dependencies(self):
+        dependencies = self[DEPENDENCIES_KEY]
+        return list(dependencies.keys()) if dependencies else []
 
     @property
     def main_path(self):
