@@ -1,0 +1,6 @@
+# [PackageDev] target_format: plist, ext: tmPreferences
+name: Indent Patterns
+uuid: 47acfea7-21f0-4702-99d4-4aed8165750b
+scope: source.elm
+settings:
+  increaseIndentPattern: ((^.*(=|[|!%$?~+:\-.=</>&\\*^]+|\bthen|\belse|\bof)\s*$)|(^.*\bif(?!.*\bthen\b.*\belse\b.*).*$))
