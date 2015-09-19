@@ -6,8 +6,6 @@ import json
 
 import sublime, sublime_plugin
 
-SETTINGS = sublime.load_settings('Elm Language Support.sublime-settings')
-
 def join_qualified(region, view):
     """
     Given a region, expand outward on periods to return a new region defining
@@ -74,20 +72,10 @@ class ElmLanguageSupport(sublime_plugin.EventListener):
         sel = view.sel()[0]
         region = join_qualified(view.word(sel), view)
         scope = view.scope_name(region.b)
-        if SETTINGS.get('enabled', True) and scope.find('source.elm') != -1:
+        if scope.find('source.elm') != -1:
             view.run_command('elm_show_type')
 
 class ElmShowType(sublime_plugin.TextCommand):
     def run(self, edit):
         msg = get_type(self.view) or ''
         sublime.status_message(msg)
-
-class ElmEnable(sublime_plugin.ApplicationCommand):
-    def run(self):
-        SETTINGS.set("enabled", "true")
-        sublime.save_settings('Elm Language Support.sublime-settings')
-
-class ElmDisable(sublime_plugin.ApplicationCommand):
-    def run(self):
-        SETTINGS.set("enabled", "false")
-        sublime.save_settings('Elm Language Support.sublime-settings')
