@@ -112,6 +112,12 @@
 				</dict>
 				<dict>
 					<key>match</key>
+					<string>(exposing)</string>
+					<key>name</key>
+					<string>keyword.import.elm</string>
+				</dict>
+				<dict>
+					<key>match</key>
 					<string>\(\.\.\)</string>
 					<key>name</key>
 					<string>keyword.import.elm</string>
