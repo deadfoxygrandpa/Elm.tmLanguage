@@ -14,18 +14,25 @@ default_exec = import_module('Default.exec')
 class ElmMakeCommand(default_exec.ExecCommand):
 
     # inspired by: http://www.sublimetext.com/forum/viewtopic.php?t=12028
-    def run(self, info_format, error_format, syntax, color_scheme, **kwargs):
+    def run(self, error_format, info_format, syntax, color_scheme, null_device, warnings, **kwargs):
         self.buffer = b''
-        self.info_format = string.Template(info_format)
+        self.warnings = warnings == "true"
         self.error_format = string.Template(error_format)
-        self.do_run(**kwargs)
+        self.info_format = string.Template(info_format)
+        self.run_with_project(null_device=null_device, **kwargs)
         self.style_output(syntax, color_scheme)
 
-    def do_run(self, cmd, working_dir, **kwargs):
-        project = ElmProject(cmd[1])
+    def run_with_project(self, cmd, working_dir, null_device, **kwargs):
+        file_arg, output_arg = cmd[1:3]
+        project = ElmProject(file_arg)
         log_string('project.logging.settings', repr(project))
-        cmd[1] = fs.expanduser(project.main_path)
-        cmd[2] = cmd[2].format(fs.expanduser(project.output_path))
+        if '{output}' in output_arg:
+            cmd[1] = fs.expanduser(project.main_path)
+            output_path = fs.expanduser(project.output_path)
+            cmd[2] = output_arg.format(output=output_path)
+        else:
+            # cmd[1] builds active file rather than project main
+            cmd[2] = output_arg.format(null=null_device)
         project_dir = project.working_dir or working_dir
         # ST2: TypeError: __init__() got an unexpected keyword argument 'syntax'
         super(ElmMakeCommand, self).run(cmd, working_dir=project_dir, **kwargs)
@@ -52,13 +59,16 @@ class ElmMakeCommand(default_exec.ExecCommand):
     def format_result(self, result_str):
         decode_error = lambda dict: self.format_error(**dict) if 'type' in dict else dict
         try:
-            return json.loads(result_str, object_hook=decode_error)
+            data = json.loads(result_str, object_hook=decode_error)
+            return [s for s in data if s is not None]
         except ValueError:
             log_string('make.logging.invalid_json', result_str)
             info_str = result_str.strip()
             return [self.info_format.substitute(info=info_str)] if info_str else []
 
     def format_error(shelf, type, file, region, overview, details, **kwargs):
+        if type == 'warning' and not shelf.warnings:
+            return None
         line = region['start']['line']
         column = region['start']['column']
         message = overview

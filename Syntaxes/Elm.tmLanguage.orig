@@ -100,17 +100,27 @@
 			<array>
 				<dict>
 					<key>match</key>
-					<string>(as|exposing)</string>
+<<<<<<< HEAD
+					<string>(as)</string>
 					<key>name</key>
 					<string>keyword.import.elm</string>
 				</dict>
 				<dict>
+					<key>match</key>
 					<string>(exposing)</string>
 					<key>name</key>
 					<string>keyword.import.elm</string>
 				</dict>
 				<dict>
 					<key>match</key>
+					<string>\(\.\.\)</string>
+=======
+					<string>(as|exposing)</string>
+>>>>>>> pr
+					<key>name</key>
+					<string>keyword.import.elm</string>
+				</dict>
+				<dict>
 					<key>include</key>
 					<string>#module_name</string>
 				</dict>

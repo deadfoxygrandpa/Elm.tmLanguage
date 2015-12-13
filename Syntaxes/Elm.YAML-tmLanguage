@@ -1,0 +1,204 @@
+# [PackageDev] target_format: plist, ext: tmLanguage
+name: Elm
+scopeName: source.elm
+fileTypes: [elm]
+uuid: 2cb90e5e-6e98-456d-9a8a-b59935dbc4b0
+
+patterns:
+- name: keyword.operator.function.infix.elm
+  match: (`)[a-zA-Z_']*?(`)
+  captures:
+    '1': {name: punctuation.definition.entity.elm}
+    '2': {name: punctuation.definition.entity.elm}
+
+- name: constant.language.unit.elm
+  match: \(\)
+
+- name: meta.declaration.module.elm
+  begin: ^\b(module)\s+
+  beginCaptures:
+    '1': {name: keyword.other.elm}
+  end: \b(where)\b
+  endCaptures:
+    '1': {name: keyword.other.elm}
+  patterns:
+  - include: '#module_name'
+  - include: '#module_exports'
+  - name: invalid
+    match: '[a-z]+'
+
+- name: meta.import.elm
+  begin: ^\b(import)\s+((open)\s+)?
+  beginCaptures:
+    '1': {name: keyword.other.elm}
+    '3': {name: invalid}
+  end: ($|;)
+  patterns:
+  - name: keyword.import.elm
+    match: (as|exposing)
+  - include: '#module_name'
+  - include: '#module_exports'
+
+- name: entity.glsl.elm
+  begin: (\[)(glsl)(\|)
+  beginCaptures:
+    '1': {name: keyword.other.elm}
+    '2': {name: support.function.prelude.elm}
+    '3': {name: keyword.other.elm}
+  end: (\|\])
+  endCaptures:
+    '1': {name: keyword.other.elm}
+  patterns:
+  - include: source.glsl
+
+- name: keyword.other.elm
+  match: \b(type alias|type|case|of|let|in|as)\s+
+
+- name: keyword.control.elm
+  match: \b(if|then|else)\s+
+
+- comment: Floats are always decimal
+  name: constant.numeric.float.elm
+  match: \b([0-9]+\.[0-9]+([eE][+-]?[0-9]+)?|[0-9]+[eE][+-]?[0-9]+)\b
+
+- name: constant.numeric.elm
+  match: \b([0-9]+)\b
+
+- name: string.quoted.double.elm
+  begin: '"""'
+  beginCaptures:
+    '0': {name: punctuation.definition.string.begin.elm}
+  end: '"""'
+  endCaptures:
+    '0': {name: punctuation.definition.string.end.elm}
+  patterns:
+  - name: constant.character.escape.elm
+    match: \\(NUL|SOH|STX|ETX|EOT|ENQ|ACK|BEL|BS|HT|LF|VT|FF|CR|SO|SI|DLE|DC1|DC2|DC3|DC4|NAK|SYN|ETB|CAN|EM|SUB|ESC|FS|GS|RS|US|SP|DEL|[abfnrtv\\'\&])
+  - name: constant.character.escape.control.elm
+    match: \^[A-Z@\[\]\\\^_]
+
+- name: string.quoted.double.elm
+  begin: '"'
+  beginCaptures:
+    '0': {name: punctuation.definition.string.begin.elm}
+  end: '"'
+  endCaptures:
+    '0': {name: punctuation.definition.string.end.elm}
+  patterns:
+  - name: constant.character.escape.elm
+    match: \\(NUL|SOH|STX|ETX|EOT|ENQ|ACK|BEL|BS|HT|LF|VT|FF|CR|SO|SI|DLE|DC1|DC2|DC3|DC4|NAK|SYN|ETB|CAN|EM|SUB|ESC|FS|GS|RS|US|SP|DEL|[abfnrtv\\\"'\&])
+  - name: constant.character.escape.control.elm
+    match: \^[A-Z@\[\]\\\^_]
+
+- name: string.quoted.single.elm
+  match: "(?x)\n(')\n(?:\n\t[\\ -\\[\\]-~]\t\t\t\t\t\t\t\t# Basic Char\n  | (\\\\\
+    (?:NUL|SOH|STX|ETX|EOT|ENQ|ACK|BEL|BS|HT|LF|VT|FF|CR|SO|SI|DLE\n\t\t|DC1|DC2|DC3|DC4|NAK|SYN|ETB|CAN|EM|SUB|ESC|FS|GS|RS\n\
+    \t\t|US|SP|DEL|[abfnrtv\\\\\\\"'\\&]))\t\t# Escapes\n  | (\\^[A-Z@\\[\\]\\\\\\\
+    ^_])\t\t\t\t\t\t# Control Chars\n)\n(')"
+  captures:
+    '1': {name: punctuation.definition.string.begin.elm}
+    '2': {name: constant.character.escape.elm}
+    '3': {name: punctuation.definition.string.end.elm}
+
+- name: meta.function.type-declaration.elm
+  begin: ^(port\s+)?([a-z_][a-zA-Z0-9_']*|\([|!%$+\-.,=</>]+\))\s*((:)([:]+)?)
+  beginCaptures:
+    '1': {name: keyword.other.port.elm}
+    '2': {name: entity.name.function.elm}
+    '4': {name: keyword.other.colon.elm}
+    '5': {name: invalid}
+  end: $\n?
+  patterns:
+  - include: '#type_signature'
+
+- name: keyword.other.port.elm
+  match: \bport\s+
+
+- name: constant.other.elm
+  match: \b[A-Z]\w*\b
+
+- include: '#comments'
+
+- name: entity.name.function.elm
+  match: ^[a-z][A-Za-z0-9_']*\s+
+
+- include: '#infix_op'
+
+- name: keyword.operator.elm
+  match: '[|!%$?~+:\-.=</>&\\*^]+'
+
+# Note: Sublime color schemes consistently decline to apply colors to
+# delimiters of literals. This does Elm users a disservice since
+# Elm's function application syntax thrives on a clear visual distinction
+# between literal delimiters and expressions.
+# We therefore go out of our way to make sure delimiters are colorized.
+- name: constant.language.delimiter.elm
+  match: '([\[\]\{\},])'
+  captures:
+    '1': {name: support.function.delimiter.elm}
+
+- name: keyword.other.parenthesis.elm
+  match: '([\(\)])'
+
+repository:
+  block_comment:
+    name: comment.block.elm
+    begin: \{-(?!#)
+    end: -\}
+    captures:
+      '0': {name: punctuation.definition.comment.elm}
+    patterns:
+    - include: '#block_comment'
+    applyEndPatternLast: 1
+
+  comments:
+    patterns:
+    - name: comment.line.double-dash.elm
+      match: (--).*$\n?
+      captures:
+        '1': {name: punctuation.definition.comment.elm}
+    - include: '#block_comment'
+
+  infix_op:
+    name: entity.name.function.infix.elm
+    match: (\([|!%$+:\-.=</>]+\)|\(,+\))
+
+  module_exports:
+    name: meta.declaration.exports.elm
+    begin: \(
+    end: \)
+    patterns:
+    - name: entity.name.function.elm
+      match: \b[a-z][a-zA-Z_'0-9]*
+    - name: storage.type.elm
+      match: \b[A-Z][A-Za-z_'0-9]*
+    - name: punctuation.separator.comma.elm
+      match: ','
+    - include: '#infix_op'
+    - comment: So named because I don't know what to call this.
+      name: meta.other.unknown.elm
+      match: \(.*?\)
+
+  module_name:
+    name: support.other.module.elm
+    match: '[A-Z][A-Za-z._'']*'
+
+  type_signature:
+    patterns:
+    - name: meta.class-constraint.elm
+      match: \(\s*([A-Z][A-Za-z]*)\s+([a-z][A-Za-z_']*)\)\s*(=>)
+      captures:
+        '1': {name: entity.other.inherited-class.elm}
+        '2': {name: variable.other.generic-type.elm}
+        '3': {name: keyword.other.big-arrow.elm}
+    - name: keyword.other.arrow.elm
+      match: ->
+    - name: keyword.other.big-arrow.elm
+      match: =>
+    - name: variable.other.generic-type.elm
+      match: \b[a-z][a-zA-Z0-9_']*\b
+    - name: storage.type.elm
+      match: \b[A-Z][a-zA-Z0-9_']*\b
+    - name: support.constant.unit.elm
+      match: \(\)
+    - include: '#comments'
