@@ -60,7 +60,7 @@ class ElmMakeCommand(default_exec.ExecCommand):
         decode_error = lambda dict: self.format_error(**dict) if 'type' in dict else dict
         try:
             data = json.loads(result_str, object_hook=decode_error)
-            if !self.warnings:
+            if not self.warnings:
                 data = [error for error in data if error['type'] != 'warning']
             return data
         except ValueError:
