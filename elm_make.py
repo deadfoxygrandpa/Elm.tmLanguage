@@ -60,15 +60,15 @@ class ElmMakeCommand(default_exec.ExecCommand):
         decode_error = lambda dict: self.format_error(**dict) if 'type' in dict else dict
         try:
             data = json.loads(result_str, object_hook=decode_error)
-            if not self.warnings:
-                data = [error for error in data if error['type'] != 'warning']
-            return data
+            return [s for s in data if s is not None]
         except ValueError:
             log_string('make.logging.invalid_json', result_str)
             info_str = result_str.strip()
             return [self.info_format.substitute(info=info_str)] if info_str else []
 
     def format_error(shelf, type, file, region, overview, details, **kwargs):
+        if type == 'warning' and not shelf.warnings:
+            return None
         line = region['start']['line']
         column = region['start']['column']
         message = overview
