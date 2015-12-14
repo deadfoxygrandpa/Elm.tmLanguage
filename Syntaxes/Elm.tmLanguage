@@ -105,12 +105,6 @@
 					<string>keyword.import.elm</string>
 				</dict>
 				<dict>
-					<string>(exposing)</string>
-					<key>name</key>
-					<string>keyword.import.elm</string>
-				</dict>
-				<dict>
-					<key>match</key>
 					<key>include</key>
 					<string>#module_name</string>
 				</dict>
