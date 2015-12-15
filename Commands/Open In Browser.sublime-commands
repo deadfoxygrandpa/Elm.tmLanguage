@@ -1,0 +1,6 @@
+[
+    {
+        "caption": "Elm Build System: Open in Browser",
+        "command": "elm_open_in_browser"
+    }
+]

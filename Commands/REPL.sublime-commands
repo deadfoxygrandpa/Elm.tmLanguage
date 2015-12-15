@@ -1,0 +1,20 @@
+[
+    {
+        "caption": "SublimeREPL: Elm",
+        "command": "repl_open", "args":
+        {
+            "type": "subprocess",
+            "encoding": "utf8",
+            "cmd": ["elm-repl"],
+            "cwd": "$file_path",
+            "syntax": "Packages/Elm Language Support/Syntaxes/Elm.tmLanguage",
+            "external_id": "elm",
+            "extend_env":
+            {
+                "osx": {"PATH": "{PATH}:/usr/local/bin"},
+                "linux": {"PATH": "{PATH}:/usr/local/bin:{HOME}/.cabal/bin"},
+                "windows": {}
+            }
+        }
+    }
+]

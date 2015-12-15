@@ -1,0 +1,5 @@
+{
+    "debug": false,
+	"enabled": true,
+	"elm_docs_path": "docs.json"
+}

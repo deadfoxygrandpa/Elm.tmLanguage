@@ -1,0 +1,15 @@
+{
+    "logging.prefix":                  "[Elm says]: ",
+    "logging.missing_plugin":          "Missing plugin: {0}",
+
+    "make.missing_plugin":             "To highlight build errors: Install with Package Control: Highlight Build Errors",
+    "make.logging.invalid_json":       "Invalid JSON from elm-make: {0}",
+
+    "open_in_browser.not_found":       "HTML file NOT found to open: {0}",
+
+    "project.not_found":               "Valid elm-package.json NOT found to update",
+    "project.updated":                 "elm-package.json updated: {0} = {1}",
+    "project.logging.invalid_choice":  "Invalid choice in elm-package.json: {0}",
+    "project.logging.invalid_json":    "Invalid elm-package.json: {0}",
+    "project.logging.settings":        "Detected settings: {0}"
+}
