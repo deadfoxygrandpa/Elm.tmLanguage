@@ -1,0 +1,6 @@
+[
+    {
+        "caption": "Elm Language Support: Run elm-format",
+        "command": "elm_format"
+    }
+]
