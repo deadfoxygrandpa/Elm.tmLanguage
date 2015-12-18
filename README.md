@@ -11,20 +11,23 @@
 
 - Compatible with [Sublime Text 2] and [Sublime Text 3]
 - Syntax highlighting
-- Two standard build commands (<kbd>Super+[Shift]+B</kbd> or <kbd>Super+[Shift]+F7</kbd>)
+- Four standard build commands (<kbd>Super+[Shift]+B</kbd> or <kbd>Super+[Shift]+F7</kbd>)
     1. `Build` just checks errors. Kudos to this [tweet][]!
     2. `Run` additionally outputs your compiled program to an inferred path.
-    3. Output path is configurable in `elm-package.json` or `Elm Build System: …` in the Command Palette. Elm build system only requires a valid config in any ancestor directory of the active file. ![compile messages screenshot](images/elm_project.jpg)
+    3. The same as the above two, but ignoring warnings
+    4. Output path is configurable in `elm-package.json` or `Elm Build System: …` in the Command Palette. Elm build system only requires a valid config in any ancestor directory of the active file. ![compile messages screenshot](images/elm_project.jpg)
 - Compile messages
     1. Navigate errors and warnings (<kbd>Super+[Shift]+F4</kbd>).
     2. Formatted for build output panel.
     3. Compile message highlighting, embedded code highlighting, and color scheme for output panel. ![compile messages screenshot](images/elm_make.jpg)
-- Type hints for standard library functions
 - Integration with popular plugins (installed separately)
     1. [SublimeREPL][] — Run `elm-repl` in an editor tab with syntax highlighting. ![SublimeREPL screenshot](images/elm_repl.jpg)
     2. [Highlight Build Errors][] — Does what it says on the box … usually.
-    3. [SideBarEnhancements][] — Open your compiled program in a configurable browser from the Command Palette.
-    4. [View In Browser][] — Same as above but compatible with ST2.
+- Integration with [elm format](https://github.com/avh4/elm-format)
+    1. Make sure `elm-format` is in your PATH
+    2. Run the "Elm Language Support: Run elm-format" command from the Command Palette to run elm-format on the current file
+    2. To enable automatic formatting on every save, Go to Preferences -> Package Settings -> SublimeOnSaveBuild -> User and add this setting:
+        `"elm_format_on_save": true`
 
 ## Learning
 
