@@ -2,5 +2,9 @@
     {
         "caption": "Elm Language Support: Run elm-format",
         "command": "elm_format"
+    },
+    {
+    	"caption": "Elm Language Support: Regex",
+    	"command": "elm_format_regex"
     }
 ]
