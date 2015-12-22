@@ -9,17 +9,6 @@ class ElmFormatCommand(sublime_plugin.TextCommand):
 		command = "elm-format {} --yes".format(self.view.file_name())
 		p = subprocess.Popen(command, shell=True)
 
-class ElmFormatRegexCommand(sublime_plugin.TextCommand):
-	def run(self, edit):
-		self.view.window().show_input_panel("regex", "[a-z]", self.find_files, lambda x: x, lambda: None)
-
-	def find_files(self, s):
-		root = self.view.window().folders()[0]
-		for path, subdirs, files in os.walk(root):
-			subdirs[:] = [d for d in subdirs if d not in ["elm-stuff", ".git"]]
-			files[:] = [f for f in files if f.endswith(".elm") and re.search(s, f) is not None]
-			for name in files:
-				print(os.path.join(path, name))
 
 class ElmLanguageSupport(sublime_plugin.EventListener):
 	def on_pre_save(self, view):
