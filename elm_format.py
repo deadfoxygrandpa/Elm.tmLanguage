@@ -17,7 +17,7 @@ class ElmFormatRegexCommand(sublime_plugin.TextCommand):
 		root = self.view.window().folders()[0]
 		for path, subdirs, files in os.walk(root):
 			subdirs[:] = [d for d in subdirs if d not in ["elm-stuff", ".git"]]
-			files[:] = [f for f in files if f.endswith(".elm") and re.match(s, os.path.splitext(f)[0])]
+			files[:] = [f for f in files if f.endswith(".elm") and re.search(s, f) is not None]
 			for name in files:
 				print(os.path.join(path, name))
 
@@ -29,4 +29,8 @@ class ElmLanguageSupport(sublime_plugin.EventListener):
 		if scope.find('source.elm') != -1:
 			settings = sublime.load_settings('Elm Language Support.sublime-settings')
 			if settings.get('elm_format_on_save', False):
-				view.run_command('elm_format')
+				regex = settings.get('elm_format_filename_filter', '')
+				if len(regex) > 0 and re.search(regex, view.file_name()) is not None:
+					print(view.file_name())
+				else:
+					view.run_command('elm_format')
