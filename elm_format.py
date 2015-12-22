@@ -9,7 +9,7 @@ class ElmFormatCommand(sublime_plugin.TextCommand):
 		p = subprocess.Popen(command, shell=True)
 
 
-class ElmLanguageSupport(sublime_plugin.EventListener):
+class ElmFormatOnSave(sublime_plugin.EventListener):
 	def on_pre_save(self, view):
 		sel = view.sel()[0]
 		region = view.word(sel)
