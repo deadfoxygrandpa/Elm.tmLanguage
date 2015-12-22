@@ -1,5 +1,4 @@
 import subprocess
-import os.path
 import re
 import sublime, sublime_plugin
 
@@ -19,7 +18,5 @@ class ElmLanguageSupport(sublime_plugin.EventListener):
 			settings = sublime.load_settings('Elm Language Support.sublime-settings')
 			if settings.get('elm_format_on_save', False):
 				regex = settings.get('elm_format_filename_filter', '')
-				if len(regex) > 0 and re.search(regex, view.file_name()) is not None:
-					print(view.file_name())
-				else:
+				if not (len(regex) > 0 and re.search(regex, view.file_name()) is not None):
 					view.run_command('elm_format')
