@@ -26,8 +26,10 @@
 - Integration with [elm format](https://github.com/avh4/elm-format)
     1. Make sure `elm-format` is in your PATH
     2. Run the "Elm Language Support: Run elm-format" command from the Command Palette to run elm-format on the current file
-    2. To enable automatic formatting on every save, Go to Preferences -> Package Settings -> SublimeOnSaveBuild -> User and add this setting:
+    3. To enable automatic formatting on every save, Go to Preferences -> Package Settings -> SublimeOnSaveBuild -> User and add this setting:
         `"elm_format_on_save": true`
+    4. If there are certain Elm source files you don't want to automatically run `elm-format` on, for example elm-css based files, you can set a regex filter which will search the full filename (including the path to the file). If the regex matches, then it will not automatically run `elm-format` on the file when you save. For example, the following filter would prevent automatic `elm-format` on a file named `elm-css/src/Css/TopBar.elm`:
+        `"elm_format_filename_filter": "elm-css/src/Css/.*\\.elm$"`
 
 ## Learning
 
