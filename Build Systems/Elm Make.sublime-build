@@ -17,10 +17,6 @@
     "color_scheme": "Packages/Color Scheme - Default/Sunburst.tmTheme",
     "null_device": "/dev/null",
     "warnings": "true",
-    "windows":
-    {
-        "null_device": "NUL"
-    },
     "osx":
     {
         "path": "/usr/local/bin:$PATH"
