@@ -16,10 +16,7 @@
     "syntax": "Packages/Elm Language Support/Syntaxes/Elm Compile Messages.hidden-tmLanguage",
     "color_scheme": "Packages/Color Scheme - Default/Sunburst.tmTheme",
     "null_device": "/dev/null",
-    "windows":
-    {
-        "null_device": "NUL"
-    },
+    "warnings": "true",
     "osx":
     {
         "path": "/usr/local/bin:$PATH"
@@ -32,6 +29,22 @@
     [
         {
             "name": "Run",
+            "cmd":
+            [
+                "elm-make",
+                "$file",
+                "--output={output}",
+                "--report=json",
+                "--yes"
+            ]
+        },
+        {
+            "name": "Ignore Warnings",
+            "warnings": "false"
+        },
+        {
+            "name": "Run - Ignore Warnings",
+            "warnings": "false",
             "cmd":
             [
                 "elm-make",

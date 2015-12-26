@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>fileTypes</key>
+	<key>fileTypes</key>
 	<array>
 		<string>elm</string>
 	</array>
@@ -34,12 +34,6 @@
 			<string>\(\)</string>
 			<key>name</key>
 			<string>constant.language.unit.elm</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\[\]</string>
-			<key>name</key>
-			<string>constant.language.empty-list.elm</string>
 		</dict>
 		<dict>
 			<key>begin</key>
@@ -106,13 +100,7 @@
 			<array>
 				<dict>
 					<key>match</key>
-					<string>(as)</string>
-					<key>name</key>
-					<string>keyword.import.elm</string>
-				</dict>
-				<dict>
-					<key>match</key>
-					<string>\(\.\.\)</string>
+					<string>(as|exposing)</string>
 					<key>name</key>
 					<string>keyword.import.elm</string>
 				</dict>
@@ -292,16 +280,15 @@
 			</dict>
 			<key>match</key>
 			<string>(?x)
-			(')
-			(?:
-				[\ -\[\]-~]								# Basic Char
-			  | (\\(?:NUL|SOH|STX|ETX|EOT|ENQ|ACK|BEL|BS|HT|LF|VT|FF|CR|SO|SI|DLE
-					|DC1|DC2|DC3|DC4|NAK|SYN|ETB|CAN|EM|SUB|ESC|FS|GS|RS
-					|US|SP|DEL|[abfnrtv\\\"'\&amp;]))		# Escapes
-			  | (\^[A-Z@\[\]\\\^_])						# Control Chars
-			)
-			(')
-			</string>
+(')
+(?:
+	[\ -\[\]-~]								# Basic Char
+  | (\\(?:NUL|SOH|STX|ETX|EOT|ENQ|ACK|BEL|BS|HT|LF|VT|FF|CR|SO|SI|DLE
+		|DC1|DC2|DC3|DC4|NAK|SYN|ETB|CAN|EM|SUB|ESC|FS|GS|RS
+		|US|SP|DEL|[abfnrtv\\\"'\&amp;]))		# Escapes
+  | (\^[A-Z@\[\]\\\^_])						# Control Chars
+)
+(')</string>
 			<key>name</key>
 			<string>string.quoted.single.elm</string>
 		</dict>
@@ -376,10 +363,24 @@
 			<string>keyword.operator.elm</string>
 		</dict>
 		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>support.function.delimiter.elm</string>
+				</dict>
+			</dict>
 			<key>match</key>
-			<string>,</string>
+			<string>([\[\]\{\},])</string>
 			<key>name</key>
-			<string>punctuation.separator.comma.elm</string>
+			<string>constant.language.delimiter.elm</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>([\(\)])</string>
+			<key>name</key>
+			<string>keyword.other.parenthesis.elm</string>
 		</dict>
 	</array>
 	<key>repository</key>
