@@ -70,7 +70,7 @@ def search_and_set_status_message(filename, query, tries):
             # loaded into memory right now. Try 10 more times at 100ms intervals
             # and if it still isn't loaded, there's likely a problem we can't fix
             # here.
-            sublime.set_timeout_async(lambda: query(filename, query, tries + 1), 100)
+            sublime.set_timeout_async(search_and_set_status_message(filename, query, tries + 1), 100)
     else:
         data = LOOKUPS[filename]
         if len(data) > 0:
