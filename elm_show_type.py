@@ -33,6 +33,11 @@ def join_qualified(region, view):
     else:
         return join_qualified(region, view)
 
+def get_word_under_cursor(view):
+    sel = view.sel()[0]
+    region = join_qualified(view.word(sel), view)
+    return view.substr(region).strip()     
+
 def get_type(view):
     """
     Given a view, return the type signature of the word under the cursor,
@@ -91,6 +96,19 @@ def get_matching_names(filename, prefix):
             if v['fullName'].startswith(prefix) or v['name'].startswith(prefix)}
         return [[v[0], v[1]] for v in completions]
 
+def explore_package(filename, package_name):
+    global LOOKUPS
+    if filename not in LOOKUPS.keys() or len(package_name) == 0:
+        return None
+    elif package_name[0].upper() != package_name[0]:
+        sublime.status_message('This is not a package!')
+        return None
+    else:
+        data = [[v['fullName'], v['signature'], v['comment']] 
+            for v in LOOKUPS[filename] 
+            if v['fullName'].startswith(package_name)]
+        sublime.active_window().show_quick_panel(data, lambda x: x)
+
 def load_from_oracle(filename):
     """
     Loads all data about the current file from elm oracle and adds it
@@ -138,9 +156,7 @@ class ElmOracleListener(sublime_plugin.EventListener):
         view_load(view)
 
     def on_query_completions(self, view, prefix, locations):
-        sel = view.sel()[0]
-        region = join_qualified(view.word(sel), view)
-        word = view.substr(region).strip()
+        word = get_word_under_cursor(view)
         return get_matching_names(view.file_name(), word)
 
 
@@ -152,3 +168,12 @@ class ElmShowType(sublime_plugin.TextCommand):
     def run(self, edit):
         msg = get_type(self.view) or ''
         sublime.status_message(msg)
+
+
+class ElmOracleDebug(sublime_plugin.TextCommand):
+    def run(self, edit):
+        word = get_word_under_cursor(self.view)
+        parts = [part for part in word.split('.') if part[0].upper() == part[0]]
+        package_name = '.'.join(parts)
+        print(word, parts, package_name)
+        explore_package(self.view.file_name(), package_name)

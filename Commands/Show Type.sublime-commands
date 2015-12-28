@@ -2,5 +2,9 @@
 	{
         "caption": "Elm Language Support: Show type",
         "command": "elm_show_type"
+    },
+	{
+        "caption": "Elm Language Support: Oracle Debug",
+        "command": "elm_oracle_debug"
     }
 ]
