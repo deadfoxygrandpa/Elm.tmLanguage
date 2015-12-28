@@ -76,6 +76,10 @@ def search_and_set_status_message(filename, query, tries):
         return None     
 
 def load_from_oracle(filename):
+    """
+    Loads all data about the current file from elm oracle and adds it
+    to the LOOKUPS global dictionary.
+    """
     global LOOKUPS
     p = subprocess.Popen('elm-oracle ' + filename + ' ""', stdout=subprocess.PIPE, cwd=os.path.dirname(filename), shell=True)
     output = p.communicate()[0].strip()
@@ -84,6 +88,17 @@ def load_from_oracle(filename):
     except ValueError:
         return None
     LOOKUPS[filename] = data
+
+def view_load(view):
+    """
+    Selectively calls load_from_oracle based on the current scope.
+    """
+    global LOOKUPS
+    sel = view.sel()[0]
+    region = join_qualified(view.word(sel), view)
+    scope = view.scope_name(region.b)
+    if scope.find('source.elm') != -1:
+        load_from_oracle(view.file_name())
 
 
 class ElmOracleListener(sublime_plugin.EventListener):
@@ -102,13 +117,10 @@ class ElmOracleListener(sublime_plugin.EventListener):
             view.run_command('elm_show_type')
 
     def on_activated_async(self, view):
-        global LOOKUPS
-        sel = view.sel()[0]
-        region = join_qualified(view.word(sel), view)
-        scope = view.scope_name(region.b)
-        if scope.find('source.elm') != -1:
-            load_from_oracle(view.file_name())
-            print(LOOKUPS.keys())
+        view_load(view)
+
+    def on_post_save_async(self, view):
+        view_load(view)
 
 
 class ElmShowType(sublime_plugin.TextCommand):
