@@ -93,7 +93,6 @@ def view_load(view):
     """
     Selectively calls load_from_oracle based on the current scope.
     """
-    global LOOKUPS
     sel = view.sel()[0]
     region = join_qualified(view.word(sel), view)
     scope = view.scope_name(region.b)
