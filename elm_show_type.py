@@ -75,6 +75,21 @@ def search_and_set_status_message(filename, query, tries):
                     break
         return None     
 
+def get_matching_names(filename, prefix):
+    """
+    Given a file name and a search prefix, return a list of matching
+    completions from elm oracle.
+    """
+    print(prefix)
+    global LOOKUPS
+    if filename not in LOOKUPS.keys():
+        return None
+    else:
+        data = LOOKUPS[filename]
+        completions = [[v['fullName'] + '\t' + v['signature'], v['fullName']] for v in data if v['fullName'].startswith(prefix) or v['name'].startswith(prefix)]
+        print(completions)
+        return completions
+
 def load_from_oracle(filename):
     """
     Loads all data about the current file from elm oracle and adds it
@@ -120,6 +135,12 @@ class ElmOracleListener(sublime_plugin.EventListener):
 
     def on_post_save_async(self, view):
         view_load(view)
+
+    def on_query_completions(self, view, prefix, locations):
+        sel = view.sel()[0]
+        region = join_qualified(view.word(sel), view)
+        word = view.substr(region).strip()
+        return get_matching_names(view.file_name(), word)
 
 
 class ElmShowType(sublime_plugin.TextCommand):
