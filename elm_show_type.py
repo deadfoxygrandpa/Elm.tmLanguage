@@ -86,9 +86,10 @@ def get_matching_names(filename, prefix):
         return None
     else:
         data = LOOKUPS[filename]
-        completions = [[v['fullName'] + '\t' + v['signature'], v['fullName']] for v in data if v['fullName'].startswith(prefix) or v['name'].startswith(prefix)]
-        print(completions)
-        return completions
+        completions = {(v['fullName'] + '\t' + v['signature'], v['fullName']) 
+            for v in data 
+            if v['fullName'].startswith(prefix) or v['name'].startswith(prefix)}
+        return [[v[0], v[1]] for v in completions]
 
 def load_from_oracle(filename):
     """
