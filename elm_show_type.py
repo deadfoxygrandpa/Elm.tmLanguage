@@ -1,5 +1,6 @@
 from __future__ import print_function
 
+import webbrowser
 import os.path
 import subprocess
 import json
@@ -104,10 +105,19 @@ def explore_package(filename, package_name):
         sublime.status_message('This is not a package!')
         return None
     else:
-        data = [[v['fullName'], v['signature'], v['comment']] 
+        def open_link(items, i):
+            if i == -1:
+                return None
+            else:
+                open_in_browser(items[i][3])
+        data = [[v['fullName'], v['signature'], v['comment'], v['href']] 
             for v in LOOKUPS[filename] 
             if v['fullName'].startswith(package_name)]
-        sublime.active_window().show_quick_panel(data, lambda x: x)
+        panel_items = [v[:3] for v in data]
+        sublime.active_window().show_quick_panel(panel_items, lambda i: open_link(data, i))
+
+def open_in_browser(url):
+    webbrowser.open_new_tab(url)        
 
 def load_from_oracle(filename):
     """
