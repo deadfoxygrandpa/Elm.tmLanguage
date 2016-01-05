@@ -1,5 +1,4 @@
 import json
-import os
 import re
 import string
 
@@ -16,8 +15,9 @@ default_exec = import_module('Default.exec')
 class ElmMakeCommand(ElmBinCommandBase, default_exec.ExecCommand):
 
     # inspired by: http://www.sublimetext.com/forum/viewtopic.php?t=12028
-    def run(self, error_format, info_format, syntax, color_scheme, **kwargs):
+    def run(self, error_format, info_format, syntax, color_scheme, warnings, **kwargs):
         self.buffer = b''
+        self.warnings = warnings == "true"
         self.error_format = string.Template(error_format)
         self.info_format = string.Template(info_format)
         self.run_with_project(**kwargs)
@@ -33,7 +33,7 @@ class ElmMakeCommand(ElmBinCommandBase, default_exec.ExecCommand):
             cmd[2] = output_arg.format(output=output_path)
         else:
             # cmd[1] builds active file rather than project main
-            cmd[2] = output_arg.format(null=os.devnull)
+            cmd[2] = output_arg.format(null='/dev/null')
         project_dir = project.working_dir or working_dir
         # ST2: TypeError: __init__() got an unexpected keyword argument 'syntax'
         super(ElmMakeCommand, self).run(cmd, working_dir=project_dir, **kwargs)
@@ -60,13 +60,16 @@ class ElmMakeCommand(ElmBinCommandBase, default_exec.ExecCommand):
     def format_result(self, result_str):
         decode_error = lambda dict: self.format_error(**dict) if 'type' in dict else dict
         try:
-            return json.loads(result_str, object_hook=decode_error)
+            data = json.loads(result_str, object_hook=decode_error)
+            return [s for s in data if s is not None]
         except ValueError:
             log_string('make.logging.invalid_json', result_str)
             info_str = result_str.strip()
             return [self.info_format.substitute(info=info_str)] if info_str else []
 
     def format_error(shelf, type, file, region, overview, details, **kwargs):
+        if type == 'warning' and not shelf.warnings:
+            return None
         line = region['start']['line']
         column = region['start']['column']
         message = overview

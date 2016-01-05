@@ -1,6 +1,6 @@
 {
-    "selector": "source.elm",
     "target": "elm_make",
+    "selector": "source.elm",
     "cmd":
     [
         "elm-make",
@@ -15,10 +15,27 @@
     "info_format": "=== $info ===",
     "syntax": "Packages/Elm Language Support/Syntaxes/Elm Compile Messages.hidden-tmLanguage",
     "color_scheme": "Packages/Color Scheme - Default/Sunburst.tmTheme",
+    "warnings": "true",
     "variants":
     [
         {
             "name": "Run",
+            "cmd":
+            [
+                "elm-make",
+                "$file",
+                "--output={output}",
+                "--report=json",
+                "--yes"
+            ]
+        },
+        {
+            "name": "Ignore Warnings",
+            "warnings": "false"
+        },
+        {
+            "name": "Run - Ignore Warnings",
+            "warnings": "false",
             "cmd":
             [
                 "elm-make",

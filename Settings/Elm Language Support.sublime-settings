@@ -2,5 +2,7 @@
     "elm_bin_dir": "",
     "debug": false,
     "enabled": true,
-    "elm_docs_path": "docs.json"
+    "elm_docs_path": "docs.json",
+    "elm_format_on_save": false,
+    "elm_format_filename_filter": "",
 }
