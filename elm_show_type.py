@@ -96,7 +96,12 @@ def get_matching_names(filename, prefix):
         return None
     else:
         data = LOOKUPS[filename]
-        completions = {(v['fullName'] + '\t' + v['signature'], v['fullName']) 
+        # get the characters to remove from the completion to avoid duplication
+        # of paths. If it's 0, then stay at 0, otherwise add a period back
+        chars_to_skip = len('.'.join(prefix.split('.')[:-1]))
+        if chars_to_skip > 0:
+            chars_to_skip += 1      
+        completions = {(v['fullName'] + '\t' + v['signature'], v['fullName'][chars_to_skip:]) 
             for v in data 
             if v['fullName'].startswith(prefix) or v['name'].startswith(prefix)}
         return [[v[0], v[1]] for v in completions]
