@@ -117,7 +117,9 @@ def explore_package(filename, package_name):
         data = [[v['fullName'], v['signature'], v['comment'], v['href']] 
             for v in LOOKUPS[filename] 
             if v['fullName'].startswith(package_name)]
-        panel_items = [v[:3] for v in data]
+        # all items must be the same number of rows
+        n = 75
+        panel_items = [v[:2] + [v[2][:n]] + [v[2][n:2*n]] + [v[2][2*n:]] for v in data]
         sublime.active_window().show_quick_panel(panel_items, lambda i: open_link(data, i))
 
 def open_in_browser(url):
