@@ -58,7 +58,7 @@ def fetch_json(url, callback=None, *args, **kwargs):
         worker = lambda: callback(fetch_json(url), *args, **kwargs)
         Thread(target=worker).start()
     else:
-        settings = dict(cache=HttpCache(604800))
+        settings = dict(cache=HttpCache(604800), downloader_precedence=dict(windows=['urllib'], osx=['urllib'], linux=['urllib', 'curl', 'wget']))
         return JSONApiClient(settings).fetch_json(url, prefer_cached=True)
 
 # MARK: logging
