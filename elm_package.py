@@ -136,10 +136,10 @@ class ElmPackageInstallCommand(ElmPackageCommandBase, sublime_plugin.TextCommand
             self.on_version(None, None)
 
     def on_version(self, name, version):
-        self.window.run_command('set_build_system', dict(file=self.build_system))
         specific_version = version if version != self.default_version else None
         ElmPackageCommand.Args(self.view).package = name, specific_version
-        self.window.run_command('build')
+        # this simulates a build command without changing the build system
+        ElmPackageCommand(self.window).run(["elm-package", "install", "--yes", "$file"], "$project_path")
 
 class ElmPackageOpenCommand(ElmPackageCommandBase, sublime_plugin.WindowCommand):
     default_package_key = 'open.no_package'
