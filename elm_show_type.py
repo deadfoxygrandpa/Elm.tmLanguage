@@ -183,7 +183,7 @@ class ElmShowType(sublime_plugin.TextCommand):
         sublime.status_message(msg)
 
 
-class ElmOracleDebug(sublime_plugin.TextCommand):
+class ElmOracleExplore(sublime_plugin.TextCommand):
     def run(self, edit):
         word = get_word_under_cursor(self.view)
         parts = [part for part in word.split('.') if part[0].upper() == part[0]]

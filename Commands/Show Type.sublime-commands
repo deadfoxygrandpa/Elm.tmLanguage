@@ -4,7 +4,7 @@
         "command": "elm_show_type"
     },
 	{
-        "caption": "Elm Language Support: Oracle Debug",
-        "command": "elm_oracle_debug"
+        "caption": "Elm Language Support: Explore Package Docs",
+        "command": "elm_oracle_explore"
     }
 ]
