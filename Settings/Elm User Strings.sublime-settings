@@ -12,6 +12,7 @@
     "package.install.no_version":      "Current Version",
     "package.open.no_package":         "All Packages",
     "package.url.json":                "http://package.elm-lang.org/all-packages",
+    "package.url.current":             "http://package.elm-lang.org/new-packages",
     "package.url.open":                "http://package.elm-lang.org/packages/{0}/latest",
     "package.url.open_all":            "http://package.elm-lang.org/packages",
     "package.url.repo":                "https://api.github.com/repos/{0}",

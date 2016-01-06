@@ -60,9 +60,10 @@ class ElmPackageCommandBase(abstract_class()):
                 summary='',
                 versions=None)
             decode_package = lambda json: self.Package(**json)
-            self.packages = [default_package] + list(map(decode_package, json))
+            self.packages = [default_package] + [package for package in list(map(decode_package, json)) if package.name in current_packages]
             self.show_packages()
 
+        current_packages = fetch_json(self.get_string('url.current'))
         on_retry = lambda json: retry_on_main_thread(on_fetch, json)
         fetch_json(self.get_string('url.json'), on_retry)
 
