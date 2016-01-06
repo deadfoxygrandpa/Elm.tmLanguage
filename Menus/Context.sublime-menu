@@ -1,0 +1,13 @@
+[
+	{
+        "id": "elmlanguagesupport",
+        "caption": "Elm Language Support",
+        "children":
+        [
+            {
+                "caption": "Explore This Package",
+                "command": "elm_oracle_explore"
+            }
+        ]
+    }
+]

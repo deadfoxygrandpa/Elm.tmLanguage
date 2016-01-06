@@ -1,0 +1,22 @@
+# [PackageDev] target_format: plist, ext: tmPreferences
+name: Metadata
+uuid: 64598216-cf92-4b00-961f-2b1478921c3e
+scope: source.elm
+settings:
+  increaseIndentPattern: |-
+    (?x)
+      ^.*
+        (=
+        |[|!%$?~+:\-.=</>&\\*^]+
+        |\bthen
+        |\belse
+        |\bof
+        )
+      \s*$
+  shellVariables:
+  - name: TM_COMMENT_START
+    value: --
+  - name: TM_COMMENT_START_2
+    value: '{-'
+  - name: TM_COMMENT_END_2
+    value: -}
