@@ -1,11 +1,16 @@
 from __future__ import print_function
 
 import webbrowser
-import os.path
+import os, os.path
 import subprocess
 import json
 
 import sublime, sublime_plugin
+
+try:     # ST3
+    from .elm_project import ElmProject
+except:  # ST2
+    from elm_project import ElmProject
 
 LOOKUPS = {}
 
@@ -86,7 +91,6 @@ def get_matching_names(filename, prefix):
     Given a file name and a search prefix, return a list of matching
     completions from elm oracle.
     """
-    print(prefix)
     global LOOKUPS
     if filename not in LOOKUPS.keys():
         return None
@@ -125,7 +129,9 @@ def load_from_oracle(filename):
     to the LOOKUPS global dictionary.
     """
     global LOOKUPS
-    p = subprocess.Popen('elm-oracle ' + filename + ' ""', stdout=subprocess.PIPE, cwd=os.path.dirname(filename), shell=True)
+    project = ElmProject(filename)
+    os.chdir(project.working_dir)
+    p = subprocess.Popen('elm-oracle ' + filename + ' ""', stdout=subprocess.PIPE, shell=True)
     output = p.communicate()[0].strip()
     try:
         data = json.loads(output.decode('utf-8'))
@@ -148,9 +154,6 @@ class ElmOracleListener(sublime_plugin.EventListener):
     """
     An event listener to load and search through data from elm oracle.
     """
-    # TODO: implement completions based on current context
-    # def on_query_completions(self, view, prefix, locations):
-    #     return []
 
     def on_selection_modified_async(self, view):
         sel = view.sel()[0]
@@ -185,5 +188,4 @@ class ElmOracleDebug(sublime_plugin.TextCommand):
         word = get_word_under_cursor(self.view)
         parts = [part for part in word.split('.') if part[0].upper() == part[0]]
         package_name = '.'.join(parts)
-        print(word, parts, package_name)
         explore_package(self.view.file_name(), package_name)
