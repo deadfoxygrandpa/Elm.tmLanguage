@@ -91,17 +91,29 @@ def get_matching_names(filename, prefix):
     Given a file name and a search prefix, return a list of matching
     completions from elm oracle.
     """
+    def skip_chars(full_name):
+        # Sublime Text seems to have odd behavior on completions. If the full
+        # name is at the same "path level" as the prefix, then the completion
+        # will replace the entire entry, otherwise it will only replace after
+        # the final period separator
+        full_name_path = full_name.split('.')[:-1]
+        prefix_path = prefix.split('.')[:-1]
+        if full_name_path == prefix_path:
+            return full_name
+        else:
+            # get the characters to remove from the completion to avoid duplication
+            # of paths. If it's 0, then stay at 0, otherwise add a period back
+            chars_to_skip = len('.'.join(prefix_path))
+            if chars_to_skip > 0:
+                chars_to_skip += 1
+            return full_name[chars_to_skip:]
+
     global LOOKUPS
     if filename not in LOOKUPS.keys():
         return None
     else:
         data = LOOKUPS[filename]
-        # get the characters to remove from the completion to avoid duplication
-        # of paths. If it's 0, then stay at 0, otherwise add a period back
-        chars_to_skip = len('.'.join(prefix.split('.')[:-1]))
-        if chars_to_skip > 0:
-            chars_to_skip += 1      
-        completions = {(v['fullName'] + '\t' + v['signature'], v['fullName'][chars_to_skip:]) 
+        completions = {(v['fullName'] + '\t' + v['signature'], skip_chars(v['fullName'])) 
             for v in data 
             if v['fullName'].startswith(prefix) or v['name'].startswith(prefix)}
         return [[v[0], v[1]] for v in completions]
