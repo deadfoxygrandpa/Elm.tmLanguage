@@ -44,10 +44,11 @@ def get_word_under_cursor(view):
     region = join_qualified(view.word(sel), view)
     return view.substr(region).strip()     
 
-def get_type(view):
+def get_type(view, panel):
     """
     Given a view, return the type signature of the word under the cursor,
-    if found. If no type is found, return an empty string.
+    if found. If no type is found, return an empty string. Write the info
+    to an output panel.
     """
     sel = view.sel()[0]
     region = join_qualified(view.word(sel), view)
@@ -55,14 +56,13 @@ def get_type(view):
     if scope.find('source.elm') != -1 and scope.find('string') == -1 and scope.find('comment') == -1:
         filename = view.file_name()
         word = view.substr(region).strip()
-        sublime.set_timeout_async(lambda: search_and_set_status_message(filename, word, 0), 0)
-        return ''
+        sublime.set_timeout_async(lambda: search_and_set_status_message(filename, word, panel, 0), 0)
 
-def search_and_set_status_message(filename, query, tries):
+def search_and_set_status_message(filename, query, panel, tries):
     """
     Given a filename and a query, look up in the in-memory dict of values
     pulled from elm oracle to find a match. If a match is found, display
-    the type signature in the status bar.
+    the type signature in the status bar and set it in the output panel.
     """
     global LOOKUPS
     if len(query) == 0:
@@ -75,7 +75,7 @@ def search_and_set_status_message(filename, query, tries):
             # loaded into memory right now. Try 10 more times at 100ms intervals
             # and if it still isn't loaded, there's likely a problem we can't fix
             # here.
-            sublime.set_timeout_async(search_and_set_status_message(filename, query, tries + 1), 100)
+            sublime.set_timeout_async(search_and_set_status_message(filename, query, panel, tries + 1), 100)
     else:
         data = LOOKUPS[filename]
         if len(data) > 0:
@@ -83,6 +83,8 @@ def search_and_set_status_message(filename, query, tries):
                 if item['name'] == query.split('.')[-1]:
                     type_signature = item['fullName'] + ' : ' + item['signature']
                     sublime.status_message(type_signature)
+                    panel.run_command('erase_view')
+                    panel.run_command('append', {'characters': type_signature + '\n' + item['comment']})
                     break
         return None     
 
@@ -197,9 +199,21 @@ class ElmShowType(sublime_plugin.TextCommand):
     A text command to lookup the type signature of the function under the
     cursor, and display it in the status bar if found.
     """
+    type_panel = None
+
     def run(self, edit):
-        msg = get_type(self.view) or ''
-        sublime.status_message(msg)
+        if self.type_panel is None:
+            self.type_panel = self.view.window().create_output_panel('elm_type')
+            # self.type_panel.set_syntax_file('Packages/Elm Language Support/Syntaxes/Elm Types.hidden-tmLanguage')
+        get_type(self.view, self.type_panel)
+
+
+class ElmShowTypePanel(sublime_plugin.WindowCommand):
+    """
+    Turns on the type output panel
+    """
+    def run(self):
+        self.window.run_command("show_panel", {"panel": "output.elm_type"})
 
 
 class ElmOracleExplore(sublime_plugin.TextCommand):
@@ -208,3 +222,11 @@ class ElmOracleExplore(sublime_plugin.TextCommand):
         parts = [part for part in word.split('.') if part[0].upper() == part[0]]
         package_name = '.'.join(parts)
         explore_package(self.view.file_name(), package_name)
+
+
+class EraseView(sublime_plugin.TextCommand):
+    """
+    Erases a view
+    """
+    def run(self, edit):
+        self.view.erase(edit, sublime.Region(0, self.view.size()))
