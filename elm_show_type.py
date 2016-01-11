@@ -152,8 +152,14 @@ def load_from_oracle(filename):
     global LOOKUPS
     project = ElmProject(filename)
     os.chdir(project.working_dir)
-    p = subprocess.Popen('elm-oracle ' + filename + ' ""', stdout=subprocess.PIPE, shell=True)
-    output = p.communicate()[0].strip()
+    p = subprocess.Popen('elm-oracle ' + filename + ' ""', stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE, shell=True)
+    output, errors = p.communicate()
+    output = output.strip()
+    settings = sublime.load_settings('Elm Language Support.sublime-settings')
+    if settings.get('debug', False):
+        string_settings = sublime.load_settings('Elm User Strings.sublime-settings')
+        print(string_settings.get('logging.prefix', '') + '(elm-oracle) ' + output, 'errors: ' + errors.strip())
     try:
         data = json.loads(output.decode('utf-8'))
     except ValueError:
