@@ -23,7 +23,7 @@ class ElmFormatOnSave(sublime_plugin.EventListener):
 		scope = view.scope_name(region.b)
 		if scope.find('source.elm') != -1:
 			settings = sublime.load_settings('Elm Language Support.sublime-settings')
-			if settings.get('elm_format_on_save', False):
+			if settings.get('elm_format_on_save', True):
 				regex = settings.get('elm_format_filename_filter', '')
 				if not (len(regex) > 0 and re.search(regex, view.file_name()) is not None):
 					view.run_command('elm_format')
