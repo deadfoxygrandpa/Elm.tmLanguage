@@ -13,7 +13,7 @@ class ElmFormatCommand(sublime_plugin.TextCommand):
 		settings = sublime.load_settings('Elm Language Support.sublime-settings')
 		if settings.get('debug', False):
 		    string_settings = sublime.load_settings('Elm User Strings.sublime-settings')
-		    print(string_settings.get('logging.prefix', '') + '(elm-format) ' + str(output.strip()), 'errors: ' + str(errors.strip()))
+		    print(string_settings.get('logging.prefix', '') + '(elm-format) ' + str(output.strip()), '\nerrors: ' + str(errors.strip()))
 
 
 class ElmFormatOnSave(sublime_plugin.EventListener):
