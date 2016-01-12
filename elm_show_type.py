@@ -159,7 +159,7 @@ def load_from_oracle(filename):
     settings = sublime.load_settings('Elm Language Support.sublime-settings')
     if settings.get('debug', False):
         string_settings = sublime.load_settings('Elm User Strings.sublime-settings')
-        print(string_settings.get('logging.prefix', '') + '(elm-oracle) ' + output, 'errors: ' + errors.strip())
+        print(string_settings.get('logging.prefix', '') + '(elm-oracle) ' + str(output), '\nerrors: ' + str(errors.strip()))
     try:
         data = json.loads(output.decode('utf-8'))
     except ValueError:
