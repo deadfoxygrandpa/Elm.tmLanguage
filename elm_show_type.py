@@ -119,7 +119,6 @@ def get_matching_names(filename, prefix):
 
         for (i, t) in enumerate(types):
             name += ' ${{{}:{}}}'.format(i + 1, t)
-        print(signature,types, name)
         return name
 
     def substitute(t):
