@@ -4,6 +4,7 @@ import webbrowser
 import os, os.path
 import subprocess
 import json
+import re
 
 import sublime, sublime_plugin
 
@@ -93,29 +94,59 @@ def get_matching_names(filename, prefix):
     Given a file name and a search prefix, return a list of matching
     completions from elm oracle.
     """
-    def skip_chars(full_name):
+    def format(full_name, signature):
         # Sublime Text seems to have odd behavior on completions. If the full
         # name is at the same "path level" as the prefix, then the completion
         # will replace the entire entry, otherwise it will only replace after
         # the final period separator
+
+        # gets the top level values from a type annotation (not recursive)
+        # Also drop the last one, as that's the return value
+        types = re.findall("(\([^\)]+\) ?|\{[^\}]+\} ?|[A-z0-9'. (),]+)", signature)
+        types = [substitute(t.strip()) for t in types][:-1]
+
         full_name_path = full_name.split('.')[:-1]
         prefix_path = prefix.split('.')[:-1]
         if full_name_path == prefix_path:
-            return full_name
+            name = full_name
         else:
             # get the characters to remove from the completion to avoid duplication
             # of paths. If it's 0, then stay at 0, otherwise add a period back
             chars_to_skip = len('.'.join(prefix_path))
             if chars_to_skip > 0:
                 chars_to_skip += 1
-            return full_name[chars_to_skip:]
+            name = full_name[chars_to_skip:]
+
+        for (i, t) in enumerate(types):
+            name += ' ${{{}:{}}}'.format(i + 1, t)
+        print(signature,types, name)
+        return name
+
+    def substitute(t):
+        # Converts a type to a lowercased single word version
+        if t.startswith('('):
+            # elm-oracle seems to format tuples with a space after the (
+            # and functions without one, but this might be brittle. If
+            # you see any bugs related to function/tuple then this is probably
+            # the source of them...
+            if t[1] == ' ':
+                return 'tuple'
+            else:
+                return 'function'
+        elif t.startswith('{'):
+            return 'record'
+        else:
+            # take the first type constructor's unqualified name
+            # then lowercase it
+            return t.split(' ')[0].split('.')[-1].lower()
+
 
     global LOOKUPS
     if filename not in LOOKUPS.keys():
         return None
     else:
         data = LOOKUPS[filename]
-        completions = {(v['fullName'] + '\t' + v['signature'], skip_chars(v['fullName'])) 
+        completions = {(v['fullName'] + '\t' + v['signature'], format(v['fullName'], v['signature'])) 
             for v in data 
             if v['fullName'].startswith(prefix) or v['name'].startswith(prefix)}
         return [[v[0], v[1]] for v in completions]
