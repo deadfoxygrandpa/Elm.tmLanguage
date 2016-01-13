@@ -84,9 +84,9 @@ def search_and_set_status_message(filename, query, panel, tries):
                     type_signature = item['fullName'] + ' : ' + item['signature']
                     sublime.status_message(type_signature)
                     panel.run_command('erase_view')
-                    panel.run_command('append', {'characters': type_signature + '\n' + item['comment']})
+                    panel.run_command('append', {'characters': '`' + type_signature + '`' + '\n' + item['comment'][1:]})
                     break
-        return None     
+        return None    
 
 def get_matching_names(filename, prefix):
     """
@@ -210,7 +210,7 @@ class ElmShowType(sublime_plugin.TextCommand):
     def run(self, edit):
         if self.type_panel is None:
             self.type_panel = self.view.window().create_output_panel('elm_type')
-            # self.type_panel.set_syntax_file('Packages/Elm Language Support/Syntaxes/Elm Types.hidden-tmLanguage')
+            self.type_panel.set_syntax_file('Packages/Elm Language Support/Syntaxes/Elm Documentation.hidden-tmLanguage')
         get_type(self.view, self.type_panel)
 
 
