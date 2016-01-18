@@ -25,6 +25,8 @@ class ElmFormatCommand(sublime_plugin.TextCommand):
 		if settings.get('debug', False):
 		    string_settings = sublime.load_settings('Elm User Strings.sublime-settings')
 		    print(string_settings.get('logging.prefix', '') + '(elm-format) ' + str(output.strip()), '\nerrors: ' + str(errors.strip()))
+		    if str(errors.strip()):
+		        print('Your PATH is: ', os.environ['PATH'])
 
 
 class ElmFormatOnSave(sublime_plugin.EventListener):
