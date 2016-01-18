@@ -30,7 +30,7 @@ class ElmFormatCommand(sublime_plugin.TextCommand):
 
 
 class ElmFormatOnSave(sublime_plugin.EventListener):
-	def on_pre_save(self, view):
+	def on_post_save(self, view):
 		sel = view.sel()[0]
 		region = view.word(sel)
 		scope = view.scope_name(region.b)
