@@ -11,14 +11,14 @@ class ElmFormatCommand(sublime_plugin.TextCommand):
 		settings = sublime.load_settings('Elm Language Support.sublime-settings')
 		path = settings.get('elm_paths', '')
 		if path:
-			old_path = os.environ["PATH"]
-			os.environ["PATH"] = os.path.expandvars(path + ';$PATH')
+			old_path = os.environ['PATH']
+			os.environ['PATH'] = os.path.expandvars(path + ';$PATH')
 
-		command = ["elm-format", self.view.file_name(), "--yes"]
+		command = ['elm-format', self.view.file_name(), '--yes']
 		p = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
 
 		if path:
-			os.environ["PATH"] = old_path
+			os.environ['PATH'] = old_path
 
 		output, errors = p.communicate()
 		
