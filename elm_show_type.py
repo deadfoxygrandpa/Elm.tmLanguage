@@ -4,6 +4,7 @@ import webbrowser
 import os, os.path
 import subprocess
 import json
+from difflib import SequenceMatcher
 
 import sublime, sublime_plugin
 
@@ -79,13 +80,17 @@ def search_and_set_status_message(filename, query, panel, tries):
     else:
         data = LOOKUPS[filename]
         if len(data) > 0:
-            for item in data:
-                if item['name'] == query.split('.')[-1]:
-                    type_signature = item['fullName'] + ' : ' + item['signature']
-                    sublime.status_message(type_signature)
-                    panel.run_command('erase_view')
-                    panel.run_command('append', {'characters': '`' + type_signature + '`' + '\n' + item['comment'][1:]})
-                    break
+            matches = [item for item in data if item['name'] == query.split('.')[-1]]
+            if len(matches) == 0:
+                return None
+            else:
+                # sort matches by similarity to query
+                matches.sort(key=lambda x: SequenceMatcher(None, query, x['fullName']).ratio(), reverse=True)
+                item = matches[0]
+                type_signature = item['fullName'] + ' : ' + item['signature']
+                sublime.status_message(type_signature)
+                panel.run_command('erase_view')
+                panel.run_command('append', {'characters': '`' + type_signature + '`' + '\n' + item['comment'][1:]})
         return None    
 
 def get_matching_names(filename, prefix):
@@ -159,7 +164,7 @@ def load_from_oracle(filename):
         old_path = os.environ['PATH']
         os.environ["PATH"] = os.path.expandvars(path + ';$PATH')
 
-    p = subprocess.Popen(['elm-oracle', filename, '""'], stdout=subprocess.PIPE,
+    p = subprocess.Popen(['elm-oracle', filename, ''], stdout=subprocess.PIPE,
         stderr=subprocess.PIPE, shell=True)
 
     if path:
