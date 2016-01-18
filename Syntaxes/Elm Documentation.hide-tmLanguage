@@ -10,32 +10,15 @@
 	<array>
 		<dict>
 			<key>begin</key>
-			<string>(`)(?!`)</string>
-			<key>comment</key>
-			<string>Inline `variable`</string>
-			<key>contentName</key>
-			<string>variable.other.elm.elm-build-output</string>
-			<key>end</key>
-			<string>\1</string>
-			<key>name</key>
-			<string>markup.raw.inline.elm-build-output</string>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>include</key>
-					<string>source.elm</string>
-				</dict>
-			</array>
-		</dict>
-		<dict>
-			<key>begin</key>
-			<string>(?m)^ {4}</string>
+			<string>\x{FEFF}</string>
 			<key>comment</key>
 			<string>Code Block</string>
+			<key>contentName</key>
+			<string>markup.raw.block.elm-documentation</string>
 			<key>end</key>
-			<string>\n+(?!^ {4})</string>
+			<string>\x{FEFF}</string>
 			<key>name</key>
-			<string>markup.raw.block.elm-build-output</string>
+			<string>markup.raw.block.elm-documentation</string>
 			<key>patterns</key>
 			<array>
 				<dict>
