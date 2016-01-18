@@ -96,7 +96,7 @@ def search_and_set_status_message(filename, query, panel, tries):
                 # replace backticks with no-width space for syntax highlighting
                 panel_output = panel_output.replace('`', '\uFEFF')
                 # add no-width space to beginning and end of code blocks for syntax highlighting
-                panel_output = re.sub('\n( {4}[\s\S]+?)(?=\n\S)\n', '"""\n\\1"""\n', panel_output)
+                panel_output = re.sub('\n( {4}[\s\S]+?)((?=\n\S)\n|\Z)', '\uFEFF\n\\1\uFEFF\n', panel_output)
                 # remove first four spaces on each line from code blocks
                 panel_output = re.sub('\n {4}', '\n', panel_output)
                 panel.run_command('append', {'characters': panel_output})
