@@ -1,19 +1,32 @@
 from __future__ import print_function
 
 import subprocess
+import os, os.path
 import re
 import sublime, sublime_plugin
 
 
 class ElmFormatCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
-		command = "elm-format {} --yes".format(self.view.file_name())
-		p = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
-		output, errors = p.communicate()
 		settings = sublime.load_settings('Elm Language Support.sublime-settings')
+		path = settings.get('elm_paths', '')
+		if path:
+			old_path = os.environ['PATH']
+			os.environ['PATH'] = os.path.expandvars(path + ';$PATH')
+
+		command = ['elm-format', self.view.file_name(), '--yes']
+		p = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+
+		if path:
+			os.environ['PATH'] = old_path
+
+		output, errors = p.communicate()
+		
 		if settings.get('debug', False):
 		    string_settings = sublime.load_settings('Elm User Strings.sublime-settings')
 		    print(string_settings.get('logging.prefix', '') + '(elm-format) ' + str(output.strip()), '\nerrors: ' + str(errors.strip()))
+		    if str(errors.strip()):
+		        print('Your PATH is: ', os.environ['PATH'])
 
 
 class ElmFormatOnSave(sublime_plugin.EventListener):
