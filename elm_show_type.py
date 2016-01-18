@@ -4,6 +4,7 @@ import webbrowser
 import os, os.path
 import subprocess
 import json
+import re
 from difflib import SequenceMatcher
 
 import sublime, sublime_plugin
@@ -90,7 +91,15 @@ def search_and_set_status_message(filename, query, panel, tries):
                 type_signature = item['fullName'] + ' : ' + item['signature']
                 sublime.status_message(type_signature)
                 panel.run_command('erase_view')
-                panel.run_command('append', {'characters': '`' + type_signature + '`' + '\n' + item['comment'][1:]})
+                # add full name and type annotation
+                panel_output = '`' + type_signature + '`' + '\n\n' + item['comment'][1:]
+                # replace backticks with no-width space for syntax highlighting
+                panel_output = panel_output.replace('`', '\uFEFF')
+                # add no-width space to beginning and end of code blocks for syntax highlighting
+                panel_output = re.sub('\n( {4}[\s\S]+?)(?=\n\S)\n', '"""\n\\1"""\n', panel_output)
+                # remove first four spaces on each line from code blocks
+                panel_output = re.sub('\n {4}', '\n', panel_output)
+                panel.run_command('append', {'characters': panel_output})
         return None    
 
 def get_matching_names(filename, prefix):
