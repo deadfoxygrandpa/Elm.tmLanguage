@@ -8,6 +8,12 @@ import sublime, sublime_plugin
 
 class ElmFormatCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
+
+		# Hide the console window on Windows
+		shell = False
+		if os.name == "nt":
+		    shell = True
+
 		settings = sublime.load_settings('Elm Language Support.sublime-settings')
 		path = settings.get('elm_paths', '')
 		if path:
@@ -15,7 +21,7 @@ class ElmFormatCommand(sublime_plugin.TextCommand):
 			os.environ['PATH'] = os.path.expandvars(path + ';$PATH')
 
 		command = ['elm-format', self.view.file_name(), '--yes']
-		p = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+		p = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=shell)
 
 		if path:
 			os.environ['PATH'] = old_path
