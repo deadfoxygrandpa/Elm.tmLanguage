@@ -167,6 +167,11 @@ def load_from_oracle(filename):
     project = ElmProject(filename)
     os.chdir(project.working_dir)
 
+    # Hide the console window on Windows
+    shell = False
+    if os.name == "nt":
+        shell = True
+
     settings = sublime.load_settings('Elm Language Support.sublime-settings')
     path = settings.get('elm_paths', '')
     if path:
@@ -174,7 +179,7 @@ def load_from_oracle(filename):
         os.environ["PATH"] = os.path.expandvars(path + ';$PATH')
 
     p = subprocess.Popen(['elm-oracle', filename, ''], stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE, shell=True)
+        stderr=subprocess.PIPE, shell=shell)
 
     if path:
         os.environ['PATH'] = old_path
