@@ -1,4 +1,4 @@
-# [PackageDev] target_format: plist, ext: hide-tmLanguage
+# [PackageDev] target_format: plist, ext: hidden-tmLanguage
 name: Elm Documentation
 scopeName: text.html.mediawiki.elm-documentation
 fileTypes: []
