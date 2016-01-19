@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>fileTypes</key>
+	<array/>
+	<key>name</key>
+	<string>Elm Documentation</string>
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>begin</key>
+			<string>\x{FEFF}</string>
+			<key>comment</key>
+			<string>Code Block</string>
+			<key>contentName</key>
+			<string>markup.raw.block.elm-documentation</string>
+			<key>end</key>
+			<string>\x{FEFF}</string>
+			<key>name</key>
+			<string>markup.raw.block.elm-documentation</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>source.elm</string>
+				</dict>
+			</array>
+		</dict>
+	</array>
+	<key>scopeName</key>
+	<string>text.html.mediawiki.elm-documentation</string>
+	<key>uuid</key>
+	<string>c4a06e11-4259-4698-aeb2-1e87799984cc</string>
+</dict>
+</plist>
