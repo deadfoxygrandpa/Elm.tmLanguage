@@ -1,0 +1,3 @@
+[
+	{ "keys": ["ctrl+k","t"], "command": "elm_show_type_panel"}
+]
