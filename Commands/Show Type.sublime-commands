@@ -1,7 +1,8 @@
 [
 	{
         "caption": "Elm Language Support: Show type",
-        "command": "elm_show_type"
+        "command": "elm_show_type",
+        "args": { "panel": true }
     },
     {
     	"caption": "Elm Language Support: Open type panel",
