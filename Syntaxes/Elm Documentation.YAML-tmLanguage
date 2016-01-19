@@ -1,23 +1,14 @@
-# [PackageDev] target_format: plist, ext: hidden-tmLanguage
----
+# [PackageDev] target_format: plist, ext: hide-tmLanguage
 name: Elm Documentation
 scopeName: text.html.mediawiki.elm-documentation
 fileTypes: []
 uuid: c4a06e11-4259-4698-aeb2-1e87799984cc
 
 patterns:
-- comment: 'Inline `variable`'
-  name: markup.raw.inline.elm-build-output
-  # contentName: variable.other.elm.elm-build-output
-  begin: (\x{FEFF})(?!\x{FEFF})
-  end: \1
-  # patterns:
-  # - include: source.elm
 - comment: Code Block
-  name: markup.raw.block.elm-build-output
-  contentName: markup.raw.block.elm-build-output
-  begin: '"""'
-  end: '"""'
-  # patterns:
-  # - include: source.elm
-  
+  name: markup.raw.block.elm-documentation
+  contentName: markup.raw.block.elm-documentation
+  begin: \x{FEFF}
+  end: \x{FEFF}
+  patterns:
+  - include: source.elm

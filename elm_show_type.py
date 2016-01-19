@@ -96,7 +96,7 @@ def search_and_set_status_message(filename, query, panel, tries):
                 # replace backticks with no-width space for syntax highlighting
                 panel_output = panel_output.replace('`', '\uFEFF')
                 # add no-width space to beginning and end of code blocks for syntax highlighting
-                panel_output = re.sub('\n( {4}[\s\S]+?)(?=\n\S)\n', '"""\n\\1"""\n', panel_output)
+                panel_output = re.sub('\n( {4}[\s\S]+?)((?=\n\S)\n|\Z)', '\uFEFF\n\\1\uFEFF\n', panel_output)
                 # remove first four spaces on each line from code blocks
                 panel_output = re.sub('\n {4}', '\n', panel_output)
                 panel.run_command('append', {'characters': panel_output})
@@ -167,14 +167,21 @@ def load_from_oracle(filename):
     project = ElmProject(filename)
     os.chdir(project.working_dir)
 
+    # Hide the console window on Windows
+    shell = False
+    path_separator = ':'
+    if os.name == "nt":
+        shell = True
+        path_separator = ';'
+
     settings = sublime.load_settings('Elm Language Support.sublime-settings')
     path = settings.get('elm_paths', '')
     if path:
         old_path = os.environ['PATH']
-        os.environ["PATH"] = os.path.expandvars(path + ';$PATH')
+        os.environ["PATH"] = os.path.expandvars(path + path_separator + '$PATH')
 
     p = subprocess.Popen(['elm-oracle', filename, ''], stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE, shell=True)
+        stderr=subprocess.PIPE, shell=shell)
 
     if path:
         os.environ['PATH'] = old_path
@@ -236,7 +243,8 @@ class ElmShowType(sublime_plugin.TextCommand):
     def run(self, edit, panel=False):
         if self.type_panel is None:
             self.type_panel = self.view.window().create_output_panel('elm_type')
-            self.type_panel.set_syntax_file('Packages/Elm Language Support/Syntaxes/Elm Documentation.hidden-tmLanguage')
+            # using extension hide-tmLanguage because hidden-tmLanguage doesn't work correctly
+            self.type_panel.set_syntax_file('Packages/Elm Language Support/Syntaxes/Elm Documentation.hide-tmLanguage')
         get_type(self.view, self.type_panel)
         if panel:
             self.view.window().run_command('elm_show_type_panel')

@@ -10,25 +10,22 @@
 	<array>
 		<dict>
 			<key>begin</key>
-			<string>(\x{FEFF})(?!\x{FEFF})</string>
-			<key>comment</key>
-			<string>Inline `variable`</string>
-			<key>end</key>
-			<string>\1</string>
-			<key>name</key>
-			<string>markup.raw.inline.elm-build-output</string>
-		</dict>
-		<dict>
-			<key>begin</key>
-			<string>"""</string>
+			<string>\x{FEFF}</string>
 			<key>comment</key>
 			<string>Code Block</string>
 			<key>contentName</key>
-			<string>markup.raw.block.elm-build-output</string>
+			<string>markup.raw.block.elm-documentation</string>
 			<key>end</key>
-			<string>"""</string>
+			<string>\x{FEFF}</string>
 			<key>name</key>
-			<string>markup.raw.block.elm-build-output</string>
+			<string>markup.raw.block.elm-documentation</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>source.elm</string>
+				</dict>
+			</array>
 		</dict>
 	</array>
 	<key>scopeName</key>
