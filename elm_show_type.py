@@ -233,11 +233,13 @@ class ElmShowType(sublime_plugin.TextCommand):
     """
     type_panel = None
 
-    def run(self, edit):
+    def run(self, edit, panel=False):
         if self.type_panel is None:
             self.type_panel = self.view.window().create_output_panel('elm_type')
             self.type_panel.set_syntax_file('Packages/Elm Language Support/Syntaxes/Elm Documentation.hidden-tmLanguage')
         get_type(self.view, self.type_panel)
+        if panel:
+            self.view.window().run_command('elm_show_type_panel')
 
 
 class ElmShowTypePanel(sublime_plugin.WindowCommand):
