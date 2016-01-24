@@ -1,0 +1,13 @@
+[
+	{
+        "id": "elmlanguagesupport",
+        "caption": "Elm Language Support",
+        "children":
+        [
+            {
+                "caption": "Open Type Panel",
+                "command": "elm_show_type_panel"
+            }
+        ]
+    }
+]

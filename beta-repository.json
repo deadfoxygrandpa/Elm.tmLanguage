@@ -1,0 +1,19 @@
+{
+	"schema_version": "3.0.0",
+	"packages": [
+		{
+			"name": "Elm Language Support",
+			"details": "https://github.com/deadfoxygrandpa/Elm.tmLanguage",
+			"releases": [
+				{
+					"sublime_text": "*",
+					"branch": "beta"
+				}
+			]
+		}
+	],
+	"dependencies": [
+	],
+	"includes": [
+	]
+}

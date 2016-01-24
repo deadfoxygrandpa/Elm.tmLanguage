@@ -1,18 +1,11 @@
 [
 	{
         "caption": "Elm Language Support: Show type",
-        "command": "elm_show_type"
+        "command": "elm_show_type",
+        "args": { "panel": true }
     },
     {
-    	"caption": "Elm Language Support: Autoset Docs Path",
-    	"command": "elm_set_docs_path"
-    },
-    {
-        "caption": "Elm Language Support: Enable",
-        "command": "elm_enable"
-    },
-    {
-        "caption": "Elm Language Support: Disable",
-        "command": "elm_disable"
+    	"caption": "Elm Language Support: Open type panel",
+    	"command": "elm_show_type_panel"
     }
 ]

@@ -1,0 +1,8 @@
+[
+	{ "keys": ["alt+up"], "command": "elm_show_type_panel",
+		"context":
+			[ { "key": "selector", "operator": "equal", "operand": "source.elm" } ]
+	},
+	{ "keys": ["alt+down"], "command": "hide_panel"
+	}
+]
