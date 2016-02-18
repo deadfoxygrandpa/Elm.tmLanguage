@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-module {$1:ModuleName} (Model, Action, init, update, view) where
+module ${1:ModuleName} (Model, Action, init, update, view) where
 
 import Html
 import Html.Attributes
