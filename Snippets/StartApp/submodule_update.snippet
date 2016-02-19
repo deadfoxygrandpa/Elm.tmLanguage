@@ -1,0 +1,15 @@
+<snippet>
+	<content><![CDATA[
+${1:ModuleName}Action action ->
+let
+  ( ${2:moduleName}, fx ) =
+    ${1}.update action model.${2}
+in
+  ( { model | ${2} = ${2} }, Effects.map ${1}Action fx )
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>submodule</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.elm</scope>
+	<description>Create a new submodule update branch</description>
+</snippet>
