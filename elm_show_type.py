@@ -129,9 +129,9 @@ def get_matching_names(filename, prefix):
         return None
     else:
         data = LOOKUPS[filename]
-        completions = {(v['fullName'] + '\t' + v['signature'], skip_chars(v['fullName'])) 
-            for v in data 
-            if v['fullName'].startswith(prefix) or v['name'].startswith(prefix)}
+        completions = set(((v['fullName'] + '\t' + v['signature'], skip_chars(v['fullName']))
+            for v in data
+            if v['fullName'].startswith(prefix) or v['name'].startswith(prefix)))
         return [[v[0], v[1]] for v in completions]
 
 def explore_package(filename, package_name):
