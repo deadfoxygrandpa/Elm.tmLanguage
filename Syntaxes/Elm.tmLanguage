@@ -47,7 +47,7 @@
 				</dict>
 			</dict>
 			<key>end</key>
-			<string>\b(where)\b</string>
+			<string>\b(where)\b|$|;</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>1</key>
@@ -63,6 +63,12 @@
 				<dict>
 					<key>include</key>
 					<string>#module_name</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>(exposing)</string>
+					<key>name</key>
+					<string>keyword.other.elm</string>
 				</dict>
 				<dict>
 					<key>include</key>
