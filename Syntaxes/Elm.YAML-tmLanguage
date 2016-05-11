@@ -15,15 +15,26 @@ patterns:
   match: \(\)
 
 - name: meta.declaration.module.elm
-  begin: ^\b(module)\s+
+  begin: ^\b((effect|port)\s+)?(module)\s+
   beginCaptures:
     '1': {name: keyword.other.elm}
-  end: \b(where)\b
+    '3': {name: keyword.other.elm}
+  end: $|;
   endCaptures:
     '1': {name: keyword.other.elm}
   patterns:
   - include: '#module_name'
+  - begin: (where)\s*\{
+    beginCaptures:
+      '1': {name: keyword.other.elm}
+    end: \}
+    patterns:
+    - include: '#type_signature'
+  - name: keyword.other.elm
+    match: (exposing)
   - include: '#module_exports'
+  - name: keyword.other.elm
+    match: (where)
   - name: invalid
     match: '[a-z]+'
 
