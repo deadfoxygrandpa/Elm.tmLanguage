@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>fileTypes</key>
@@ -37,7 +37,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^\b(module)\s+</string>
+			<string>^\b((effect|port)\s+)?(module)\s+</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -45,9 +45,14 @@
 					<key>name</key>
 					<string>keyword.other.elm</string>
 				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.other.elm</string>
+				</dict>
 			</dict>
 			<key>end</key>
-			<string>\b(where)\b</string>
+			<string>$|;</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>1</key>
@@ -65,8 +70,41 @@
 					<string>#module_name</string>
 				</dict>
 				<dict>
+					<key>begin</key>
+					<string>(where)\s*\{</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.other.elm</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>\}</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#type_signature</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>(exposing)</string>
+					<key>name</key>
+					<string>keyword.other.elm</string>
+				</dict>
+				<dict>
 					<key>include</key>
 					<string>#module_exports</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>(where)</string>
+					<key>name</key>
+					<string>keyword.other.elm</string>
 				</dict>
 				<dict>
 					<key>match</key>
