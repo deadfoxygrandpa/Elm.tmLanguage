@@ -18,7 +18,7 @@ patterns:
   begin: ^\b(module)\s+
   beginCaptures:
     '1': {name: keyword.other.elm}
-  end: \b(where)\b
+  end: ($|;)
   endCaptures:
     '1': {name: keyword.other.elm}
   patterns:
